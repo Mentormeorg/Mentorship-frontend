@@ -1,2 +1,2 @@
-# -Mentorship-frontend
+# Mentorship-frontend
 Mentorship Frontend repo
