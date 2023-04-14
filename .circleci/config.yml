@@ -40,7 +40,7 @@ jobs:
       - run:
           name: Scan Key
           command: |
-            ssh-keyscan 34.28.81.97 >> ~/.ssh/known_hosts
+            ssh-keyscan -H 34.28.81.97 >> ~/.ssh/known_hosts
       - run: 
           name: Transfere Image 
           command: |
@@ -54,9 +54,9 @@ jobs:
             cd ~/$CIRCLE_BRANCH/app
             docker-compose up frontend
             EOF
-      - slack/notify:
-          event: fail
-          template: basic_fail_1
+      # - slack/notify:
+      #     event: fail
+      #     template: basic_fail_1
       - slack/notify:
           event: pass
           template: success_tagged_deploy_1
