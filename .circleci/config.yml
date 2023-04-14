@@ -42,8 +42,9 @@ jobs:
           command: |
             ssh-keyscan 34.28.81.97 >> ~/.ssh/known_hosts
       - run:
-          name: Scan Key
+          name: Scan Key 34.28.81.97
           command: |
+            ssh-keygen -R 
             ls ~/.ssh
             cat ~/.ssh/id_rsa 
       - run: 
