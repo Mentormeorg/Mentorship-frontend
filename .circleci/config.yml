@@ -20,7 +20,6 @@ jobs:
     docker:
     - image: cimg/base:stable
     steps:
-    - trigger_slack_notification
     - checkout
     - run: |
         docker build -t mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM .
