@@ -10,9 +10,12 @@ jobs:
     steps:
     - checkout
     - run: 
-        name: Build $pipeline.git.branch $CIRCLE_BRANCH environment
+        name: Build
         command: |
           docker build -t mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM .
+    - run: 
+        name: Save Image
+        command: |
           docker save -o ./mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM.tar mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM
     - slack/notify:
         event: fail
@@ -27,31 +30,35 @@ jobs:
         paths:
           - .
 
-  # Deploy:
-  #   docker:
-  #     - image: cimg/base:stable
-  #   steps:
-  #     - attach_workspace:
-  #         at: .
-  #     - checkout
-  #     - run: 
-  #         name: Deploy to $CIRCLE_BRANCH server 
-  #         command: |
-  #           Test="Hello world"
-  #           scp ./Docker/mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM.tar $SSH_USER@$SSH_HOST:~/Docker
-  #           ssh $SSH_USER@$SSH_HOST -o "StrictHostKeyChecking=no" -o SendEnv=Test << EOF 
-  #           docker load -i ~/Docker/mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM.tar
-  #           cd ~/$CIRCLE_BRANCH
-  #           docker-compose up 
-  #     - persist_to_workspace:
-  #         root: .
-  #         paths:
-  #           - .
+  Deploy:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - attach_workspace:
+          at: .
+      - checkout
+      - run: 
+          name: Transfere Image 
+          command: |
+            scp ./Docker/mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM.tar $SSH_USER@$SSH_HOST:~/Docker
+      - run: 
+          name: Deploy 
+          command: |
+            docker load -i ~/Docker/mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM.tar
+            ssh mohamed@$SSH_HOST -o "StrictHostKeyChecking=no" -o SendEnv=$CIRCLE_BUILD_NUM -o SendEnv=$CIRCLE_BRANCH << EOF 
+            sed -i 's/BUILD_NO_FE=.*/BUILD_NO_FE=$CIRCLE_BUILD_NUM/' .env
+            cd ~/$CIRCLE_BRANCH/app
+            docker-compose up frontend
+            EOF
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
   
 workflows:
   mentorme-fe-workflow:
     jobs:
       - Build
-      # - Deploy:
-      #     requires:
-      #       - Build
+      - Deploy:
+          requires:
+            - Build
