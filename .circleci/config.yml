@@ -11,6 +11,8 @@ jobs:
         mkdir Docker
         docker build -t  mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM .
         docker save -o ./Docker/mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM.tar mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM
+    - setup_remote_docker:
+        version: 20.10.14
     - persist_to_workspace:
         root: .
         paths:
