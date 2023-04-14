@@ -9,8 +9,8 @@ jobs:
     - run: |
         export DOCKER_BUILDKIT=1
         mkdir Docker
-        docker build -t  MentorMe-FE-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM .
-        docker save -o ./Docker/MentorMe-FE-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM.tar MentorMe-FE-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM
+        docker build -t  mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM .
+        docker save -o ./Docker/mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM.tar mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM
     - persist_to_workspace:
         root: .
         paths:
@@ -27,9 +27,9 @@ jobs:
   #         name: Deploy to $CIRCLE_BRANCH server 
   #         command: |
   #           Test="Hello world"
-  #           scp ./Docker/MentorMe-FE-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM.tar $SSH_USER@$SSH_HOST:~/Docker
+  #           scp ./Docker/mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM.tar $SSH_USER@$SSH_HOST:~/Docker
   #           ssh $SSH_USER@$SSH_HOST -o "StrictHostKeyChecking=no" -o SendEnv=Test << EOF 
-  #           docker load -i ~/Docker/MentorMe-FE-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM.tar
+  #           docker load -i ~/Docker/mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM.tar
   #           cd ~/$CIRCLE_BRANCH
   #           docker-compose up 
   #     - persist_to_workspace:
@@ -38,7 +38,7 @@ jobs:
   #           - .
   
 workflows:
-  MentorMe-FE-workflow:
+  mentorme-fe-workflow:
     jobs:
       - Build
       # - Deploy:
