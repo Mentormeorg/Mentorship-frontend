@@ -45,7 +45,7 @@ jobs:
           name: Deploy 
           command: |
             docker load -i ~/Docker/mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM.tar
-            ssh mohamed@$SSH_HOST -o "StrictHostKeyChecking=no" -o SendEnv=$CIRCLE_BUILD_NUM -o SendEnv=$CIRCLE_BRANCH << 'EOF' 
+            ssh mohamed@$SSH_HOST -o "StrictHostKeyChecking=no" -o SendEnv=$CIRCLE_BUILD_NUM -o SendEnv=$CIRCLE_BRANCH \<< EOF 
             sed -i 's/BUILD_NO_FE=.*/BUILD_NO_FE=$CIRCLE_BUILD_NUM/' .env
             cd ~/$CIRCLE_BRANCH/app
             docker-compose up frontend
