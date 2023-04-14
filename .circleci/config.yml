@@ -36,7 +36,7 @@ jobs:
       - checkout
       - add_ssh_keys:
           fingerprints:
-            - "a5:46:1e:b2:2a:c2:01:55:8d:cd:bb:1f:b5:a9:91:f8"
+            - "ab:fc:1e:d2:02:81:7f:ec:5e:68:24:a3:2e:0d:bf:41"
       - run:
           name: Scan Key
           command: |
