@@ -72,6 +72,4 @@ workflows:
       - Deploy:
           requires:
           - Build
-          filters:
-            branches:
-             only: devops
+
