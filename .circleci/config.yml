@@ -34,6 +34,9 @@ jobs:
       - attach_workspace:
           at: .
       - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - a5:46:1e:b2:2a:c2:01:55:8d:cd:bb:1f:b5:a9:91:f8
       - run: 
           name: Transfere Image 
           command: |
