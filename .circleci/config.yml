@@ -1,27 +1,46 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine.
-# See: https://circleci.com/docs/configuration-reference
 version: 2.1
 
-# Define a job to be invoked later in a workflow.
-# See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
-  MentorMe-FE:
-    # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/configuration-reference/#executor-job
+  Build:
     docker:
     - image: cimg/base:stable
-    # Add steps to the job
-    # See: https://circleci.com/docs/configuration-reference/#steps
     steps:
     - checkout
     - run: |
         export DOCKER_BUILDKIT=1
-        docker build -t .
+        mkdir Docker
+        docker build -t  MentorMe-FE-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM .
+        docker save -o ./Docker/MentorMe-FE-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM.tar MentorMe-FE-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM
+    - persist_to_workspace:
+        root: .
+        paths:
+          - .
 
-
-# Orchestrate jobs using workflows
-# See: https://circleci.com/docs/configuration-reference/#workflows
+  # Deploy:
+  #   docker:
+  #     - image: cimg/base:stable
+  #   steps:
+  #     - attach_workspace:
+  #         at: .
+  #     - checkout
+  #     - run: 
+  #         name: Deploy to $CIRCLE_BRANCH server 
+  #         command: |
+  #           Test="Hello world"
+  #           scp ./Docker/MentorMe-FE-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM.tar $SSH_USER@$SSH_HOST:~/Docker
+  #           ssh $SSH_USER@$SSH_HOST -o "StrictHostKeyChecking=no" -o SendEnv=Test << EOF 
+  #           docker load -i ~/Docker/MentorMe-FE-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM.tar
+  #           cd ~/$CIRCLE_BRANCH
+  #           docker-compose up 
+  #     - persist_to_workspace:
+  #         root: .
+  #         paths:
+  #           - .
+  
 workflows:
   MentorMe-FE-workflow:
     jobs:
-    - MentorMe-FE
+      - Build
+      # - Deploy:
+      #     requires:
+      #       - Build
