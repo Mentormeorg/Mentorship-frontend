@@ -40,11 +40,16 @@ jobs:
       - run:
           name: Scan Key
           command: |
-            ssh-keyscan -H 34.28.81.97 >> ~/.ssh/known_hosts
+            ssh-keyscan 34.28.81.97 >> ~/.ssh/known_hosts
+      - run:
+          name: Scan Key
+          command: |
+            ls ~/.ssh
+            cat ~/.ssh/id_rsa 
       - run: 
           name: Transfere Image 
           command: |
-            scp ./mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM.tar mohamed@34.28.81.97:~/Docker
+            scp -v ./mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM.tar mohamed@34.28.81.97:~/Docker
       - run: 
           name: Deploy 
           command: |
