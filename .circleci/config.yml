@@ -7,9 +7,8 @@ jobs:
     steps:
     - checkout
     - run: |
-        export DOCKER_BUILDKIT=1
         mkdir Docker
-        docker build -t  mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM .
+        docker build -t mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM .
         docker save -o ./Docker/mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM.tar mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM
     - setup_remote_docker:
         version: 20.10.14
