@@ -37,6 +37,10 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             - a5:46:1e:b2:2a:c2:01:55:8d:cd:bb:1f:b5:a9:91:f8
+      - run:
+          name: Scan Key
+          command: |
+            ssh-keyscan 34.28.81.97 >> ~/.ssh/known_hosts
       - run: 
           name: Transfere Image 
           command: |
