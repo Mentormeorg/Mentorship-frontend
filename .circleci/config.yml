@@ -20,9 +20,6 @@ jobs:
     - slack/notify:
         event: fail
         template: basic_fail_1
-    - slack/notify:
-        event: pass
-        template: success_tagged_deploy_1
     - setup_remote_docker:
         version: 20.10.14
     - persist_to_workspace:
@@ -40,7 +37,7 @@ jobs:
       - run: 
           name: Transfere Image 
           command: |
-            scp ./Docker/mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM.tar $SSH_USER@$SSH_HOST:~/Docker
+            scp ./Docker/mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM.tar mohamed@34.28.81.97:~/Docker
       - run: 
           name: Deploy 
           command: |
