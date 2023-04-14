@@ -39,7 +39,7 @@ jobs:
           command: |
             ssh-keygen -R 34.28.81.97
             ls ~/.ssh
-            cat ~/.ssh/id_rsa 
+            cat ~/.ssh/id_rsa_abfc1ed202817fec5e6824a32e0dbf41
       - add_ssh_keys:
           fingerprints:
             - "ab:fc:1e:d2:02:81:7f:ec:5e:68:24:a3:2e:0d:bf:41"
