@@ -9,9 +9,11 @@ jobs:
     - image: cimg/base:stable
     steps:
     - checkout
-    - run: |
-        docker build -t mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM .
-        docker save -o ./mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM.tar mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM
+    - run: 
+        name: Build $pipeline.git.branch $CIRCLE_BRANCH environment
+        command: |
+          docker build -t mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM .
+          docker save -o ./mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM.tar mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM
     - slack/notify:
         event: fail
         template: basic_fail_1
