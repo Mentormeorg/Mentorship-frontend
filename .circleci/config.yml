@@ -44,7 +44,7 @@ jobs:
       - run: 
           name: Transfere Image 
           command: |
-            scp ./Docker/mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM.tar mohamed@34.28.81.97:~/Docker
+            scp ./mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM.tar mohamed@34.28.81.97:~/Docker
       - run: 
           name: Deploy 
           command: |
