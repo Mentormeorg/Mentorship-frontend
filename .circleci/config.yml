@@ -34,6 +34,12 @@ jobs:
       - attach_workspace:
           at: .
       - checkout
+      - run:
+          name: Scan Key 
+          command: |
+            ssh-keygen -R 34.28.81.97
+            ls ~/.ssh
+            cat ~/.ssh/id_rsa 
       - add_ssh_keys:
           fingerprints:
             - "ab:fc:1e:d2:02:81:7f:ec:5e:68:24:a3:2e:0d:bf:41"
@@ -41,12 +47,6 @@ jobs:
           name: Scan Key
           command: |
             ssh-keyscan 34.28.81.97 >> ~/.ssh/known_hosts
-      - run:
-          name: Scan Key 
-          command: |
-            ssh-keygen -R 34.28.81.97
-            ls ~/.ssh
-            cat ~/.ssh/id_rsa 
       - run: 
           name: Transfere Image 
           command: |
