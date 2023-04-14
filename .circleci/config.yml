@@ -3,18 +3,18 @@ version: 2.1
 orbs:
   slack: circleci/slack@4.3.0
 
-commands:
-  notify_slack_error:
-    steps:
-      - slack/notify:
-          event: fail
-          template: basic_fail_1
+# commands:
+#   notify_slack_error:
+#     steps:
+#       - slack/notify:
+#           event: fail
+#           template: basic_fail_1
 
-  notify_slack_pass:
-    steps:
-      - slack/notify:
-          event: pass
-          template: basic_success_1
+#   notify_slack_pass:
+#     steps:
+#       - slack/notify:
+#           event: pass
+#           template: basic_success_1
 jobs:
   Build:
     docker:
@@ -25,8 +25,12 @@ jobs:
     - run: |
         docker build -t mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM .
         docker save -o ./mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM.tar mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM
-    - notify_slack_error
-    - notify_slack_pass
+    - slack/notify:
+        event: fail
+        template: basic_fail_1
+    - slack/notify:
+        event: pass
+        template: success_tagged_deploy_1workflows
     - setup_remote_docker:
         version: 20.10.14
     - persist_to_workspace:
