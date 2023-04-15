@@ -64,7 +64,8 @@ jobs:
             docker load -i ~/docker/mentorme-fe-$CIRCLE_BRANCH:$BUILD_NUM.tar
             sed -i 's/BUILD_NO_FE=.*/BUILD_NO_FE=$BUILD_NUM/' ~/$CIRCLE_BRANCH/app/.env
             cd ~/$CIRCLE_BRANCH/app
-            docker-compose up frontend
+            docker-compose up -d frontend
+            docker-compose restart frontend
             EOF
       - slack/notify:
           event: fail
