@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 	title = 'Mentorship-frontend';
+	cities: string[] = ['Egypt', 'USA', 'Germany', 'Italy', 'France'];
+	selectedCity = 'Egypt';
 }
