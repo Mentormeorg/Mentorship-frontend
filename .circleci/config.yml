@@ -53,19 +53,18 @@ jobs:
           name: Transfere Image 
           command: |
             export BUILD_NUM=$(cat build_number.txt)
-            echo $BUILD_NUM
             scp ./mentorme-fe-$CIRCLE_BRANCH:$BUILD_NUM.tar mohamed@34.28.81.97:~/docker/
       - run: 
           name: Deploy 
           command: |
             export BUILD_NUM=$(cat build_number.txt)
-            echo $BUILD_NUM
+            export SERVICE_NAME=$( echo $CIRCLE_REPOSITORY_URL | cut -d / -f 5 | cut -d - -f 2)
             ssh mohamed@34.28.81.97 -o "StrictHostKeyChecking=no" -o SendEnv=$BUILD_NUM -o SendEnv=$CIRCLE_BRANCH \<< EOF 
             docker load -i ~/docker/mentorme-fe-$CIRCLE_BRANCH:$BUILD_NUM.tar
             sed -i 's/BUILD_NO_FE=.*/BUILD_NO_FE=$BUILD_NUM/' ~/$CIRCLE_BRANCH/app/.env
             cd ~/$CIRCLE_BRANCH/app
-            docker-compose up -d frontend
-            docker-compose restart frontend
+            docker-compose up -d $SERVICE_NAME
+            docker-compose restart $SERVICE_NAME
             EOF
       - slack/notify:
           event: fail
@@ -84,5 +83,11 @@ workflows:
       - Build
       - Deploy:
           requires:
-          - Build
+            - Build
+          filters:
+            branches:
+              only:
+                - master
+                - staging 
+                - devops
 
