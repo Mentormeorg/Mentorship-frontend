@@ -20,7 +20,6 @@ jobs:
         name: Save Image
         command: |
           docker save -o ./mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM.tar mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM
-          ls
     - run: 
         name: Save Artifacts
         command: |
@@ -61,10 +60,12 @@ jobs:
             export SERVICE_NAME=$( echo $CIRCLE_REPOSITORY_URL | cut -d / -f 5 | cut -d - -f 2)
             ssh mohamed@34.28.81.97 -o "StrictHostKeyChecking=no" -o SendEnv=$BUILD_NUM -o SendEnv=$CIRCLE_BRANCH \<< EOF 
             docker load -i ~/docker/mentorme-fe-$CIRCLE_BRANCH:$BUILD_NUM.tar
+            rm -rf ~/docker/*
             sed -i 's/BUILD_NO_FE=.*/BUILD_NO_FE=$BUILD_NUM/' ~/$CIRCLE_BRANCH/app/.env
             cd ~/$CIRCLE_BRANCH/app
             docker-compose up -d $SERVICE_NAME
             docker-compose restart $SERVICE_NAME
+            docker rmi -f $(docker images -q | tail -n +3) 2>/dev/null
             EOF
       - slack/notify:
           event: fail
