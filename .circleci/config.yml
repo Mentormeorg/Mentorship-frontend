@@ -58,8 +58,10 @@ jobs:
       - run: 
           name: Deploy 
           command: |
-            docker load -i ~/docker/mentorme-fe-$CIRCLE_BRANCH:$BUILD_NUM.tar
+            export BUILD_NUM=$(cat build_number.txt)
+            echo $BUILD_NUM
             ssh mohamed@34.28.81.97 -o "StrictHostKeyChecking=no" -o SendEnv=$BUILD_NUM -o SendEnv=$CIRCLE_BRANCH \<< EOF 
+            docker load -i ~/docker/mentorme-fe-$CIRCLE_BRANCH:$BUILD_NUM.tar
             sed -i 's/BUILD_NO_FE=.*/BUILD_NO_FE=$BUILD_NUM/' .env
             cd ~/$CIRCLE_BRANCH/app
             docker-compose up frontend
