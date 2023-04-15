@@ -13,6 +13,8 @@ jobs:
         name: Build
         command: |
           docker build -t mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM .
+          export BUILD_NUM=$CIRCLE_BUILD_NUM
+          echo $MY_BUILD_NUM > build_number.txt
     - run: 
         name: Save Image
         command: |
@@ -49,7 +51,7 @@ jobs:
       - run: 
           name: Transfere Image 
           command: |
-            ls
+            export CIRCLE_BUILD_NUM=$(cat build_number.txt)
             scp ./mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM.tar mohamed@34.28.81.97:~/Docker
       - run: 
           name: Deploy 
@@ -60,9 +62,9 @@ jobs:
             cd ~/$CIRCLE_BRANCH/app
             docker-compose up frontend
             EOF
-      # - slack/notify:
-      #     event: fail
-      #     template: basic_fail_1
+      - slack/notify:
+          event: fail
+          template: basic_fail_1
       - slack/notify:
           event: pass
           template: success_tagged_deploy_1
