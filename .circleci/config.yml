@@ -14,7 +14,7 @@ jobs:
         command: |
           docker build -t mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM .
           export BUILD_NUM=$CIRCLE_BUILD_NUM
-          echo $MY_BUILD_NUM > build_number.txt
+          echo $BUILD_NUM > build_number.txt
           cat build_number.txt
     - run: 
         name: Save Image
