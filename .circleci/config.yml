@@ -62,7 +62,7 @@ jobs:
             echo $BUILD_NUM
             ssh mohamed@34.28.81.97 -o "StrictHostKeyChecking=no" -o SendEnv=$BUILD_NUM -o SendEnv=$CIRCLE_BRANCH \<< EOF 
             docker load -i ~/docker/mentorme-fe-$CIRCLE_BRANCH:$BUILD_NUM.tar
-            sed -i 's/BUILD_NO_FE=.*/BUILD_NO_FE=$BUILD_NUM/' .env
+            sed -i 's/BUILD_NO_FE=.*/BUILD_NO_FE=$BUILD_NUM/' ~/$CIRCLE_BRANCH/app/.env
             cd ~/$CIRCLE_BRANCH/app
             docker-compose up frontend
             EOF
