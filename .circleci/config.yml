@@ -52,6 +52,7 @@ jobs:
       - run: 
           name: Transfere Image 
           command: |
+            cat build_number.txt
             export BUILD_NUM=$(cat build_number.txt)
             cat $BUILD_NUM
             scp ./mentorme-fe-$CIRCLE_BRANCH:$BUILD_NUM.tar mohamed@34.28.81.97:~/Docker
