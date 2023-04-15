@@ -17,9 +17,11 @@ jobs:
         name: Save Image
         command: |
           docker save -o ./mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM.tar mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM
-    - store_artifacts:
-        path: mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM.tar
-        destination: artifacts
+          ls
+    - run: 
+        name: Save Artifacts
+        command: |
+          docker save -o ./mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM.tar mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM
     - slack/notify:
         event: fail
         template: basic_fail_1
@@ -44,11 +46,10 @@ jobs:
           name: Scan Key
           command: |
             ssh-keyscan 34.28.81.97 >> ~/.ssh/known_hosts
-      - fetch_artifacts:
-          - "artifacts/mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM.tar"
       - run: 
           name: Transfere Image 
           command: |
+            ls
             scp ./mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM.tar mohamed@34.28.81.97:~/Docker
       - run: 
           name: Deploy 
