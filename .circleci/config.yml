@@ -67,7 +67,6 @@ jobs:
             cd ~/$CIRCLE_BRANCH/app
             docker-compose up -d $SERVICE_NAME
             docker-compose restart $SERVICE_NAME
-            docker rmi -f $(docker images -q | tail -n +3) 2>/dev/null exit 0
             EOF
       - slack/notify:
           event: fail
