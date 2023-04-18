@@ -13,7 +13,7 @@ jobs:
     - run: 
         name: Build
         command: |
-          docker build -t mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM .
+          docker build --no-cache -t mentorme-fe-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM .
           export BUILD_NUM=$CIRCLE_BUILD_NUM
           echo $BUILD_NUM > build_number.txt
           cat build_number.txt
