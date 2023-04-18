@@ -49,7 +49,7 @@ jobs:
       - run:
           name: Add Key 
           command: |
-            ssh-keyscan 34.28.81.97 >> ~/.ssh/known_hosts
+            ssh-keyscan 104.197.93.189 >> ~/.ssh/known_hosts
       - run: 
           name: Transfere Image 
           command: |
