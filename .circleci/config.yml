@@ -7,6 +7,7 @@ jobs:
   Build:
     docker:
     - image: cimg/base:stable
+    resource_class: small
     steps:
     - checkout
     - run: 
@@ -37,13 +38,14 @@ jobs:
   Deploy:
     docker:
       - image: cimg/base:stable
+    resource_class: small
     steps:
       - attach_workspace:
           at: .
       - checkout
       - add_ssh_keys:
           fingerprints:
-            - "ab:fc:1e:d2:02:81:7f:ec:5e:68:24:a3:2e:0d:bf:41"
+            - "8b:33:2d:a8:af:61:c2:d7:08:84:bc:18:a9:3d:56:e0"
       - run:
           name: Add Key 
           command: |
