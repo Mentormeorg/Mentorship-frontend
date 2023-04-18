@@ -52,13 +52,13 @@ jobs:
           name: Transfere Image 
           command: |
             export BUILD_NUM=$(cat build_number.txt)
-            scp ./mentorme-fe-$CIRCLE_BRANCH:$BUILD_NUM.tar mohamed@34.28.81.97:~/docker/
+            scp ./mentorme-fe-$CIRCLE_BRANCH:$BUILD_NUM.tar mentormetesting@104.197.93.189:~/docker/
       - run: 
           name: Deploy 
           command: |
             export BUILD_NUM=$(cat build_number.txt)
             export SERVICE_NAME=$( echo $CIRCLE_REPOSITORY_URL | cut -d / -f 5 | cut -d - -f 2)
-            ssh mohamed@34.28.81.97 -o "StrictHostKeyChecking=no" -o SendEnv=$BUILD_NUM -o SendEnv=$CIRCLE_BRANCH \<< EOF 
+            ssh mentormetesting@104.197.93.189 -o "StrictHostKeyChecking=no" -o SendEnv=$BUILD_NUM -o SendEnv=$CIRCLE_BRANCH \<< EOF 
             docker load -i ~/docker/mentorme-fe-$CIRCLE_BRANCH:$BUILD_NUM.tar
             rm -rf ~/docker/*
             sed -i 's/BUILD_NO_FE=.*/BUILD_NO_FE=$BUILD_NUM/' ~/$CIRCLE_BRANCH/app/.env
