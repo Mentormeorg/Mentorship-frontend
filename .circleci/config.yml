@@ -13,9 +13,9 @@ jobs:
     - run: 
         name: Build
         command: |
-          # echo "export SERVICE_NAME=$($CIRCLE_REPOSITORY_URL | cut -d / -f 5 | cut -d - -f 2)" >> $BASH_ENV
-          # cp $BASH_ENV bash.env
-          # cat bash.env
+          echo "export SERVICE_NAME=$( echo $CIRCLE_REPOSITORY_URL | cut -d / -f 5 | cut -d - -f 2)" >> $BASH_ENV
+          cp $BASH_ENV bash.env
+          cat bash.env
           # printenv SERVICE_NAME
           # docker build --no-cache -t mentorme-$SERVICE_NAME-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM .
           # export BUILD_NUM=$CIRCLE_BUILD_NUM
