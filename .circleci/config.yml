@@ -14,6 +14,7 @@ jobs:
         name: Build
         command: |
           export SERVICE=$( echo $CIRCLE_REPOSITORY_URL | cut -d / -f 5 | cut -d - -f 2)
+          echo $SERVICE
           echo "export SERVICE_NAME=$SERVICE" >> $BASH_ENV
           cp $BASH_ENV bash.env
           cat bash.env
