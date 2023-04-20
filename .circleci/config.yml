@@ -13,7 +13,7 @@ jobs:
     - run: 
         name: Build
         command: |
-          echo "export SERVICE_NAME=`$CIRCLE_REPOSITORY_URL | cut -d / -f 5 | cut -d - -f 2`" >> $BASH_ENV
+          echo "export SERVICE_NAME=$($CIRCLE_REPOSITORY_URL | cut -d / -f 5 | cut -d - -f 2)" >> $BASH_ENV
           cp $BASH_ENV bash.env
           cat bash.env
           printenv SERVICE_NAME
