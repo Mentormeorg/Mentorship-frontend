@@ -15,6 +15,8 @@ jobs:
         command: |
           echo "export SERVICE_NAME=$( echo $CIRCLE_REPOSITORY_URL | cut -d / -f 5 | cut -d - -f 2)" >> $BASH_ENV
           cp $BASH_ENV bash.env
+          cat bash.env
+          printenv SERVICE_NAME
           docker build --no-cache -t mentorme-$SERVICE_NAME-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM .
           export BUILD_NUM=$CIRCLE_BUILD_NUM
           echo $BUILD_NUM > build_number.txt
@@ -57,15 +59,17 @@ jobs:
       - run: 
           name: Deploy 
           command: |
+            cat bash.env
+            printenv SERVICE_NAME
             export BUILD_NUM=$(cat build_number.txt)
             export SERVICE_NAME=$( echo $CIRCLE_REPOSITORY_URL | cut -d / -f 5 | cut -d - -f 2)
             ssh mentormetesting@104.197.93.189 -o "StrictHostKeyChecking=no" -o SendEnv=$BUILD_NUM -o SendEnv=$CIRCLE_BRANCH  -o SendEnv=$SERVICE_NAME \<< EOF 
+            export SERVICE_NAME_UPPER=$(echo $SERVICE_NAME | tr [:lower:] [:upper:])
             docker load -i ~/docker/mentorme-$SERVICE_NAME-$CIRCLE_BRANCH:$BUILD_NUM.tar
             rm -rf ~/docker/*
-            sed -i 's/BUILD_NO_$SERVICE_NAME=.*/BUILD_NO_$SERVICE_NAME=$BUILD_NUM/' ~/$CIRCLE_BRANCH/app/.env
+            sed -i 's/BUILD_NO_$SERVICE_NAME_UPPER=.*/BUILD_NO_$SERVICE_NAME_UPPER=$BUILD_NUM/' ~/$CIRCLE_BRANCH/app/.env
             cd ~/$CIRCLE_BRANCH/app
-            docker-compose up -d $SERVICE_NAME
-            docker-compose restart $SERVICE_NAME
+            docker-compose up -d --force-recreate $SERVICE_NAME
             EOF
       - slack/notify:
           event: fail
