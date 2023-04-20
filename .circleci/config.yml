@@ -13,6 +13,7 @@ jobs:
     - run: 
         name: Build
         command: |
+          echo $CIRCLE_PROJECT_REPONAME
           echo $CIRCLE_REPOSITORY_URL
           export SERVICE_NAME=$(echo $CIRCLE_REPOSITORY_URL | cut -d / -f 5 | cut -d - -f 2)
           echo $SERVICE_NAME
