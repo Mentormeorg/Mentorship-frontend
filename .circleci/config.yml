@@ -11,16 +11,20 @@ jobs:
     steps:
     - checkout
     - run: 
-        name: Build
+        name: Build Image
         command: |
           export SERVICE_NAME=`echo Mentorship-frontend | cut -d - -f 2`
           export BUILD_NUM=$CIRCLE_BUILD_NUM
           echo $BUILD_NUM > BUILD_NUM
-          
+          echo "service name: $SERVICE_NAME"
+          echo "Build number: $CIRCLE_BUILD_NUM"
+
           docker build --no-cache -t mentorme-$SERVICE_NAME-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM .
     - run: 
         name: Save Artifacts
         command: |
+          echo "service name: $SERVICE_NAME"
+          echo "Build number: $CIRCLE_BUILD_NUM"
           docker save -o ./mentorme-$SERVICE_NAME-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM.tar mentorme-$SERVICE_NAME-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM
     - slack/notify:
         event: fail
