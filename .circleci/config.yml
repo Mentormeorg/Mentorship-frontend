@@ -23,6 +23,7 @@ jobs:
     - run: 
         name: Save Artifacts
         command: |
+          export SERVICE_NAME=`echo Mentorship-frontend | cut -d - -f 2`
           echo "service name: $SERVICE_NAME"
           echo "Build number: $CIRCLE_BUILD_NUM"
           docker save -o ./mentorme-$SERVICE_NAME-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM.tar mentorme-$SERVICE_NAME-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM
