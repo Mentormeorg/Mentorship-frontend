@@ -57,16 +57,14 @@ jobs:
           name: Deploy 
           command: |
             export SERVICE_NAME=`echo Mentorship-frontend | cut -d - -f 2`
-            export BUILD_NUM=$(cat BUILD_NUM)
             export SERVICE_NAME_ENV=`echo $SERVICE_NAME | tr [:lower:] [:upper:]`
+            export BUILD_NUM=$(cat BUILD_NUM)
 
             ssh mentormetesting@104.197.93.189 -o "StrictHostKeyChecking=no" -o SendEnv=$BUILD_NUM -o SendEnv=$CIRCLE_BRANCH  -o SendEnv=$SERVICE_NAME -o SendEnv=$SERVICE_NAME_ENV \<< EOF 
-            
-            echo $SERVICE_NAME_ENV
-            docker load -i ~/docker/mentorme-$SERVICE_NAME-$CIRCLE_BRANCH:$BUILD_NUM.tar
-            rm -rf ~/docker/*
+            docker load -i ~/docker-images/mentorme-$SERVICE_NAME-$CIRCLE_BRANCH:$BUILD_NUM.tar
+            rm -rf ~/docker-images/*
             sed -i "s/BUILD_NO_$SERVICE_NAME_ENV=.*/BUILD_NO_$SERVICE_NAME_ENV=$BUILD_NUM/" ~/$CIRCLE_BRANCH/app/.env
-            cd ~/$CIRCLE_BRANCH/app
+            cd ~/environments/$CIRCLE_BRANCH/app
             docker-compose up -d --force-recreate $SERVICE_NAME
             EOF
       - slack/notify:
