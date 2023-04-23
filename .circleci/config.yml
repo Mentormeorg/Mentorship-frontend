@@ -52,7 +52,7 @@ jobs:
           command: |
             export SERVICE_NAME=`echo Mentorship-frontend | cut -d - -f 2`
             export BUILD_NUM=$(cat BUILD_NUM)
-            scp ./mentorme-$SERVICE_NAME-$CIRCLE_BRANCH:$BUILD_NUM.tar mentormetesting@104.197.93.189:~/docker/
+            scp ./mentorme-$SERVICE_NAME-$CIRCLE_BRANCH:$BUILD_NUM.tar mentormetesting@104.197.93.189:~/docker-images/
       - run: 
           name: Deploy 
           command: |
