@@ -31,7 +31,7 @@ jobs:
         root: .
         paths:
           - .
-
+ 
   Deploy:
     docker:
       - image: cimg/base:stable
