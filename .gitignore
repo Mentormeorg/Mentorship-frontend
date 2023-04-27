@@ -43,3 +43,6 @@ Thumbs.db
 
 # generated css files
 _css/*
+
+# CICD
+.circleci/*
