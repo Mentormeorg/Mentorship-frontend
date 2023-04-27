@@ -13,14 +13,14 @@ jobs:
     - run: 
         name: Build Image
         command: |
-          export SERVICE_NAME=`echo Mentorship-frontend | cut -d - -f 2`
+          export SERVICE_NAME=`echo $CIRCLE_PROJECT_REPONAME | cut -d - -f 2`
           export BUILD_NUM=$CIRCLE_BUILD_NUM
           echo $BUILD_NUM > BUILD_NUM
           docker build --no-cache -t mentorme-$SERVICE_NAME-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM .
     - run: 
         name: Save Artifacts
         command: |
-          export SERVICE_NAME=`echo Mentorship-frontend | cut -d - -f 2`
+          export SERVICE_NAME=`echo $CIRCLE_PROJECT_REPONAME | cut -d - -f 2`
           docker save -o ./mentorme-$SERVICE_NAME-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM.tar mentorme-$SERVICE_NAME-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM
     - slack/notify:
         event: fail
@@ -31,7 +31,7 @@ jobs:
         root: .
         paths:
           - .
- 
+
   Deploy:
     docker:
       - image: cimg/base:stable
@@ -50,20 +50,20 @@ jobs:
       - run: 
           name: Transfere Artifacts 
           command: |
-            export SERVICE_NAME=`echo Mentorship-frontend | cut -d - -f 2`
+            export SERVICE_NAME=`echo $CIRCLE_PROJECT_REPONAME | cut -d - -f 2`
             export BUILD_NUM=$(cat BUILD_NUM)
             scp ./mentorme-$SERVICE_NAME-$CIRCLE_BRANCH:$BUILD_NUM.tar mentormetesting@104.197.93.189:~/docker-images/
       - run: 
           name: Deploy 
           command: |
-            export SERVICE_NAME=`echo Mentorship-frontend | cut -d - -f 2`
+            export SERVICE_NAME=`echo $CIRCLE_PROJECT_REPONAME | cut -d - -f 2`
             export SERVICE_NAME_ENV=`echo $SERVICE_NAME | tr [:lower:] [:upper:]`
             export BUILD_NUM=$(cat BUILD_NUM)
 
             ssh mentormetesting@104.197.93.189 -o "StrictHostKeyChecking=no" -o SendEnv=$BUILD_NUM -o SendEnv=$CIRCLE_BRANCH  -o SendEnv=$SERVICE_NAME -o SendEnv=$SERVICE_NAME_ENV \<< EOF 
             docker load -i ~/docker-images/mentorme-$SERVICE_NAME-$CIRCLE_BRANCH:$BUILD_NUM.tar
             rm -rf ~/docker-images/*
-            sed -i "s/BUILD_NO_$SERVICE_NAME_ENV=.*/BUILD_NO_$SERVICE_NAME_ENV=$BUILD_NUM/" ~/$CIRCLE_BRANCH/app/.env
+            sed -i "s/BUILD_NO_${SERVICE_NAME_ENV}=.*/BUILD_NO_${SERVICE_NAME_ENV}=$BUILD_NUM/" ~/environments/$CIRCLE_BRANCH/app/.env
             cd ~/environments/$CIRCLE_BRANCH/app
             docker-compose up -d --force-recreate $SERVICE_NAME
             EOF
@@ -79,7 +79,7 @@ jobs:
             - .
   
 workflows:
-  mentorme-workflow:
+  mentorchief:
     jobs:
       - Build
       - Deploy:
@@ -90,5 +90,5 @@ workflows:
               only:
                 - master
                 - staging 
+                - testing
                 - devops
-
