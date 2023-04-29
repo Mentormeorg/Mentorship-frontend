@@ -16,7 +16,7 @@ jobs:
           export SERVICE_NAME=`echo $CIRCLE_PROJECT_REPONAME | cut -d - -f 2`
           export BUILD_NUM=$CIRCLE_BUILD_NUM
           echo $BUILD_NUM > BUILD_NUM
-          docker build --no-cache -t mentorme-$SERVICE_NAME-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM .
+          docker build --no-cache --build-arg BUILD_ENV=$CIRCLE_BRANCH -t mentorme-$SERVICE_NAME-$CIRCLE_BRANCH:$CIRCLE_BUILD_NUM .
     - run: 
         name: Save Artifacts
         command: |
