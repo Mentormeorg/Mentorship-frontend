@@ -1,5 +1,7 @@
 FROM node:16.13 as  build-stage
 
+ARG BUILD_ENV
+
 WORKDIR /usr/app/
 
 COPY package*.json ./
@@ -8,7 +10,7 @@ RUN npm install
 
 COPY . .
 
-RUN npm run build-dev
+RUN npm run build-${BUILD_ENV}
 
 
 FROM nginx:1.12-alpine
