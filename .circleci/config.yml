@@ -7,10 +7,11 @@ jobs:
   Build:
     docker:
     - image: cimg/base:stable
-    docker_layer_caching: true
     resource_class: small
     steps:
     - checkout
+    - setup_remote_docker:
+        docker_layer_caching: true
     - run: 
         name: Build Image
         command: |
