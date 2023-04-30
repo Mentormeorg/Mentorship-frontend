@@ -47,6 +47,7 @@ jobs:
       - run:
           name: Add Key 
           command: |
+            ls
             ssh-keyscan 104.197.93.189 >> ~/.ssh/known_hosts
       - run: 
           name: Transfere Artifacts 
