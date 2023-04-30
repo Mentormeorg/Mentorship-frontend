@@ -10,8 +10,6 @@ jobs:
     resource_class: small
     steps:
     - checkout
-    - setup_remote_docker:
-        docker_layer_caching: true
     - run: 
         name: Build Image
         command: |
@@ -28,6 +26,7 @@ jobs:
         event: fail
         template: basic_fail_1
     - setup_remote_docker:
+        docker_layer_caching: true
         version: 20.10.14
     - persist_to_workspace:
         root: .
