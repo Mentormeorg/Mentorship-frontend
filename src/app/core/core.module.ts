@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-	declarations: [],
-	imports: [CommonModule],
+    declarations: [],
+    imports: [CommonModule],
 })
 export class CoreModule {}

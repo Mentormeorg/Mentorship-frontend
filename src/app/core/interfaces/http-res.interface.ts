@@ -1,4 +1,4 @@
-export interface IRES <T> {
-	success : boolean;
-	data : T;
+export interface IRES<T> {
+    success: boolean;
+    data: T;
 }

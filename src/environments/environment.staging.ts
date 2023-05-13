@@ -1,6 +1,6 @@
 export const environment = {
-	production: false,
-	// ! Add base url here / backend localhost server
-	baseUrl: 'http://api-stagin.mentorchief.net',
-	title: '[STAGING] MentorChief',
+    production: true,
+    // ! Add base url here / backend localhost server
+    baseUrl: 'http://api-stagin.mentorchief.net',
+    title: '[STAGING] MentorChief',
 };

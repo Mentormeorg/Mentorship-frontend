@@ -1,0 +1,9 @@
+node_modules/
+.angular/
+.vscode/
+.circleci/
+.gitignore
+.editorconfig
+.eslintrc.json
+.prettierrc.json
+README.md

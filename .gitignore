@@ -18,7 +18,6 @@ yarn-error.log
 .c9/
 *.launch
 .settings/
-*.sublime-workspace
 
 # Visual Studio Code
 .vscode/*
@@ -46,3 +45,10 @@ _css/*
 
 # CICD
 .circleci/*
+
+# Docker
+Dockerfile
+default.conf
+docker.compose.yml
+
+.husky/*

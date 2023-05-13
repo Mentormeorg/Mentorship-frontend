@@ -1,4 +1,4 @@
-FROM node:16.13 as  build-stage
+FROM node:16.14 as  build-stage
 
 ARG BUILD_ENV
 
@@ -6,16 +6,15 @@ WORKDIR /usr/app/
 
 COPY package*.json ./
 
-RUN npm install
+RUN npm install -g pnpm
+
+RUN pnpm install
 
 COPY . .
 
-RUN npm run build-${BUILD_ENV}
+RUN pnpm run build-testing
 
-
-FROM nginx:1.12-alpine
-
-RUN apk --no-cache add curl
+FROM  nginx:1.24.0-alpine
 
 COPY --from=build-stage /usr/app/dist/* /usr/share/nginx/html
 

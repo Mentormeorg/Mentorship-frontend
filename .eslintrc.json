@@ -1,6 +1,7 @@
 {
 	"root": true,
 	"ignorePatterns": ["projects/**/*"],
+	"plugins": [ "check-file","@angular-eslint"],
 	"overrides": [
 		{
 			"files": ["*.ts"],
@@ -32,9 +33,33 @@
 				"max-lines": [
 					"error",
 					{
-						"max": 300,
+						"max": 180,
 						"skipBlankLines": true,
 						"skipComments": true
+					}
+				],
+				"check-file/no-index": "off",
+				"check-file/filename-blocklist": [
+						"error",
+						{
+								"**/*.model.ts": "*.models.ts",
+								"**/*.util.ts": "*.utils.ts"
+						}
+				],
+				"check-file/filename-naming-convention": [
+					"warn",
+					{
+						"**/*.{jsx,tsx}": "KEBAB_CASE",
+						"**/*.{js,ts}": "KEBAB_CASE"
+					},
+					{
+						"ignoreMiddleExtensions": true
+					}
+				],
+				"check-file/folder-naming-convention": [
+				"error",
+					{
+						"src/**/": "KEBAB_CASE"
 					}
 				]
 			}

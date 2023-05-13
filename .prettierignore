@@ -1,0 +1,26 @@
+# Add files here to ignore them from prettier formatting
+
+/dist
+/node_modules
+.dockerignore
+.gitignore
+.editorconfig
+.prettierrc
+.prettierignore
+default.conf
+docker-compose.yml
+Dockerfile
+pnpm-workspace.yaml
+package.json
+.circleci/
+.prettierrc.json
+/.angular
+/.vscode
+/.github
+/.husky
+package-lock.json
+pnpm-lock.yaml
+commitlint.config.js
+.eslintignore
+.eslintrc.json
+README.md
