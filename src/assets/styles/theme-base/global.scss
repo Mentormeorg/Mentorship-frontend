@@ -12,7 +12,7 @@
 body {
     font-family: $font_family;
     font-size: $base_FS;
-    color: $font_color;
+    color: $primary_fc;
 }
 
 p,
@@ -43,6 +43,7 @@ button {
     border: none;
     background: none;
     cursor: pointer;
+		border-radius: 0.8rem;
 }
 
 input {
