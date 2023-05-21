@@ -1,0 +1,36 @@
+@import '../../../../../../assets/styles/theme-base/variables.scss';
+
+app-auth-slider {
+    max-width: 560px;
+    overflow: hidden;
+    display: block;
+}
+.p-carousel-content {
+    position: relative;
+}
+
+p.qoute {
+    padding: 0 6%;
+    position: absolute;
+    bottom: 5rem;
+    display: flex;
+    justify-content: center;
+    color: $white;
+    font-style: Italic;
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+    font-weight: 300;
+    font-family: $qoute_font;
+    background-color: $mask_color;
+    text-align: center;
+}
+
+.p-carousel-indicators {
+    position: absolute;
+    bottom: 2.5rem;
+    right: 50%;
+    transform: translateX(50%);
+    width: 100%;
+    display: flex;
+    gap: 5px;
+}
