@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AuthSliderComponent } from './auth/layout/components/auth-slider/auth-slider.component';
-import { CarouselModule } from 'primeng/carousel';
+import { ModulesRoutingModule } from './modules-routing.module';
+import { NotFoundComponent } from './common/not-found/not-found.component';
 
 @NgModule({
-    declarations: [AuthSliderComponent],
-    imports: [CommonModule, CarouselModule],
-    exports: [AuthSliderComponent],
+    declarations: [
+    NotFoundComponent
+  ],
+    imports: [CommonModule, ModulesRoutingModule],
+    exports: [],
 })
 export class ModulesModule {}

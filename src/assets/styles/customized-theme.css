@@ -2001,18 +2001,18 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
     color: rgba(2, 22, 56, 0.5);
 }
 .p-button.p-button-text {
-    background-color: transparent;
-    color: #021641;
+    background-color: rgb(2, 22, 56);
+    color: #fff;
     border-color: transparent;
 }
 .p-button.p-button-text:enabled:hover {
-    background: rgba(2, 22, 65, 0.04);
-    color: #021641;
+    background-color: rgb(2, 22, 56);
+    color: #fff;
     border-color: transparent;
 }
 .p-button.p-button-text:enabled:active {
-    background: rgba(2, 22, 65, 0.16);
-    color: #021641;
+    background-color: rgb(2, 22, 56);
+    color: #fff;
     border-color: transparent;
 }
 .p-button.p-button-text.p-button-plain {
@@ -2122,7 +2122,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
 .p-button.p-button-secondary:enabled:focus,
 .p-buttonset.p-button-secondary > .p-button:enabled:focus,
 .p-splitbutton.p-button-secondary > .p-button:enabled:focus {
-    box-shadow: 0 0 0 0.2rem #e2e8f0;
+    box-shadow: none;
 }
 .p-button.p-button-secondary:enabled:active,
 .p-buttonset.p-button-secondary > .p-button:enabled:active,
@@ -2135,7 +2135,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
 .p-buttonset.p-button-secondary > .p-button.p-button-outlined,
 .p-splitbutton.p-button-secondary > .p-button.p-button-outlined {
     background-color: transparent;
-    color: #fff;
+    color: #021641;
     border: 1px solid;
 }
 .p-button.p-button-secondary.p-button-outlined:enabled:hover,
@@ -2155,23 +2155,25 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
 .p-button.p-button-secondary.p-button-text,
 .p-buttonset.p-button-secondary > .p-button.p-button-text,
 .p-splitbutton.p-button-secondary > .p-button.p-button-text {
-    background-color: transparent;
-    color: #fff;
-    border-color: transparent;
+    background-color: #fff;
+    color: rgba(2, 22, 56, 1);
+    border: 1px solid;
+    border-color: rgba(2, 22, 56, 0.1);
 }
 .p-button.p-button-secondary.p-button-text:enabled:hover,
 .p-buttonset.p-button-secondary > .p-button.p-button-text:enabled:hover,
 .p-splitbutton.p-button-secondary > .p-button.p-button-text:enabled:hover {
-    background: rgba(255, 255, 255, 0.04);
-    border-color: transparent;
-    color: #fff;
+    background-color: #fff;
+    color: rgba(2, 22, 56, 1);
+    border: 1px solid;
+    border-color: rgba(2, 22, 56, 0.5);
+    outline: none;
 }
 .p-button.p-button-secondary.p-button-text:enabled:active,
 .p-buttonset.p-button-secondary > .p-button.p-button-text:enabled:active,
 .p-splitbutton.p-button-secondary > .p-button.p-button-text:enabled:active {
-    background: rgba(255, 255, 255, 0.16);
-    border-color: transparent;
-    color: #fff;
+    border-color: rgba(2, 22, 56, 0.5);
+    color: rgba(2, 22, 56, 1);
 }
 .p-button.p-button-info,
 .p-buttonset.p-button-info > .p-button,
@@ -4603,14 +4605,14 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
     padding: 1.25rem 0 0 0;
 }
 .p-divider .p-divider-content {
-    background-color: #fff;
+    background-color: #f4f4f4;
 }
 .p-divider.p-divider-horizontal {
     margin: 1.25rem 0;
     padding: 0 1.25rem;
 }
 .p-divider.p-divider-horizontal:before {
-    border-top: 1px #fff;
+    border-top: 1px rgb(2, 22, 56);
 }
 .p-divider.p-divider-horizontal .p-divider-content {
     padding: 0 0.5rem;
