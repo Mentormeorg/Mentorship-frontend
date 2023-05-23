@@ -13,7 +13,7 @@ body {
     font-family: $font_family;
     font-size: $base_FS;
     color: $primary_fc;
-		background-color: #f4f4f4;
+    background-color: #f4f4f4;
 }
 
 p,
@@ -34,9 +34,9 @@ ol {
 a {
     color: inherit;
 
-		&:hover{
-			text-decoration: none;
-		}
+    &:hover {
+        text-decoration: none;
+    }
 }
 
 img {

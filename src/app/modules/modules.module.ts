@@ -4,9 +4,7 @@ import { ModulesRoutingModule } from './modules-routing.module';
 import { NotFoundComponent } from './common/not-found/not-found.component';
 
 @NgModule({
-    declarations: [
-    NotFoundComponent
-  ],
+    declarations: [NotFoundComponent],
     imports: [CommonModule, ModulesRoutingModule],
     exports: [],
 })
