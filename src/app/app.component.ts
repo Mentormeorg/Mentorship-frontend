@@ -11,6 +11,7 @@ export class AppComponent implements OnInit {
     public title = 'Testing MentorChief';
 
     ngOnInit(): void {
+        this._translationService.addLangs(['ar']);
         this._translationService.setDefaultLang('en');
         this._translationService.use('en');
     }
