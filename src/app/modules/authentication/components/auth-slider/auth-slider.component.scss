@@ -1,0 +1,82 @@
+@import '../../../../../assets/styles/theme-base/variables.scss';
+
+app-auth-slider {
+    min-width: 530px;
+    max-width: 900px;
+    display: block;
+    position: relative;
+}
+
+.auth-slider {
+    position: relative;
+
+    .ellipses {
+        width: 7vw;
+        min-width: 7rem;
+        max-width: 9rem;
+
+        transform-style: preserve-3d;
+        transform: perspective(1000px);
+        transform: translateZ(50px);
+        @media screen and (max-width: $sm) {
+            display: none;
+        }
+
+        &:first-child {
+            position: absolute;
+            bottom: 5%;
+            left: 0;
+            transform: translateX(-50%);
+            z-index: 100;
+            transform-origin: center;
+        }
+
+        &:nth-child(2) {
+            position: absolute;
+            top: 5%;
+            right: 0;
+            transform: translateX(50%);
+            z-index: 100;
+            transform-origin: center;
+        }
+    }
+}
+
+.p-carousel-content {
+    position: relative;
+}
+
+p.qoute {
+    padding: 0 6%;
+    position: absolute;
+    bottom: 5rem;
+    display: flex;
+    justify-content: center;
+    color: $white;
+    font-style: Italic;
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+    font-weight: 300;
+    font-family: $qoute_font;
+    background-color: $mask_color;
+    text-align: center;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 95%;
+}
+
+.p-carousel-indicators {
+    position: absolute;
+    bottom: 2.5rem;
+    right: 50%;
+    transform: translateX(50%);
+    width: 100%;
+    display: flex;
+    gap: 5px;
+}
+
+.side-img {
+    height: 82vh;
+    object-fit: cover;
+    border-radius: 2rem;
+}

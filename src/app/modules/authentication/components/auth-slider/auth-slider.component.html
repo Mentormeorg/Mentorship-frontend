@@ -1,0 +1,28 @@
+<div class="auth-slider">
+    <img class="ellipses" src="assets/images/helpers/Ellipse1.svg" alt="" />
+    <img class="ellipses" src="assets/images/helpers/Ellipse2.svg" alt="" />
+
+    <p-carousel
+        [value]="slides"
+        [numVisible]="1"
+        [circular]="true"
+        [showNavigators]="false"
+        [autoplayInterval]="sliderInterval"
+        class="border-round"
+    >
+        <ng-template let-product pTemplate="item">
+            <div class="border-round">
+                <div class="mb-3 relative">
+                    <img
+                        class="side-img w-full"
+                        [src]="product.imagePath"
+                        [alt]="product.name"
+                    />
+                    <p class="mb-0 qoute">
+                        {{ product.qoute }}
+                    </p>
+                </div>
+            </div>
+        </ng-template>
+    </p-carousel>
+</div>

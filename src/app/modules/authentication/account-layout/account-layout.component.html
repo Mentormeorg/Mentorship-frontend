@@ -1,0 +1,22 @@
+<div class="auth-container">
+    <div class="nav">
+        <div class="nav-logo logo">
+            <a [routerLink]="['/']"
+                ><img src="assets/images/logo.png" alt=""
+            /></a>
+        </div>
+    </div>
+
+    <router-outlet></router-outlet>
+
+    <div class="footer">
+        <div class="footer-langs langs">
+            <img src="assets/images/helpers/Globe.svg" alt="" />
+            <p-dropdown
+                [options]="languagesList"
+                [(ngModel)]="currentLanguage"
+                optionLabel="lable"
+            ></p-dropdown>
+        </div>
+    </div>
+</div>
