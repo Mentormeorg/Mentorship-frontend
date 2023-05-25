@@ -11,14 +11,14 @@ import { ForgetPasswordComponent } from './components/forget-password/forget-pas
 import { SharedModule } from '@shared/shared.module';
 
 @NgModule({
-	declarations: [
-		AuthComponent,
-		LoginComponent,
-		RegisterComponent,
-		VerifyEmailComponent,
-		ResetPasswordComponent,
-		ForgetPasswordComponent,
-	],
-	imports: [CommonModule, AuthRoutingModule, SharedModule],
+    declarations: [
+        AuthComponent,
+        LoginComponent,
+        RegisterComponent,
+        VerifyEmailComponent,
+        ResetPasswordComponent,
+        ForgetPasswordComponent,
+    ],
+    imports: [CommonModule, AuthRoutingModule, SharedModule],
 })
 export class AuthModule {}

@@ -20,31 +20,31 @@ import { NotFoundComponent } from '@shared/components/not-found/not-found.compon
 */
 
 const routes: Routes = [
-	{
-		path: '',
-		component: AuthComponent,
-		children: [
-			{ path: '', redirectTo: 'login', pathMatch: 'full' },
-			{ path: 'login', component: LoginComponent },
-			{ path: 'register', component: RegisterComponent },
-			{ path: 'forget-password', component: ForgetPasswordComponent },
-			{ path: 'reset-password', component: ResetPasswordComponent },
-			{ path: 'verify-email', component: VerifyEmailComponent },
-		],
-	},
-	{
-		path: '**',
-		redirectTo: '404',
-		pathMatch: 'full',
-	},
-	{
-		path: '404',
-		component: NotFoundComponent,
-	},
+    {
+        path: '',
+        component: AuthComponent,
+        children: [
+            { path: '', redirectTo: 'login', pathMatch: 'full' },
+            { path: 'login', component: LoginComponent },
+            { path: 'register', component: RegisterComponent },
+            { path: 'forget-password', component: ForgetPasswordComponent },
+            { path: 'reset-password', component: ResetPasswordComponent },
+            { path: 'verify-email', component: VerifyEmailComponent },
+        ],
+    },
+    {
+        path: '**',
+        redirectTo: '404',
+        pathMatch: 'full',
+    },
+    {
+        path: '404',
+        component: NotFoundComponent,
+    },
 ];
 
 @NgModule({
-	imports: [RouterModule.forChild(routes)],
-	exports: [RouterModule],
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule],
 })
 export class AuthRoutingModule {}
