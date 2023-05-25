@@ -1,14 +1,13 @@
-app-auth-layout{
-	height: 100vh;
-  display: flex;
+app-auth-layout {
+    height: 100vh;
+    display: flex;
 }
 .auth-container {
-
     display: grid;
     padding-top: 0;
-		width: 95%;
-		margin: 0 auto;
-            height: 96dvh;
+    width: 95%;
+    margin: 0 auto;
+    height: 96dvh;
 
     .nav {
         margin: 0;
