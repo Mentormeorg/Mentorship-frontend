@@ -91,8 +91,7 @@ export class AuthenticationService {
                 return of(e);
             })
         );
-
-
+    }
     //* Register user
     public register(user: IRegisterBody): void {
         // * Send register request to server
@@ -139,7 +138,6 @@ export class AuthenticationService {
                 return of(e);
             })
         );
-
     }
 
     //* Handle refresh token
@@ -158,7 +156,6 @@ export class AuthenticationService {
                 }),
                 catchError((e) => {
                     return of(e);
-
                 })
             );
     }
