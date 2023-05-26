@@ -1,7 +1,5 @@
-import { NgModule, inject } from '@angular/core';
-import { RouterModule, Routes, CanLoad, Router } from '@angular/router';
-import { AuthenticationService } from '@core/services/authentication.service';
-import { NotFoundComponent } from '@shared/components/not-found/not-found.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
     // Main Parent Module
