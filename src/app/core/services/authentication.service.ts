@@ -25,6 +25,7 @@ export class AuthenticationService {
     private readonly BASE_URL = environment.baseUrl;
     private readonly LOGIN_URL = `${this.BASE_URL}/auth/sign-in`;
     private readonly LOGOUT_URL = `${this.BASE_URL}/auth/logout`;
+
     private readonly REGISTER_URL = `${this.BASE_URL}/auth/sign-up`;
     private readonly FORGET_PASSWORD_URL = `${this.BASE_URL}/auth/forget-password`;
     private readonly RESET_PASSWORD_URL = `${this.BASE_URL}/auth/reset-credentials`;
@@ -90,11 +91,12 @@ export class AuthenticationService {
                 return of(e);
             })
         );
-    }
+
 
     //* Register user
     public register(user: IRegisterBody): void {
         // * Send register request to server
+
         this._http.post<IRES<IUser>>(this.REGISTER_URL, user).pipe(
             // map((res) => {
 
@@ -137,6 +139,7 @@ export class AuthenticationService {
                 return of(e);
             })
         );
+
     }
 
     //* Handle refresh token
@@ -155,6 +158,7 @@ export class AuthenticationService {
                 }),
                 catchError((e) => {
                     return of(e);
+
                 })
             );
     }
