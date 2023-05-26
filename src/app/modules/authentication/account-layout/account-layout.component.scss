@@ -1,6 +1,7 @@
 app-auth-layout {
     height: 100vh;
     display: flex;
+		overflow-x: hidden;
 }
 .auth-container {
     display: grid;

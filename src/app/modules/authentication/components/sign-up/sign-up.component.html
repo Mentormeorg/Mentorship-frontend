@@ -7,7 +7,10 @@
         </p>
     </div>
     <div class="login-social_buttons">
-        <p-button styleClass="p-button-secondary p-button-text">
+        <p-button
+            styleClass="p-button-secondary p-button-text"
+            (click)="signInWithGoogle()"
+        >
             <span
                 class="flex gap-3 align-items-center justify-content-center flex-1"
             >
@@ -15,7 +18,10 @@
                 Continue with Google
             </span>
         </p-button>
-        <p-button styleClass="p-button-secondary p-button-text">
+        <p-button
+            styleClass="p-button-secondary p-button-text"
+            (click)="signInWithLinkedin()"
+        >
             <span
                 class="flex gap-3 align-items-center justify-content-center flex-1"
             >

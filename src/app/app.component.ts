@@ -17,6 +17,6 @@ export class AppComponent implements OnInit {
         this._translationService.setDefaultLang('en');
         this._translationService.use('en');
 
-        this._authService.logout().subscribe(console.error);
+        // this._authService.logout().subscribe(console.error);
     }
 }

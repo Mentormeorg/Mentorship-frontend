@@ -25,6 +25,9 @@ export class AuthenticationService {
     private readonly BASE_URL = environment.baseUrl;
     private readonly LOGIN_URL = `${this.BASE_URL}/auth/sign-in`;
     private readonly LOGOUT_URL = `${this.BASE_URL}/auth/logout`;
+    private readonly GOOGLE_AUTH_URL = `${this.BASE_URL}/auth/google`;
+    private readonly LINKEDIN_AUTH_URL = `${this.BASE_URL}/auth/linkedin`;
+    private readonly GITHUB_AUTH_URL = `${this.BASE_URL}/auth/github`;
 
     private readonly REGISTER_URL = `${this.BASE_URL}/auth/sign-up`;
     private readonly FORGET_PASSWORD_URL = `${this.BASE_URL}/auth/forget-password`;
@@ -158,5 +161,15 @@ export class AuthenticationService {
                     return of(e);
                 })
             );
+    }
+
+    public googleAuth() {
+        return this._http.get(this.GOOGLE_AUTH_URL);
+    }
+    public linkedinAuth() {
+        return this._http.get(this.LINKEDIN_AUTH_URL);
+    }
+    public githubAuth() {
+        return this._http.get(this.GITHUB_AUTH_URL);
     }
 }
