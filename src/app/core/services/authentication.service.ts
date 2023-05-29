@@ -167,21 +167,21 @@ export class AuthenticationService {
         window.open(
             this.GOOGLE_AUTH_URL,
             'mozillaWindow',
-            'popup,resizable=1,width=350,height=250'
+            'popup,resizable=1,width=450,height=350'
         );
     }
     public linkedinAuth(): void {
         window.open(
             this.LINKEDIN_AUTH_URL,
             'mozillaWindow',
-            'popup,resizable=1,width=350,height=250'
+            'popup,resizable=1,width=450,height=350'
         );
     }
     public githubAuth(): void {
         window.open(
             this.GITHUB_AUTH_URL,
             'mozillaWindow',
-            'popup,resizable=1,width=350,height=250'
+            'popup,resizable=1,width=450,height=350'
         );
     }
 }
