@@ -1,3 +1,4 @@
+<h1>{{ authService.isAuthenticated | async }}</h1>
 <div class="signin-container signin">
     <div class="signin-intro intro text-center">
         <h1 class="intro-header">Welcome to Mentorchief</h1>
@@ -9,7 +10,7 @@
     <div class="signin-social_buttons">
         <p-button
             styleClass="p-button-secondary p-button-text"
-            (click)="signInWithGoogle()"
+            (click)="signIn('google')"
         >
             <span
                 class="flex gap-3 align-items-center justify-content-center flex-1"
@@ -21,7 +22,7 @@
 
         <p-button
             styleClass="p-button-secondary p-button-text"
-            (click)="signInWithLinkedin()"
+            (click)="signIn('linkedin')"
         >
             <span
                 class="flex gap-3 align-items-center justify-content-center flex-1"
@@ -32,7 +33,7 @@
         </p-button>
         <p-button
             styleClass="p-button-secondary p-button-text"
-            (click)="signInWithGithub()"
+            (click)="signIn('github')"
         >
             <span
                 class="flex gap-3 align-items-center justify-content-center flex-1"
@@ -70,6 +71,7 @@
             </div>
             <p-button
                 styleClass="p-button-primary submit-email p-button-text w-full flex justify-content-center"
+                (click)="signIn('email')"
             >
                 Login
             </p-button>

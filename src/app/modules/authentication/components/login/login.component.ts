@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnChanges, SimpleChanges, inject } from '@angular/core';
 import { AuthenticationService } from '@core/services/authentication.service';
 
 @Component({
@@ -6,21 +6,34 @@ import { AuthenticationService } from '@core/services/authentication.service';
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent {
-    private _authService: AuthenticationService = inject(AuthenticationService);
+export class LoginComponent implements OnChanges {
+    public authService: AuthenticationService = inject(AuthenticationService);
     email = '';
     password = '';
 
     constructor() {
-        console.log(this._authService.getOAuthToken());
+        this.authService.isAuthOk();
     }
-    signInWithGoogle() {
-        this._authService.googleAuth();
+
+    ngOnChanges(changes: SimpleChanges): void {
+        console.log(changes);
     }
-    signInWithLinkedin() {
-        this._authService.linkedinAuth();
-    }
-    signInWithGithub() {
-        this._authService.githubAuth();
+    signIn(provider: string) {
+        switch (provider) {
+            case 'google':
+                this.authService.googleAuth();
+                break;
+            case 'linkedin':
+                this.authService.linkedinAuth();
+                break;
+            case 'github':
+                this.authService.githubAuth();
+                break;
+            case 'email':
+                this.authService.isAuthenticated.next(true);
+                break;
+            default:
+                throw new Error(`Invalid provider: ${provider}`);
+        }
     }
 }

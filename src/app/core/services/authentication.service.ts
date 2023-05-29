@@ -42,6 +42,12 @@ export class AuthenticationService {
         false
     );
 
+    public isAuthOk(): void {
+        let token = getStorageItem<string>(StorageKeys.OAUTH_TOKEN);
+        let status = !!token && Object.keys(token).length > 0;
+        this.isAuthenticated.next(status);
+    }
+
     public setOAuthToken(token: string) {
         setStorage<string>(StorageKeys.OAUTH_TOKEN, token);
     }
@@ -52,6 +58,7 @@ export class AuthenticationService {
     private setUserData(userData: IUser | null): void {
         this.userData.next(userData);
         setStorage<IUser | null>(StorageKeys.USER_DATA, userData);
+        this.isAuthenticated.next(true);
     }
 
     //* set token [private]

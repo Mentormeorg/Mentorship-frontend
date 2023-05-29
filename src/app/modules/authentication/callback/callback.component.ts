@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '@core/services/authentication.service';
+import { finalize, map } from 'rxjs';
 
 @Component({
     selector: 'app-callback',
@@ -16,8 +17,16 @@ export class CallbackComponent implements OnInit {
     ngOnInit(): void {
         this._activeRoute.queryParams.subscribe((params) => {
             if (params) {
-                this._authService.setOAuthToken(params[this.tokenKey]);
                 // window.close();
+                this._authService.isAuthenticated.pipe(
+                    map(() => {
+                        this._authService.setOAuthToken(params[this.tokenKey]);
+                    }),
+                    finalize(() => {
+                        window.close();
+                    })
+                );
+
                 console.log('Authurized User	');
             } else {
                 console.log('NON Authurized User');
