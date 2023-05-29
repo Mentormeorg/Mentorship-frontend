@@ -163,13 +163,25 @@ export class AuthenticationService {
             );
     }
 
-    public googleAuth() {
-        return this._http.get(this.GOOGLE_AUTH_URL);
+    public googleAuth(): void {
+        window.open(
+            this.GOOGLE_AUTH_URL,
+            'mozillaWindow',
+            'popup,resizable=1,width=350,height=250'
+        );
     }
-    public linkedinAuth() {
-        return this._http.get(this.LINKEDIN_AUTH_URL);
+    public linkedinAuth(): void {
+        window.open(
+            this.LINKEDIN_AUTH_URL,
+            'mozillaWindow',
+            'popup,resizable=1,width=350,height=250'
+        );
     }
-    public githubAuth() {
-        return this._http.get(this.GITHUB_AUTH_URL);
+    public githubAuth(): void {
+        window.open(
+            this.GITHUB_AUTH_URL,
+            'mozillaWindow',
+            'popup,resizable=1,width=350,height=250'
+        );
     }
 }

@@ -1,20 +1,22 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { CarouselModule } from 'primeng/carousel';
 
+import { FormsModule } from '@angular/forms';
+import { ButtonModule } from 'primeng/button';
+import { DividerModule } from 'primeng/divider';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputTextModule } from 'primeng/inputtext';
+import { PasswordModule } from 'primeng/password';
+import { AccountLayoutComponent } from './account-layout/account-layout.component';
+import { AuthenticationLayoutComponent } from './authentication-layout/authentication-layout.component';
 import { AuthenticationRoutingModule } from './authentication-routing.module';
 import { AuthSliderComponent } from './components/auth-slider/auth-slider.component';
-import { AuthenticationLayoutComponent } from './authentication-layout/authentication-layout.component';
-import { LoginComponent } from './components/login/login.component';
-import { SignUpComponent } from './components/sign-up/sign-up.component';
-import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
-import { AccountLayoutComponent } from './account-layout/account-layout.component';
-import { DropdownModule } from 'primeng/dropdown';
-import { FormsModule } from '@angular/forms';
-import { DividerModule } from 'primeng/divider';
-import { ButtonModule } from 'primeng/button';
-import { InputTextModule } from 'primeng/inputtext';
+import { LoginComponent } from './components/login/login.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { CallbackComponent } from './callback/callback.component';
 
 @NgModule({
     declarations: [
@@ -25,6 +27,7 @@ import { InputTextModule } from 'primeng/inputtext';
         ResetPasswordComponent,
         ForgetPasswordComponent,
         AccountLayoutComponent,
+        CallbackComponent,
     ],
     imports: [
         CommonModule,
@@ -36,6 +39,7 @@ import { InputTextModule } from 'primeng/inputtext';
         DividerModule,
         ButtonModule,
         InputTextModule,
+        PasswordModule,
     ],
 })
 export class AuthenticationModule {}

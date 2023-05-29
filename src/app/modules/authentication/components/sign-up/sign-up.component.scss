@@ -1,7 +1,7 @@
 @import '../../../../../assets/styles/theme-base/variables.scss';
 
-.login-container {
-    .login-intro,
+.signup-container {
+    .signup-intro,
     .intro {
         &-header {
             font-weight: 700;
@@ -18,7 +18,7 @@
             color: $navy_blue_5;
         }
     }
-    .login-social_buttons {
+    .signup-social_buttons {
         margin-top: 3rem;
         p-button {
             display: grid;
@@ -28,10 +28,13 @@
                 font-weight: 700;
                 font-size: 1.4rem;
                 line-height: 2rem;
+                .button-label {
+                    min-width: 18rem;
+                }
             }
         }
     }
-    .login-form {
+    .signup-form {
         input {
             margin-top: 0.5rem;
         }

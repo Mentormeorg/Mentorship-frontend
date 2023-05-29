@@ -8,13 +8,18 @@ import { AuthenticationService } from '@core/services/authentication.service';
 })
 export class SignUpComponent {
     private _authService: AuthenticationService = inject(AuthenticationService);
-    signInWithGoogle() {
+    signupWithGoogle() {
         console.log('object');
-        this._authService.googleAuth().subscribe(console.log);
+        this._authService.googleAuth();
     }
-    signInWithLinkedin() {
+    signupWithLinkedin() {
         console.log('object');
-        this._authService.linkedinAuth().subscribe(console.log);
+        this._authService.linkedinAuth();
+    }
+
+    signupWithGithub() {
+        console.log('object');
+        this._authService.githubAuth();
     }
     // what we need to do
     // 1. create a form with a template validation

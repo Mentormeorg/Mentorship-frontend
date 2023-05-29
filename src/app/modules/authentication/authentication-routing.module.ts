@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthenticationLayoutComponent } from './authentication-layout/authentication-layout.component';
-import { LoginComponent } from './components/login/login.component';
-import { SignUpComponent } from './components/sign-up/sign-up.component';
-import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
-import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 import { AccountLayoutComponent } from './account-layout/account-layout.component';
+import { AuthenticationLayoutComponent } from './authentication-layout/authentication-layout.component';
+import { CallbackComponent } from './callback/callback.component';
+import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
+import { LoginComponent } from './components/login/login.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
 
 const routes: Routes = [
     {
@@ -35,6 +36,10 @@ const routes: Routes = [
             {
                 path: 'reset-password',
                 component: ResetPasswordComponent,
+            },
+            {
+                path: 'callback',
+                component: CallbackComponent,
             },
             {
                 path: 'forget-password',

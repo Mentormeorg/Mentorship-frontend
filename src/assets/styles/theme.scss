@@ -1,4 +1,5 @@
 @import './theme-base/colors.scss';
+
 :root {
     --font-family: 'Lexend Deca', 'Noto Sans KR', Inter;
     --focus-ring: none;
@@ -12,3 +13,8 @@ body {
 .p-icon-wrapper {
     transform: scale(1.8);
 }
+
+// input:-webkit-autofill + label{
+// 		transform: translateY(-2.5rem);
+// 		font-size: 1.2rem;
+// }
