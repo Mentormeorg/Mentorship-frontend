@@ -21,6 +21,7 @@ export class CallbackComponent implements OnInit {
                 this._authService.isAuthenticated.pipe(
                     map(() => {
                         this._authService.setOAuthToken(params[this.tokenKey]);
+                        localStorage.getItem(params[this.tokenKey]);
                     }),
                     finalize(() => {
                         window.close();

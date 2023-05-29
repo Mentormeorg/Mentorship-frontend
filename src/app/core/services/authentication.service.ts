@@ -176,12 +176,12 @@ export class AuthenticationService {
     }
 
     public googleAuth(): void {
-        window.open(this.GOOGLE_AUTH_URL);
+        window.open(this.GOOGLE_AUTH_URL, 'popup', 'width=600,height=600');
     }
     public linkedinAuth(): void {
-        window.open(this.LINKEDIN_AUTH_URL);
+        window.open(this.LINKEDIN_AUTH_URL, 'popup', 'width=600,height=600');
     }
     public githubAuth(): void {
-        window.open(this.GITHUB_AUTH_URL);
+        window.open(this.GITHUB_AUTH_URL, 'popup', 'width=600,height=600');
     }
 }
