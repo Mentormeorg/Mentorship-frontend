@@ -10,6 +10,12 @@ export class LoginComponent {
     private _authService: AuthenticationService = inject(AuthenticationService);
     email = '';
     password = '';
+
+    constructor() {
+        this._authService.OAuthToken.subscribe((token) => {
+            console.log(token);
+        });
+    }
     signInWithGoogle() {
         this._authService.googleAuth();
     }
