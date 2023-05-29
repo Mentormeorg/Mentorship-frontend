@@ -12,10 +12,8 @@ export class CallbackComponent implements OnInit {
 
     ngOnInit(): void {
         console.log('callback component');
-        console.log(
-            this._activeRoute.params.subscribe((params) => {
-                console.log(params);
-            })
-        );
+        this._activeRoute.queryParams.subscribe((params) => {
+            console.log(params);
+        });
     }
 }
