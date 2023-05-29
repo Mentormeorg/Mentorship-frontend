@@ -15,7 +15,7 @@ import {
     setStorage,
 } from '@core/utils/storage.utils';
 import { environment } from '@environments/environment';
-import { BehaviorSubject, catchError, map, of } from 'rxjs';
+import { BehaviorSubject, Subject, catchError, map, of } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
@@ -28,7 +28,6 @@ export class AuthenticationService {
     private readonly GOOGLE_AUTH_URL = `${this.BASE_URL}/auth/google`;
     private readonly LINKEDIN_AUTH_URL = `${this.BASE_URL}/auth/linkedin`;
     private readonly GITHUB_AUTH_URL = `${this.BASE_URL}/auth/github`;
-
     private readonly REGISTER_URL = `${this.BASE_URL}/auth/sign-up`;
     private readonly FORGET_PASSWORD_URL = `${this.BASE_URL}/auth/forget-password`;
     private readonly RESET_PASSWORD_URL = `${this.BASE_URL}/auth/reset-credentials`;
@@ -42,6 +41,8 @@ export class AuthenticationService {
     public isAuthenticated: BehaviorSubject<boolean> = new BehaviorSubject(
         false
     );
+
+    public OAuthToken: Subject<string> = new Subject();
 
     //* Set / Reset user data [private]
     private setUserData(userData: IUser | null): void {

@@ -3,4 +3,5 @@ export enum StorageKeys {
     TOKEN = 'token',
     LANG = 'lang',
     STEPS_DATA = 'steps_data',
+    OAUTH_TOKEN = 'OAuthToken',
 }

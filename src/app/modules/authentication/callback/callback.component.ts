@@ -1,5 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AuthenticationService } from '@core/services/authentication.service';
+import { catchError } from 'rxjs';
 
 @Component({
     selector: 'app-callback',
@@ -8,12 +10,17 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CallbackComponent implements OnInit {
     private _activeRoute: ActivatedRoute = inject(ActivatedRoute);
-    constructor() {}
+    private _authService: AuthenticationService = inject(AuthenticationService);
+    private readonly tokenKey = 'code';
 
     ngOnInit(): void {
-        console.log('callback component');
-        this._activeRoute.queryParams.subscribe((params) => {
-            console.log(params);
-        });
+        this._activeRoute.queryParams
+            .pipe(catchError(async () => window.close()))
+            .subscribe((params) => {
+                if (params) {
+                    this._authService.OAuthToken.next(params[this.tokenKey]);
+                }
+                window.close();
+            });
     }
 }
