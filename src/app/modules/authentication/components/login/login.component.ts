@@ -1,4 +1,5 @@
-import { Component, OnChanges, SimpleChanges, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthenticationService } from '@core/services/authentication.service';
 
 @Component({
@@ -6,17 +7,18 @@ import { AuthenticationService } from '@core/services/authentication.service';
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnChanges {
+export class LoginComponent implements OnInit {
     public authService: AuthenticationService = inject(AuthenticationService);
+    private _router: Router = inject(Router);
     email = '';
     password = '';
 
-    constructor() {
-        this.authService.isAuthOk();
-    }
-
-    ngOnChanges(changes: SimpleChanges): void {
-        console.log(changes);
+    ngOnInit(): void {
+        this.authService.isAuthOk().subscribe((authenticated: boolean) => {
+            if (authenticated) {
+                this._router.navigate(['/registeration-steps']);
+            }
+        });
     }
     signIn(provider: string) {
         switch (provider) {

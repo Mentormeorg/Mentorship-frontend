@@ -1,4 +1,6 @@
-<h1>{{ (authService.isAuthOk() | async) ? 'true' : 'false' }}</h1>
+<h1 class="text-center bg-red-100">
+    {{ (authService.isAuthOk() | async) ? 'true' : 'false' }}
+</h1>
 <div class="signin-container signin">
     <div class="signin-intro intro text-center">
         <h1 class="intro-header">Welcome to Mentorchief</h1>
