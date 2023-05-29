@@ -3,10 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { AccountLayoutComponent } from './account-layout/account-layout.component';
 import { AuthenticationLayoutComponent } from './authentication-layout/authentication-layout.component';
 import { CallbackComponent } from './callback/callback.component';
-import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
-import { LoginComponent } from './components/login/login.component';
-import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
-import { SignUpComponent } from './components/sign-up/sign-up.component';
+import {
+    ForgetPasswordComponent,
+    LoginComponent,
+    ResetPasswordComponent,
+    SignUpComponent,
+} from './components';
 
 const routes: Routes = [
     {
@@ -36,6 +38,13 @@ const routes: Routes = [
             {
                 path: 'reset-password',
                 component: ResetPasswordComponent,
+            },
+            {
+                path: 'registeration-steps',
+                loadChildren: () =>
+                    import(
+                        '../../registration-steps/registration-steps.module'
+                    ).then((m) => m.RegistrationStepsModule),
             },
             {
                 path: 'callback',
