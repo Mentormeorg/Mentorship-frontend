@@ -1,6 +1,7 @@
 {
     "conventionalCommits.scopes": [
         "global-style",
-        "auth"
+        "auth",
+        "registration-steps"
     ]
 }
