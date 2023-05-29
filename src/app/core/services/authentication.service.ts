@@ -15,7 +15,7 @@ import {
     setStorage,
 } from '@core/utils/storage.utils';
 import { environment } from '@environments/environment';
-import { BehaviorSubject, Subject, catchError, map, of } from 'rxjs';
+import { BehaviorSubject, catchError, map, of } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
@@ -42,8 +42,12 @@ export class AuthenticationService {
         false
     );
 
-    public OAuthToken: Subject<string> = new Subject();
-
+    public setOAuthToken(token: string) {
+        setStorage<string>(StorageKeys.OAUTH_TOKEN, token);
+    }
+    public getOAuthToken(): string {
+        return getStorageItem<string>(StorageKeys.OAUTH_TOKEN);
+    }
     //* Set / Reset user data [private]
     private setUserData(userData: IUser | null): void {
         this.userData.next(userData);
@@ -165,24 +169,12 @@ export class AuthenticationService {
     }
 
     public googleAuth(): void {
-        window.open(
-            this.GOOGLE_AUTH_URL,
-            'mozillaWindow',
-            'popup,resizable=1,width=450,height=350'
-        );
+        window.open(this.GOOGLE_AUTH_URL);
     }
     public linkedinAuth(): void {
-        window.open(
-            this.LINKEDIN_AUTH_URL,
-            'mozillaWindow',
-            'popup,resizable=1,width=450,height=350'
-        );
+        window.open(this.LINKEDIN_AUTH_URL);
     }
     public githubAuth(): void {
-        window.open(
-            this.GITHUB_AUTH_URL,
-            'mozillaWindow',
-            'popup,resizable=1,width=450,height=350'
-        );
+        window.open(this.GITHUB_AUTH_URL);
     }
 }

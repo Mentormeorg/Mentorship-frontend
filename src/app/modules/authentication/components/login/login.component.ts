@@ -12,9 +12,7 @@ export class LoginComponent {
     password = '';
 
     constructor() {
-        this._authService.OAuthToken.subscribe((token) => {
-            console.log(token);
-        });
+        console.log(this._authService.getOAuthToken());
     }
     signInWithGoogle() {
         this._authService.googleAuth();
@@ -22,7 +20,6 @@ export class LoginComponent {
     signInWithLinkedin() {
         this._authService.linkedinAuth();
     }
-
     signInWithGithub() {
         this._authService.githubAuth();
     }
