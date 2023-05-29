@@ -50,6 +50,7 @@ export class AuthenticationService {
 
     public setOAuthToken(token: string) {
         setStorage<string>(StorageKeys.OAUTH_TOKEN, token);
+        console.log('setted');
     }
     public getOAuthToken(): string {
         return getStorageItem<string>(StorageKeys.OAUTH_TOKEN);
