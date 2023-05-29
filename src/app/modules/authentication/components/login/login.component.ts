@@ -8,13 +8,14 @@ import { AuthenticationService } from '@core/services/authentication.service';
     styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-    public authService: AuthenticationService = inject(AuthenticationService);
     private _router: Router = inject(Router);
-    email = '';
-    password = '';
+    public authService: AuthenticationService = inject(AuthenticationService);
+    public email = '';
+    public password = '';
+    public isAuthenticated = this.authService.isAuthOk();
 
     ngOnInit(): void {
-        this.authService.isAuthOk().subscribe((authenticated: boolean) => {
+        this.isAuthenticated.subscribe((authenticated: boolean) => {
             if (authenticated) {
                 this._router.navigate(['/registeration-steps']);
             }
@@ -32,7 +33,7 @@ export class LoginComponent implements OnInit {
                 this.authService.githubAuth();
                 break;
             case 'email':
-                this.authService.isAuthenticated.next(true);
+                this.isAuthenticated.subscribe(console.log);
                 break;
             default:
                 throw new Error(`Invalid provider: ${provider}`);
