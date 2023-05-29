@@ -15,7 +15,7 @@ import {
     setStorage,
 } from '@core/utils/storage.utils';
 import { environment } from '@environments/environment';
-import { BehaviorSubject, Observable, catchError, map, of } from 'rxjs';
+import { BehaviorSubject, catchError, map, of } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
@@ -42,10 +42,10 @@ export class AuthenticationService {
         false
     );
 
-    public isAuthOk(): Observable<boolean> {
+    public isAuthOk(): BehaviorSubject<boolean> {
         let token = this.getOAuthToken();
         let status = token.length > 0 && token !== '{}' ? true : false;
-        return of(status);
+        return new BehaviorSubject<boolean>(status);
     }
 
     public setOAuthToken(token: string) {
