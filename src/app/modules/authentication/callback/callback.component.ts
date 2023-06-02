@@ -18,7 +18,7 @@ export class CallbackComponent implements OnInit {
             console.log(params);
             if (params) {
                 this._authService.setOAuthToken(params[this.tokenKey]);
-                window.close();
+                // window.close();
             } else {
                 console.log('NON Authurized User');
             }
