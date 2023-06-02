@@ -55,6 +55,7 @@ export class AuthenticationService {
     public getOAuthToken(): string {
         return getStorageItem<string>(StorageKeys.OAUTH_TOKEN);
     }
+
     //* Set / Reset user data [private]
     private setUserData(userData: IUser | null): void {
         this.userData.next(userData);
