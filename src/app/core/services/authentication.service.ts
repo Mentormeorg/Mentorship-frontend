@@ -178,12 +178,45 @@ export class AuthenticationService {
     }
 
     public googleAuth(): void {
-        window.open(this.GOOGLE_AUTH_URL, 'popup', 'width=600,height=600');
+        window
+            .open(this.GOOGLE_AUTH_URL, 'popup', 'width=600,height=600')
+            ?.addEventListener('load', () => {
+                if (
+                    getStorageItem(StorageKeys.OAUTH_TOKEN) &&
+                    getStorageItem(StorageKeys.OAUTH_TOKEN) !== '{}'
+                ) {
+                    this.isAuthenticated.next(true);
+                } else {
+                    this.isAuthenticated.next(false);
+                }
+            });
     }
     public linkedinAuth(): void {
-        window.open(this.LINKEDIN_AUTH_URL, 'popup', 'width=600,height=600');
+        window
+            .open(this.LINKEDIN_AUTH_URL, 'popup', 'width=600,height=600')
+            ?.addEventListener('load', () => {
+                if (
+                    getStorageItem(StorageKeys.OAUTH_TOKEN) &&
+                    getStorageItem(StorageKeys.OAUTH_TOKEN) !== '{}'
+                ) {
+                    this.isAuthenticated.next(true);
+                } else {
+                    this.isAuthenticated.next(false);
+                }
+            });
     }
     public githubAuth(): void {
-        window.open(this.GITHUB_AUTH_URL, 'popup', 'width=600,height=600');
+        window
+            .open(this.GITHUB_AUTH_URL, 'popup', 'width=600,height=600')
+            ?.addEventListener('load', () => {
+                if (
+                    getStorageItem(StorageKeys.OAUTH_TOKEN) &&
+                    getStorageItem(StorageKeys.OAUTH_TOKEN) !== '{}'
+                ) {
+                    this.isAuthenticated.next(true);
+                } else {
+                    this.isAuthenticated.next(false);
+                }
+            });
     }
 }

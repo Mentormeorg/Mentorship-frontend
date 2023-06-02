@@ -1,5 +1,5 @@
 <h1 class="text-center bg-red-100">
-    {{ (authService.isAuthOk() | async) ? 'true' : 'false' }}
+    {{ (authService.isAuthenticated | async) ? 'true' : 'false' }}
 </h1>
 <div class="signin-container signin">
     <div class="signin-intro intro text-center">

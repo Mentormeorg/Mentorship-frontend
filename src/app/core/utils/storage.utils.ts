@@ -11,7 +11,7 @@ export function setStorage<T>(
 }
 
 export function getStorageItem<T>(key: string, isLocalStorage?: boolean): T {
-    return JSON.parse(getStorage().getItem(key) || '{}');
+    return JSON.parse(getStorage().getItem(key) || '');
 }
 
 export function removeStorageItem(key: string, isLocalStorage?: boolean): void {
