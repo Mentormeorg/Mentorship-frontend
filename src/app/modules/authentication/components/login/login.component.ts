@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, NgZone, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '@core/services/authentication.service';
 
@@ -9,6 +9,7 @@ import { AuthenticationService } from '@core/services/authentication.service';
 })
 export class LoginComponent implements OnInit {
     private _router: Router = inject(Router);
+    private ngZone: NgZone = inject(NgZone);
     public authService: AuthenticationService = inject(AuthenticationService);
     public email = '';
     public password = '';
@@ -18,7 +19,7 @@ export class LoginComponent implements OnInit {
         this.authService.isAuthenticated.subscribe((status) => {
             console.log(status);
             if (status) {
-                this._router.navigate(['/']);
+                this.ngZone.run(() => this._router.navigate(['/']));
             }
         });
     }
