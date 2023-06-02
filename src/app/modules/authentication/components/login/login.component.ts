@@ -15,8 +15,13 @@ export class LoginComponent implements OnInit {
     public isAuthenticated = this.authService.isAuthOk();
 
     ngOnInit(): void {
-        if (this.authService.getOAuthToken())
+        if (
+            this.authService.getOAuthToken() !== null &&
+            this.authService.getOAuthToken() !== undefined &&
+            this.authService.getOAuthToken() !== ''
+        ) {
             this._router.navigate(['auth/registeration-steps']);
+        }
     }
     signIn(provider: string) {
         switch (provider) {
