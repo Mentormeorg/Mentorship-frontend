@@ -12,10 +12,10 @@ export class LoginComponent implements OnInit {
     public authService: AuthenticationService = inject(AuthenticationService);
     public email = '';
     public password = '';
-    public isAuthenticated = this.authService.isAuthOk();
+    public isAuthenticated = this.authService.isAuthenticated;
 
     ngOnInit(): void {
-        this.authService.isAuthOk().subscribe((status) => {
+        this.authService.isAuthenticated.subscribe((status) => {
             console.log(status);
             if (status) {
                 this._router.navigate(['/']);
