@@ -51,6 +51,15 @@ export class AuthenticationService {
     );
 
     public setOAuthToken(token: string) {
+        if (
+            token === null ||
+            token === '' ||
+            token === undefined ||
+            token === 'null' ||
+            token === 'undefined'
+        ) {
+            return;
+        }
         setStorage<string>(StorageKeys.OAUTH_TOKEN, token);
     }
 
