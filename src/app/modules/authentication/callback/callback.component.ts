@@ -13,14 +13,11 @@ export class CallbackComponent implements OnInit {
     private readonly tokenKey = 'code';
 
     ngOnInit(): void {
-        console.log('object');
         this._activeRoute.queryParams.subscribe((params) => {
-            console.log(params);
             if (params) {
                 this._authService.setOAuthToken(params[this.tokenKey]);
                 this._authService.isAuthenticated.next(true);
-            } else {
-                console.log('NON Authurized User');
+                window.close();
             }
         });
     }

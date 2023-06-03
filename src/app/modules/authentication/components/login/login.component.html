@@ -1,5 +1,5 @@
 <h1 class="text-center bg-red-100">
-    {{ (authService.isAuthenticated | async) ? 'true' : 'false' }}
+    {{ (this.authService.isAuthenticated | async) ? 'true' : 'false' }}
 </h1>
 <div class="signin-container signin">
     <div class="signin-intro intro text-center">
@@ -12,7 +12,7 @@
     <div class="signin-social_buttons">
         <p-button
             styleClass="p-button-secondary p-button-text"
-            (click)="signIn('google')"
+            (click)="authService.socialAuth(providers.GOOGLE)"
         >
             <span
                 class="flex gap-3 align-items-center justify-content-center flex-1"
@@ -24,7 +24,7 @@
 
         <p-button
             styleClass="p-button-secondary p-button-text"
-            (click)="signIn('linkedin')"
+            (click)="authService.socialAuth(providers.LINKEDIN)"
         >
             <span
                 class="flex gap-3 align-items-center justify-content-center flex-1"
@@ -35,7 +35,7 @@
         </p-button>
         <p-button
             styleClass="p-button-secondary p-button-text"
-            (click)="signIn('github')"
+            (click)="authService.socialAuth(providers.GITHUB)"
         >
             <span
                 class="flex gap-3 align-items-center justify-content-center flex-1"
@@ -73,7 +73,6 @@
             </div>
             <p-button
                 styleClass="p-button-primary submit-email p-button-text w-full flex justify-content-center"
-                (click)="signIn('email')"
             >
                 Login
             </p-button>

@@ -1,4 +1,5 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { AuthProviderEnum } from '@core/enums';
 import { AuthenticationService } from '@core/services/authentication.service';
 
 @Component({
@@ -6,22 +7,11 @@ import { AuthenticationService } from '@core/services/authentication.service';
     templateUrl: './sign-up.component.html',
     styleUrls: ['./sign-up.component.scss'],
 })
-export class SignUpComponent {
-    private _authService: AuthenticationService = inject(AuthenticationService);
-    signupWithGoogle() {
-        console.log('object');
-        this._authService.googleAuth();
-    }
-    signupWithLinkedin() {
-        console.log('object');
-        this._authService.linkedinAuth();
-    }
+export class SignUpComponent implements OnInit {
+    public authService: AuthenticationService = inject(AuthenticationService);
+    public providers = AuthProviderEnum;
 
-    signupWithGithub() {
-        console.log('object');
-        this._authService.githubAuth();
+    ngOnInit() {
+        this.authService.authenticationWindowBinder('signup');
     }
-    // what we need to do
-    // 1. create a form with a template validation
-    // integrate this with API call
 }

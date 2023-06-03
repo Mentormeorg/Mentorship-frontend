@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
+import { Injectable, NgZone, inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthProviderEnum } from '@core/enums';
 import { StorageKeys } from '@core/enums/storage-keys.enum';
 import {
     IForgetPasswordBody,
@@ -21,14 +23,20 @@ import { BehaviorSubject, catchError, map, of } from 'rxjs';
     providedIn: 'root',
 })
 export class AuthenticationService {
-    private _http: HttpClient = inject(HttpClient);
     private readonly BASE_URL = environment.baseUrl;
-    private readonly LOGIN_URL = `${this.BASE_URL}/auth/sign-in`;
-    private readonly LOGOUT_URL = `${this.BASE_URL}/auth/logout`;
+
+    private _http: HttpClient = inject(HttpClient);
+    private _router: Router = inject(Router);
+    private _ngZone: NgZone = inject(NgZone);
+
     private readonly GOOGLE_AUTH_URL = `${this.BASE_URL}/auth/google`;
     private readonly LINKEDIN_AUTH_URL = `${this.BASE_URL}/auth/linkedin`;
     private readonly GITHUB_AUTH_URL = `${this.BASE_URL}/auth/github`;
+
+    private readonly LOGIN_URL = `${this.BASE_URL}/auth/sign-in`;
+    private readonly LOGOUT_URL = `${this.BASE_URL}/auth/logout`;
     private readonly REGISTER_URL = `${this.BASE_URL}/auth/sign-up`;
+
     private readonly FORGET_PASSWORD_URL = `${this.BASE_URL}/auth/forget-password`;
     private readonly RESET_PASSWORD_URL = `${this.BASE_URL}/auth/reset-credentials`;
     private readonly ACTIVE_ACCOUNT_URL = `${this.BASE_URL}/auth/activate`;
@@ -42,16 +50,10 @@ export class AuthenticationService {
         false
     );
 
-    public isAuthOk(): BehaviorSubject<boolean> {
-        let token = this.getOAuthToken();
-        let status = token.length > 0 && token !== '{}' ? true : false;
-        return new BehaviorSubject<boolean>(status);
-    }
-
     public setOAuthToken(token: string) {
         setStorage<string>(StorageKeys.OAUTH_TOKEN, token);
-        console.log('setted');
     }
+
     public getOAuthToken(): string {
         return getStorageItem<string>(StorageKeys.OAUTH_TOKEN);
     }
@@ -97,7 +99,6 @@ export class AuthenticationService {
     public logout() {
         // * if logout is successful, set user data to null and return true
         // * else return false
-        console.log('object');
         return this._http.get(this.LOGOUT_URL).pipe(
             map(() => {
                 this.isAuthenticated.next(false);
@@ -109,6 +110,7 @@ export class AuthenticationService {
             })
         );
     }
+
     //* Register user
     public register(user: IRegisterBody): void {
         // * Send register request to server
@@ -177,46 +179,51 @@ export class AuthenticationService {
             );
     }
 
-    public googleAuth(): void {
-        window
-            .open(this.GOOGLE_AUTH_URL, 'popup', 'width=600,height=600')
-            ?.addEventListener('load', () => {
-                if (
-                    getStorageItem(StorageKeys.OAUTH_TOKEN) &&
-                    getStorageItem(StorageKeys.OAUTH_TOKEN) !== '{}'
-                ) {
-                    this.isAuthenticated.next(true);
-                } else {
-                    this.isAuthenticated.next(false);
-                }
-            });
+    public socialAuth(providers: AuthProviderEnum): void {
+        let authURL = '';
+        const popupWidth = 600;
+        const popupHeight = 600;
+        switch (providers) {
+            case AuthProviderEnum.GOOGLE:
+                authURL = this.GOOGLE_AUTH_URL;
+                break;
+            case AuthProviderEnum.LINKEDIN:
+                authURL = this.LINKEDIN_AUTH_URL;
+                break;
+            case AuthProviderEnum.GITHUB:
+                authURL = this.GITHUB_AUTH_URL;
+                break;
+        }
+        window.open(
+            authURL,
+            'popup',
+            `width=${popupWidth},height=${popupHeight}`
+        );
     }
-    public linkedinAuth(): void {
-        window
-            .open(this.LINKEDIN_AUTH_URL, 'popup', 'width=600,height=600')
-            ?.addEventListener('load', () => {
-                if (
-                    getStorageItem(StorageKeys.OAUTH_TOKEN) &&
-                    getStorageItem(StorageKeys.OAUTH_TOKEN) !== '{}'
-                ) {
-                    this.isAuthenticated.next(true);
-                } else {
-                    this.isAuthenticated.next(false);
-                }
+
+    public authenticationWindowBinder(authType: 'login' | 'signup') {
+        const signUpRedirect = '/auth/registeration-steps';
+        const signInRedirect = '/';
+
+        const redirectLink =
+            authType === 'login' ? signInRedirect : signUpRedirect;
+        if (Object.keys(this.getOAuthToken()).length) {
+            this.isAuthenticated.next(true);
+        } else {
+            this._ngZone.runOutsideAngular(() => {
+                window.addEventListener(
+                    'storage',
+                    (e: StorageEvent): void => {
+                        if (e.storageArea?.getItem(StorageKeys.OAUTH_TOKEN)) {
+                            this._ngZone.run(() => {
+                                this.isAuthenticated.next(true);
+                                this._router.navigate([redirectLink]);
+                            });
+                        }
+                    },
+                    { once: true }
+                );
             });
-    }
-    public githubAuth(): void {
-        window
-            .open(this.GITHUB_AUTH_URL, 'popup', 'width=600,height=600')
-            ?.addEventListener('load', () => {
-                if (
-                    getStorageItem(StorageKeys.OAUTH_TOKEN) &&
-                    getStorageItem(StorageKeys.OAUTH_TOKEN) !== '{}'
-                ) {
-                    this.isAuthenticated.next(true);
-                } else {
-                    this.isAuthenticated.next(false);
-                }
-            });
+        }
     }
 }

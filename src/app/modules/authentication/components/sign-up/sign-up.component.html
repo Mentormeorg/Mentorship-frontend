@@ -9,7 +9,7 @@
     <div class="signup-social_buttons">
         <p-button
             styleClass="p-button-secondary p-button-text"
-            (click)="signupWithGoogle()"
+            (click)="authService.socialAuth(providers.GOOGLE)"
         >
             <span
                 class="flex gap-3 align-items-center justify-content-center flex-1"
@@ -21,7 +21,7 @@
 
         <p-button
             styleClass="p-button-secondary p-button-text"
-            (click)="signupWithLinkedin()"
+            (click)="authService.socialAuth(providers.LINKEDIN)"
         >
             <span
                 class="flex gap-3 align-items-center justify-content-center flex-1"
@@ -32,7 +32,7 @@
         </p-button>
         <p-button
             styleClass="p-button-secondary p-button-text"
-            (click)="signupWithGithub()"
+            (click)="authService.socialAuth(providers.GITHUB)"
         >
             <span
                 class="flex gap-3 align-items-center justify-content-center flex-1"

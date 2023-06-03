@@ -29,6 +29,7 @@
 					}
 				],
 				"@typescript-eslint/no-explicit-any": "error",
+				"no-console":"warn",
 				"no-unneeded-ternary": "error",
 				"max-lines": [
 					"error",

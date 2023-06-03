@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-role-info',
-  templateUrl: './role-info.component.html',
-  styleUrls: ['./role-info.component.scss']
+    selector: 'app-role-info',
+    templateUrl: './role-info.component.html',
+    styleUrls: ['./role-info.component.scss'],
 })
-export class RoleInfoComponent {
-
-}
+export class RoleInfoComponent {}
