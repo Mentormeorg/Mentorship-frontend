@@ -92,3 +92,4 @@ workflows:
                 - staging
                 - testing
                 - devops
+                - test
