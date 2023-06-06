@@ -79,16 +79,23 @@ jobs:
                       - .
 
 workflows:
-    mentorchief:
-        jobs:
+  mentorchief:
+    jobs:
+      - Build:
+          filters:
+            branches:
+              only:
+                - master
+                - staging
+                - testing
+                - devops
+      - Deploy:
+          requires:
             - Build
-            - Deploy:
-                  requires:
-                      - Build
-                  filters:
-                      branches:
-                          only:
-                              - master
-                              - staging
-                              - testing
-                              - devops
+          filters:
+            branches:
+              only:
+                - master
+                - staging
+                - testing
+                - devops
