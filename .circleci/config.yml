@@ -79,7 +79,7 @@ jobs:
                       - .
 
 workflows:
-  build:
+  mentorchief:
     jobs:
       - Build
       - Deploy:
