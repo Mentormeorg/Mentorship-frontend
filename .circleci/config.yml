@@ -60,7 +60,7 @@ jobs:
                       export SERVICE_NAME_ENV=`echo $SERVICE_NAME | tr [:lower:] [:upper:]`
                       export BUILD_NUM=$(cat BUILD_NUM)
 
-                      ssh mentormetesting@104.197.93.189 -o "StrictHostKeyChecking=no" -o SendEnv=$BUILD_NUM -o SendEnv=$CIRCLE_BRANCH  -o SendEnv=$SERVICE_NAME -o SendEnv=$SERVICE_NAME_ENV \<< EOF 
+                      ssh mentormetesting@104.197.93.189 -o "StrictHostKeyChecking=no" -o SendEnv=$BUILD_NUM -o SendEnv=$CIRCLE_BRANCH  -o SendEnv=$SERVICE_NAME -o SendEnv=$SERVICE_NAME_ENV \<< EOF
                       docker load -i ~/docker-images/mentorme-$SERVICE_NAME-$CIRCLE_BRANCH:$BUILD_NUM.tar
                       rm -rf ~/docker-images/*
                       sed -i "s/BUILD_NO_${SERVICE_NAME_ENV}=.*/BUILD_NO_${SERVICE_NAME_ENV}=$BUILD_NUM/" ~/environments/$CIRCLE_BRANCH/app/.env
@@ -79,16 +79,23 @@ jobs:
                       - .
 
 workflows:
-    mentorchief:
-        jobs:
+  mentorchief:
+    jobs:
+      - Build:
+          filters:
+            branches:
+              only:
+                - master
+                - staging
+                - testing
+                - devops
+      - Deploy:
+          requires:
             - Build
-            - Deploy:
-                  requires:
-                      - Build
-                  filters:
-                      branches:
-                          only:
-                              - master
-                              - staging
-                              - testing
-                              - devops
+          filters:
+            branches:
+              only:
+                - master
+                - staging
+                - testing
+                - devops
