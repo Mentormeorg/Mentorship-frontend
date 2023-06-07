@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
+import { ButtonModule } from 'primeng/button';
 import { StepsModule } from 'primeng/steps';
 import { BiographyComponent } from './components/biography/biography.component';
 import { CareerInfoComponent } from './components/career-info/career-info.component';
@@ -25,6 +26,7 @@ import { RegistrationStepsRoutingModule } from './registration-steps-routing.mod
         RegistrationStepsRoutingModule,
         StepsModule,
         FormsModule,
+        ButtonModule,
     ],
 })
 export class RegistrationStepsModule {}

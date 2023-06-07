@@ -9,12 +9,12 @@ app-auth-layout {
     width: 95%;
     margin: 0 auto;
     height: 98dvh;
-
+		grid-template-rows: 9rem auto 5rem;
     .nav {
         margin: 0;
         height: 7rem;
         display: flex;
-        align-items: end;
+        align-items: flex-end;
     }
 
     .footer {
