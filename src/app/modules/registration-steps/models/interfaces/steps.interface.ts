@@ -32,12 +32,12 @@ export interface IStep4 {
 }
 
 export interface IStep5 {
-    mentor: {
+    mentor?: {
         timeToSpend: number;
         pricePerHour: number;
         numberOfMentees: number;
     };
-    mentee: {
+    mentee?: {
         menteorValue: string[];
         communicationType: string;
         feedbackStyle: string;

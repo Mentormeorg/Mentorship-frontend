@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { StorageKeys } from '@core/enums';
 import { getStorageItem, setStorage } from '@core/utils/storage.utils';
 import { BehaviorSubject } from 'rxjs';
-import { IStepsData } from '../models/interfaces/steps.interface';
+import { IStep5, IStepsData } from '../models/interfaces/steps.interface';
 
 @Injectable({
     providedIn: 'root',
@@ -81,36 +81,36 @@ export class SteperService {
             (item) => item.routerLink === currentLink
         );
 
-        if (this.getCurrentStepIndex()) {
-            this.currentStep$.next(this.getCurrentStepIndex() + 1);
-        }
+        this.resetToLastStep();
 
-        const currentStep = this.currentStep$.value;
-        console.log(currentStep, currentLinkIndex);
-        if (currentLinkIndex > currentStep - 1) {
-            const nextRouterLink = `${this.baseRegistrationStepsUrl}${
-                this.stepsItems[this.currentStep$.value - 1].routerLink
-            }`;
-            this.router.navigate([nextRouterLink]);
+        if (currentLinkIndex + 1 > this.currentStep$.value) {
+            this.navigateToLastStep();
+        } else if (currentLinkIndex === this.currentStep$.value - 1) {
+            return;
         } else {
-            this.currentStep$.next(currentLinkIndex + 1);
+            this.stepsData = this.stepsData.slice(0, currentLinkIndex);
+            setStorage(StorageKeys.STEPS_DATA, this.stepsData);
+            this.resetToLastStep();
         }
     }
 
-    private getCurrentStepIndex(): number {
+    private resetToLastStep() {
         this.stepsData = getStorageItem<Array<IStepsData['stepsData']>>(
             StorageKeys.STEPS_DATA
         );
-
-        if (Object.keys(this.stepsData).length > 0) {
-            return this.stepsData.length - 1;
+        this.currentStep$.next(this.getCurrentStepIndex() + 1);
+    }
+    private getCurrentStepIndex(): number {
+        if (this.stepsData instanceof Array) {
+            return this.stepsData.length > this.totalSteps
+                ? this.stepsData.length - 1
+                : this.stepsData.length;
         } else {
-            this.stepsData = [];
             return 0;
         }
     }
 
-    private navigateToStep() {
+    private navigateToLastStep() {
         const nextRouterLink = `${this.baseRegistrationStepsUrl}${
             this.stepsItems[this.currentStep$.value - 1].routerLink
         }`;
@@ -125,15 +125,14 @@ export class SteperService {
      */
     public nextStep(
         stepData: IStepsData['stepsData']
-    ): Array<IStepsData['stepsData']> {
+    ): Array<IStepsData['stepsData']> | undefined {
         if (this.currentStep$.value < this.totalSteps) {
-            console.log('next');
+            if (!(this.stepsData instanceof Array)) this.stepsData = [];
             this.currentStep$.next(this.currentStep$.value + 1);
             this.stepsData.push(stepData);
             setStorage(StorageKeys.STEPS_DATA, this.stepsData);
-            this.navigateToStep();
+            this.navigateToLastStep();
         }
-        console.log(this.stepsData);
         return this.stepsData;
     }
 
@@ -149,13 +148,15 @@ export class SteperService {
             this.currentStep$.next(this.currentStep$.value - 1);
             this.stepsData.pop();
             setStorage(StorageKeys.STEPS_DATA, this.stepsData);
-            this.navigateToStep();
+            this.navigateToLastStep();
         }
-        console.log(this.stepsData);
         return this.stepsData;
     }
 
-    public submitForm() {
-        console.log();
+    public finish(stepData: IStep5) {
+        this.stepsData.push(stepData);
+        setStorage(StorageKeys.STEPS_DATA, this.stepsData);
+
+        // submit form
     }
 }
