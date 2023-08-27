@@ -2,12 +2,10 @@
 .grid {
     .card {
         .steps-info {
-            font-size: 1.4rem;
-            font-weight: 400;
-						margin-bottom: 1rem;
+            font-size: var(--base_FS);
+            font-weight: var(--light-font-weight);
+            margin-bottom: 1rem;
         }
-
-
 
         .p-steps ul {
             gap: 1rem !important;
