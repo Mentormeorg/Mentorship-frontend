@@ -20,6 +20,7 @@ import {
     SignInComponent,
     SignUpComponent,
 } from './components';
+import { CheckEmailComponent } from './components/check-email/check-email.component';
 
 @NgModule({
     declarations: [
@@ -31,6 +32,7 @@ import {
         ForgetPasswordComponent,
         AccountLayoutComponent,
         CallbackComponent,
+        CheckEmailComponent,
     ],
     imports: [
         CommonModule,

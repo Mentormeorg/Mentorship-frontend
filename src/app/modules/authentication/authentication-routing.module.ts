@@ -9,6 +9,7 @@ import {
     SignInComponent,
     SignUpComponent,
 } from './components';
+import { CheckEmailComponent } from './components/check-email/check-email.component';
 
 const routes: Routes = [
     {
@@ -40,6 +41,14 @@ const routes: Routes = [
                 component: ResetPasswordComponent,
             },
             {
+                path: 'forget-password',
+                component: ForgetPasswordComponent,
+            },
+            {
+                path: 'check-email',
+                component: CheckEmailComponent,
+            },
+            {
                 path: 'registeration-steps',
                 loadChildren: () =>
                     import(
@@ -49,10 +58,6 @@ const routes: Routes = [
             {
                 path: 'callback',
                 component: CallbackComponent,
-            },
-            {
-                path: 'forget-password',
-                component: ForgetPasswordComponent,
             },
             {
                 path: '**',
