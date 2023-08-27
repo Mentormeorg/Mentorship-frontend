@@ -43,7 +43,7 @@ const routes: Routes = [
                 path: 'registeration-steps',
                 loadChildren: () =>
                     import(
-                        '../../registration-steps/registration-steps.module'
+                        '../registration-steps/registration-steps.module'
                     ).then((m) => m.RegistrationStepsModule),
             },
             {

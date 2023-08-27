@@ -3,12 +3,15 @@
 @import './typography.scss';
 @import './mixins.scss';
 
-* {
+*{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+router-outlet{
+	margin: auto;
+}
 html {
     font-family: $font_family;
     font-size: $base_FS;

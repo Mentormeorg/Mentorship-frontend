@@ -8,19 +8,17 @@ app-auth-layout {
     padding-top: 0;
     width: 95%;
     margin: 0 auto;
-    height: 98dvh;
-
+    grid-template-rows: 9rem auto 5rem;
     .nav {
         margin: 0;
         height: 7rem;
         display: flex;
-        align-items: end;
+        align-items: flex-end;
     }
 
     .footer {
-        margin: 0;
-        display: flex;
-        align-self: flex-end;
+        position: absolute;
+        bottom: 2rem;
         &-langs {
             display: flex;
             align-items: center;
@@ -33,7 +31,6 @@ app-auth-layout {
                 background-color: transparent;
                 .p-dropdown-label {
                     padding: 0;
-                    font-family: 'Prompt';
                     font-style: normal;
                     font-weight: 600;
                     font-size: 2rem;
