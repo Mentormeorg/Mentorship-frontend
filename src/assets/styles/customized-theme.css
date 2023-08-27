@@ -1238,6 +1238,7 @@ p-inputswitch.ng-dirty.ng-invalid > .p-inputswitch {
     appearance: none;
     border-radius: 0.8rem;
     font-weight: 400;
+    width: 100%;
 }
 .p-inputtext:enabled:hover {
     border-color: rgba(2, 22, 56, 0.1);
@@ -1270,7 +1271,13 @@ p-inputswitch.ng-dirty.ng-invalid > .p-inputswitch {
     transform: translateY(-50%);
 }
 
-.p-float-label input:focus ~ label {
+.p-float-label input:focus ~ label,
+.p-float-label input:focus ~ label,
+.p-float-label input.p-filled ~ label,
+.p-float-label textarea:focus ~ label,
+.p-float-label textarea.p-filled ~ label,
+.p-float-label .p-inputwrapper-focus ~ label,
+.p-float-label .p-inputwrapper-filled ~ label {
     font-size: 1.4rem;
     color: #021638;
     font-weight: 300;
@@ -1585,6 +1592,10 @@ p-password.ng-invalid.ng-dirty > .p-password > .p-inputtext {
 }
 .p-password-panel .p-password-meter .p-password-strength.strong {
     background: #29c76f;
+}
+.p-password {
+    display: block;
+    width: 100%;
 }
 p-password.p-password-clearable .p-password-input {
     padding-right: 2.5rem;

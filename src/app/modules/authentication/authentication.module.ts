@@ -16,8 +16,8 @@ import { CallbackComponent } from './callback/callback.component';
 import {
     AuthSliderComponent,
     ForgetPasswordComponent,
-    LoginComponent,
     ResetPasswordComponent,
+    SignInComponent,
     SignUpComponent,
 } from './components';
 
@@ -25,7 +25,7 @@ import {
     declarations: [
         AuthSliderComponent,
         AuthenticationLayoutComponent,
-        LoginComponent,
+        SignInComponent,
         SignUpComponent,
         ResetPasswordComponent,
         ForgetPasswordComponent,

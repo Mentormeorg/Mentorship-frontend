@@ -5,8 +5,8 @@ import { AuthenticationLayoutComponent } from './authentication-layout/authentic
 import { CallbackComponent } from './callback/callback.component';
 import {
     ForgetPasswordComponent,
-    LoginComponent,
     ResetPasswordComponent,
+    SignInComponent,
     SignUpComponent,
 } from './components';
 
@@ -26,7 +26,7 @@ const routes: Routes = [
                     },
                     {
                         path: 'sign-in',
-                        component: LoginComponent,
+                        component: SignInComponent,
                     },
                     {
                         path: 'sign-up',
