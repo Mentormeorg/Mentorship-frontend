@@ -5,6 +5,12 @@
 
 $font_family: 'Inter', sans-serif;
 $qoute_font: $font_family;
-$base_FS: 10px;
+$base_FS: 1.4rem;
 $primary_fc: $navy_blue;
-$secondary_fc: $white;
+$reverse_fc: $white;
+$secondary_fc: $navy_blue_5;
+
+$normal-font-weight: 500;
+$light-font-weight: 400;
+$bold-font-weight: 700;
+$line-height: 2rem;

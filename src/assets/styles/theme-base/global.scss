@@ -1,20 +1,61 @@
-@import './breakpoints.scss';
-@import './colors.scss';
-@import './typography.scss';
-@import './mixins.scss';
+@import './variables.scss';
+// Maping scss vaiable to css variable
+:root {
+    // Colors
+    --navy_blue: #{$navy_blue};
+    --navy_blue_1: #{$navy_blue_1};
+    --navy_blue_5: #{$navy_blue_5};
 
-*{
+    --blue: #{$blue};
+    --blue_1: #{$blue_1};
+    --blue_5: #{$blue_5};
+
+    --yellow: #{$yellow};
+    --yellow_1: #{$yellow_1};
+    --yellow_5: #{$yellow_5};
+
+    --pink: #{$pink};
+    --pink_1: #{$pink_1};
+    --pink_5: #{$pink_5};
+
+    --green: #{$green};
+    --green_1: #{$green_1};
+    --green_5: #{$green_5};
+
+    --white: #{$white};
+    --blck: #{$blck};
+
+    --mask_color: #{$mask_color};
+
+    // TYPOGRAPHY
+    --font_family: #{$font_family};
+    --qoute_font: #{$qoute_font};
+    --base_FS: #{$base_FS};
+    --primary_fc: #{$navy_blue};
+    --secondary_fc: #{$navy_blue_5};
+    --reverse_fc: #{$white};
+
+    --normal-font-weight: #{$normal-font-weight};
+    --light-font-weight: #{$light-font-weight};
+    --bold-font-weight: #{$bold-font-weight};
+    --line-height: #{$line-height};
+
+    // components
+    --button-radius: 0.8rem;
+}
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-router-outlet{
-	margin: auto;
+router-outlet {
+    margin: auto;
 }
 html {
     font-family: $font_family;
-    font-size: $base_FS;
+    font-size: 10px;
     @media all and (width <= $sm) {
         font-size: $base_FS * 0.97;
     }
