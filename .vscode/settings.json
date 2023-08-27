@@ -3,5 +3,9 @@
         "global-style",
         "auth",
         "registration-steps"
-    ]
+    ],
+    "editor.tokenColorCustomizations": {
+        "comments": "",
+        "textMateRules": []
+    }
 }

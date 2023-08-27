@@ -319,7 +319,7 @@ p-autocomplete.ng-dirty.ng-invalid > .p-autocomplete > .p-inputtext {
     padding: 0.75rem 1.25rem;
     color: #343a40;
     background: var(--white);
-    font-weight: 700;
+    font-weight: var(--bold-font-weight);
 }
 p-autocomplete.p-autocomplete-clearable .p-inputtext {
     padding-right: 2.5rem;
@@ -923,7 +923,7 @@ p-chips.p-chips-clearable .p-chips-clear-icon {
     padding: 0.75rem 1.25rem;
     color: #343a40;
     background: var(--white);
-    font-weight: 700;
+    font-weight: var(--bold-font-weight);
 }
 p-dropdown.ng-dirty.ng-invalid > .p-dropdown {
     border-color: #eb516c;
@@ -1237,7 +1237,7 @@ p-inputswitch.ng-dirty.ng-invalid > .p-inputswitch {
         box-shadow 0.2s;
     appearance: none;
     border-radius: 0.8rem;
-    font-weight: 400;
+    font-weight: var(--light-font-weight);
     width: 100%;
 }
 .p-inputtext:enabled:hover {
@@ -1265,7 +1265,7 @@ p-inputswitch.ng-dirty.ng-invalid > .p-inputswitch {
     color: var(--navy_blue_5);
     transition-duration: 0.2s;
     font-size: 1.6rem;
-    font-weight: 500;
+    font-weight: var(--normal-font-weight);
     line-height: 2rem;
     margin-top: 0;
     transform: translateY(-50%);
@@ -1393,7 +1393,7 @@ p-inputswitch.ng-dirty.ng-invalid > .p-inputswitch {
     padding: 0.75rem 1.25rem;
     color: #343a40;
     background: var(--white);
-    font-weight: 700;
+    font-weight: var(--bold-font-weight);
 }
 .p-listbox .p-listbox-list .p-listbox-empty-message {
     padding: 0.75rem 1.25rem;
@@ -1543,7 +1543,7 @@ p-listbox.ng-dirty.ng-invalid > .p-listbox {
     padding: 0.75rem 1.25rem;
     color: #343a40;
     background: var(--white);
-    font-weight: 700;
+    font-weight: var(--bold-font-weight);
 }
 .p-multiselect-panel .p-multiselect-items .p-multiselect-empty-message {
     padding: 0.75rem 1.25rem;
@@ -2999,7 +2999,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
     border: none;
     border-width: 1px 0 1px 0;
     padding: 1rem 1rem;
-    font-weight: 700;
+    font-weight: var(--bold-font-weight);
 }
 .p-datatable .p-datatable-footer {
     background: var(--white);
@@ -3007,14 +3007,14 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
     border: none;
     border-width: 0 0 1px 0;
     padding: 1rem 1rem;
-    font-weight: 700;
+    font-weight: var(--bold-font-weight);
 }
 .p-datatable .p-datatable-thead > tr > th {
     text-align: left;
     padding: 1rem 1rem;
     border: none;
     border-width: 0 0 1px 0;
-    font-weight: 700;
+    font-weight: var(--bold-font-weight);
     color: #343a40;
     background: var(--white);
     transition: box-shadow 0.2s;
@@ -3024,7 +3024,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
     padding: 1rem 1rem;
     border: none;
     border-width: 0 0 1px 0;
-    font-weight: 700;
+    font-weight: var(--bold-font-weight);
     color: #343a40;
     background: var(--white);
 }
@@ -3312,7 +3312,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
     border: none;
     border-width: 1px 0 1px 0;
     padding: 1rem 1rem;
-    font-weight: 700;
+    font-weight: var(--bold-font-weight);
 }
 .p-dataview .p-dataview-content {
     background: var(--white);
@@ -3330,7 +3330,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
     border: none;
     border-width: 0 0 1px 0;
     padding: 1rem 1rem;
-    font-weight: 700;
+    font-weight: var(--bold-font-weight);
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
 }
@@ -3837,7 +3837,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
     border-top-left-radius: 5px;
 }
 .p-orderlist .p-orderlist-header .p-orderlist-title {
-    font-weight: 700;
+    font-weight: var(--bold-font-weight);
 }
 .p-orderlist .p-orderlist-filter-container {
     padding: 1.25rem;
@@ -4046,7 +4046,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
     border-top-left-radius: 5px;
 }
 .p-picklist .p-picklist-header .p-picklist-title {
-    font-weight: 700;
+    font-weight: var(--bold-font-weight);
 }
 .p-picklist .p-picklist-filter-container {
     padding: 1.25rem;
@@ -4325,7 +4325,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
     border: none;
     border-width: 1px 0 1px 0;
     padding: 1rem 1rem;
-    font-weight: 700;
+    font-weight: var(--bold-font-weight);
 }
 .p-treetable .p-treetable-footer {
     background: var(--white);
@@ -4333,14 +4333,14 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
     border: none;
     border-width: 0 0 1px 0;
     padding: 1rem 1rem;
-    font-weight: 700;
+    font-weight: var(--bold-font-weight);
 }
 .p-treetable .p-treetable-thead > tr > th {
     text-align: left;
     padding: 1rem 1rem;
     border: none;
     border-width: 0 0 1px 0;
-    font-weight: 700;
+    font-weight: var(--bold-font-weight);
     color: #343a40;
     background: var(--white);
     transition: box-shadow 0.2s;
@@ -4350,7 +4350,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
     padding: 1rem 1rem;
     border: none;
     border-width: 0 0 1px 0;
-    font-weight: 700;
+    font-weight: var(--bold-font-weight);
     color: #343a40;
     background: var(--white);
 }
@@ -4531,7 +4531,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
     border: none;
     border-width: 1px 0 1px 0;
     padding: 1rem 1rem;
-    font-weight: 700;
+    font-weight: var(--bold-font-weight);
 }
 .p-virtualscroller .p-virtualscroller-content {
     background: var(--white);
@@ -4545,7 +4545,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
     border: none;
     border-width: 0 0 1px 0;
     padding: 1rem 1rem;
-    font-weight: 700;
+    font-weight: var(--bold-font-weight);
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
 }
@@ -4554,7 +4554,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
     border: none;
     color: var(--navy_blue_5);
     background: var(--white);
-    font-weight: 700;
+    font-weight: var(--bold-font-weight);
     border-radius: var(--button-radius);
     transition: box-shadow 0.2s;
 }
@@ -4620,11 +4620,11 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
 }
 .p-card .p-card-title {
     font-size: 1.5rem;
-    font-weight: 700;
+    font-weight: var(--bold-font-weight);
     margin-bottom: 0.5rem;
 }
 .p-card .p-card-subtitle {
-    font-weight: 400;
+    font-weight: var(--light-font-weight);
     margin-bottom: 0.5rem;
     color: var(--navy_blue_5);
 }
@@ -4635,7 +4635,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
     padding: 1.25rem 0 0 0;
 }
 .p-divider .p-divider-content {
-    background-color: #f4f4f4;
+    background-color: var(--background_color);
 }
 .p-divider.p-divider-horizontal {
     margin: 1.25rem 0;
@@ -4668,7 +4668,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
     border: none;
     color: #343a40;
     background: var(--white);
-    font-weight: 700;
+    font-weight: var(--bold-font-weight);
     border-radius: var(--button-radius);
 }
 .p-fieldset.p-fieldset-toggleable .p-fieldset-legend {
@@ -4706,7 +4706,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
     border-top-left-radius: 5px;
 }
 .p-panel .p-panel-header .p-panel-title {
-    font-weight: 700;
+    font-weight: var(--bold-font-weight);
 }
 .p-panel .p-panel-header .p-panel-header-icon {
     width: 2rem;
@@ -4794,7 +4794,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
     background: var(--white);
     color: var(--navy_blue_5);
     padding: 1.25rem;
-    font-weight: 700;
+    font-weight: var(--bold-font-weight);
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
     transition: box-shadow 0.2s;
@@ -4919,7 +4919,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
     border-top-left-radius: 5px;
 }
 .p-dialog .p-dialog-header .p-dialog-title {
-    font-weight: 700;
+    font-weight: var(--bold-font-weight);
     font-size: 1.25rem;
 }
 .p-dialog .p-dialog-header .p-dialog-header-icon {
@@ -5242,7 +5242,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
     background: #021641;
     color: var(--white);
     font-size: 0.75rem;
-    font-weight: 700;
+    font-weight: var(--bold-font-weight);
     min-width: 1.5rem;
     height: 1.5rem;
     line-height: 1.5rem;
@@ -5480,7 +5480,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
     padding: 0.75rem 1.25rem;
     color: #343a40;
     background: var(--white);
-    font-weight: 700;
+    font-weight: var(--bold-font-weight);
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
 }
@@ -5522,7 +5522,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
     background: #021641;
     color: var(--white);
     font-size: 0.75rem;
-    font-weight: 700;
+    font-weight: var(--bold-font-weight);
     min-width: 1.5rem;
     height: 1.5rem;
     line-height: 1.5rem;
@@ -5583,7 +5583,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
     padding: 0.75rem 1.25rem;
     color: #343a40;
     background: var(--white);
-    font-weight: 700;
+    font-weight: var(--bold-font-weight);
     border-top-right-radius: 0;
     border-top-left-radius: 0;
 }
@@ -5601,7 +5601,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
     background: #021641;
     color: var(--white);
     font-size: 0.75rem;
-    font-weight: 700;
+    font-weight: var(--bold-font-weight);
     min-width: 1.5rem;
     height: 1.5rem;
     line-height: 1.5rem;
@@ -5797,7 +5797,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
     background: #021641;
     color: var(--white);
     font-size: 0.75rem;
-    font-weight: 700;
+    font-weight: var(--bold-font-weight);
     min-width: 1.5rem;
     height: 1.5rem;
     line-height: 1.5rem;
@@ -5973,7 +5973,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
     border: none;
     color: var(--navy_blue_5);
     background: var(--white);
-    font-weight: 700;
+    font-weight: var(--bold-font-weight);
     border-radius: var(--button-radius);
     transition: box-shadow 0.2s;
 }
@@ -6096,7 +6096,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
     background: #021641;
     color: var(--white);
     font-size: 0.75rem;
-    font-weight: 700;
+    font-weight: var(--bold-font-weight);
     min-width: 1.5rem;
     height: 1.5rem;
     line-height: 1.5rem;
@@ -6196,7 +6196,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
     background: #021641;
     color: var(--white);
     font-size: 0.75rem;
-    font-weight: 700;
+    font-weight: var(--bold-font-weight);
     min-width: 1.5rem;
     height: 1.5rem;
     line-height: 1.5rem;
@@ -6236,7 +6236,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
     color: var(--white);
 }
 .p-steps .p-steps-item.p-highlight .p-steps-title {
-    font-weight: 700;
+    font-weight: var(--bold-font-weight);
     color: #021641;
 }
 .p-steps .p-steps-item:before {
@@ -6258,7 +6258,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
     background: #021641;
     color: var(--white);
     font-size: 0.75rem;
-    font-weight: 700;
+    font-weight: var(--bold-font-weight);
     min-width: 1.5rem;
     height: 1.5rem;
     line-height: 1.5rem;
@@ -6277,7 +6277,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
     background: var(--white);
     color: var(--navy_blue_5);
     padding: 1.25rem;
-    font-weight: 700;
+    font-weight: var(--bold-font-weight);
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
     transition: box-shadow 0.2s;
@@ -6413,7 +6413,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
     background: #021641;
     color: var(--white);
     font-size: 0.75rem;
-    font-weight: 700;
+    font-weight: var(--bold-font-weight);
     min-width: 1.5rem;
     height: 1.5rem;
     line-height: 1.5rem;
@@ -6549,7 +6549,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
 }
 .p-message .p-message-text {
     font-size: var(--base_FS);
-    font-weight: 400;
+    font-weight: var(--light-font-weight);
 }
 .p-message .p-message-icon {
     font-size: 1.5rem;
@@ -6560,7 +6560,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
     height: 1.5rem;
 }
 .p-message .p-message-summary {
-    font-weight: 700;
+    font-weight: var(--bold-font-weight);
 }
 .p-message .p-message-detail {
     margin-left: 0.5rem;
@@ -6591,7 +6591,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
     height: 2rem;
 }
 .p-toast .p-toast-message .p-toast-message-content .p-toast-summary {
-    font-weight: 700;
+    font-weight: var(--bold-font-weight);
 }
 .p-toast .p-toast-message .p-toast-message-content .p-toast-detail {
     margin: 0.5rem 0 0 0;
@@ -6830,7 +6830,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
     background: #021641;
     color: var(--white);
     font-size: 0.75rem;
-    font-weight: 700;
+    font-weight: var(--bold-font-weight);
     min-width: 1.5rem;
     height: 1.5rem;
     line-height: 1.5rem;
@@ -6966,7 +6966,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
     background: #021641;
     color: var(--white);
     font-size: 0.75rem;
-    font-weight: 700;
+    font-weight: var(--bold-font-weight);
     padding: 0.25rem 0.4rem;
     border-radius: var(--button-radius);
 }
@@ -7007,7 +7007,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
         'Segoe UI Emoji', 'Segoe UI Symbol';
 }
 .p-button-label {
-    font-weight: 700;
+    font-weight: var(--bold-font-weight);
 }
 .p-accordion .p-accordion-header .p-accordion-header-link {
     transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
