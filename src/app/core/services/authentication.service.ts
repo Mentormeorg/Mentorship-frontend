@@ -210,12 +210,12 @@ export class AuthenticationService {
         );
     }
 
-    public authenticationWindowBinder(authType: 'login' | 'signup') {
+    public authenticationWindowBinder(authType: 'signIn' | 'signup') {
         const signUpRedirect = '/auth/registeration-steps';
         const signInRedirect = '/';
 
         const redirectLink =
-            authType === 'login' ? signInRedirect : signUpRedirect;
+            authType === 'signIn' ? signInRedirect : signUpRedirect;
         if (Object.keys(this.getOAuthToken()).length) {
             this.isAuthenticated.next(true);
         } else {
