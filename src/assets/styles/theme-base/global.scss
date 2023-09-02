@@ -2,9 +2,9 @@
 // Maping scss vaiable to css variable
 :root {
     // Colors
-    --navy_blue: #{$navy_blue};
-    --navy_blue_1: #{$navy_blue_1};
-    --navy_blue_5: #{$navy_blue_5};
+    --primary_color: #{$navy_blue};
+    --primary_color_1: #{$navy_blue_1};
+    --primary_color_5: #{$navy_blue_5};
 
     --blue: #{$blue};
     --blue_1: #{$blue_1};
@@ -27,6 +27,7 @@
 
     --mask_color: #{$mask_color};
     --background_color: #{$background_color};
+
     // TYPOGRAPHY
     --font_family: #{$font_family};
     --qoute_font: #{$qoute_font};
@@ -44,11 +45,11 @@
     --button-radius: 0.8rem;
 
     //Breakpoints
-    --xs: #{$xs}; //600
-    --sm: #{$sm}; //768
-    --md: #{$md}; //992
-    --lg: #{$lg}; //1200
-    --xl: #{$xl}; //1600
+    --xs: #{$xs}; //600px
+    --sm: #{$sm}; //768px
+    --md: #{$md}; //992px
+    --lg: #{$lg}; //1200px
+    --xl: #{$xl}; //1600px
 }
 
 * {
@@ -87,6 +88,7 @@ ol {
 
 a {
     color: inherit;
+    text-decoration: none;
 
     &:hover {
         text-decoration: none;

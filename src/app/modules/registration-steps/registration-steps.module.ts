@@ -1,13 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
+import { RadioButtonModule } from 'primeng/radiobutton';
 import { StepsModule } from 'primeng/steps';
 import { BiographyComponent } from './components/biography/biography.component';
 import { CareerInfoComponent } from './components/career-info/career-info.component';
 import { PersonalInfoComponent } from './components/personal-info/personal-info.component';
 import { PreferenceComponent } from './components/preference/preference.component';
+import { RegistrationBannerComponent } from './components/registration-banner/registration-banner.component';
 import { RegistrationStepsLayoutComponent } from './components/registration-steps-layout/registration-steps-layout.component';
 import { RoleInfoComponent } from './components/role-info/role-info.component';
 import { RegistrationStepsRoutingModule } from './registration-steps-routing.module';
@@ -20,6 +22,7 @@ import { RegistrationStepsRoutingModule } from './registration-steps-routing.mod
         CareerInfoComponent,
         BiographyComponent,
         PreferenceComponent,
+        RegistrationBannerComponent,
     ],
     imports: [
         CommonModule,
@@ -27,6 +30,9 @@ import { RegistrationStepsRoutingModule } from './registration-steps-routing.mod
         StepsModule,
         FormsModule,
         ButtonModule,
+        ReactiveFormsModule,
+        FormsModule,
+        RadioButtonModule,
     ],
 })
 export class RegistrationStepsModule {}

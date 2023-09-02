@@ -23,4 +23,8 @@ export class PreferenceComponent {
     finish($event?: IStepsData['stepsData']) {
         this.steprSerivce.finish(this.stepeData);
     }
+
+    prevStep() {
+        this.steprSerivce.previousStep();
+    }
 }

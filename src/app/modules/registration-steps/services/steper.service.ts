@@ -100,6 +100,7 @@ export class SteperService {
         );
         this.currentStep$.next(this.getCurrentStepIndex() + 1);
     }
+
     private getCurrentStepIndex(): number {
         if (this.stepsData instanceof Array) {
             return this.stepsData.length > this.totalSteps
