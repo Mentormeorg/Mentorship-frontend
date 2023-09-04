@@ -15,8 +15,8 @@
             display: block;
             margin: 0 auto;
             .intro {
-                margin-top: 5rem;
-                margin-bottom: 2.2rem;
+                height: 7.7rem;
+                margin-bottom: 2rem;
                 h1 {
                     font-size: 3rem;
                     font-weight: 700;
@@ -37,6 +37,7 @@
 
         .p-steps ul {
             gap: 1rem !important;
+            margin-bottom: 6rem;
             .p-steps-item {
                 height: 5px !important;
                 width: 80% !important;

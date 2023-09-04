@@ -1,9 +1,76 @@
-<p>personal-info works!</p>
-<div class="controller d-flex gap-2">
+<form [formGroup]="personalInfoForm">
+    <span class="p-float-label mb-6">
+        <input
+            class="w-full"
+            pInputText
+            id="fullname"
+            name="fullname"
+            formControlName="fullname"
+        />
+        <label htmlFor="fullname">Full name</label>
+    </span>
+    <span class="p-float-label mb-4">
+        <p-inputMask
+            formControlName="phoneNumber"
+            mask="999-99999999"
+            placeholder="(999)-99999999"
+        ></p-inputMask>
+        <label htmlFor="phone">Phone number</label>
+    </span>
+    <div class="mb-6">
+        <p>Your gender</p>
+        <span class="d-flex form-check">
+            <label for="male">
+                👦 Male
+                <input
+                    type="radio"
+                    name="gender"
+                    id="male"
+                    value="male"
+                    formControlName="gender"
+                />
+            </label>
+            <label for="female">
+                👩 Female
+                <input
+                    type="radio"
+                    name="gender"
+                    id="female"
+                    value="female"
+                    formControlName="gender"
+                />
+            </label>
+        </span>
+    </div>
+
+    <span class="mb-6 d-block">
+        <p-dropdown
+            styleClass="w-full"
+            [options]="cities"
+            optionLabel="name"
+            placeholder="Where are you from"
+            formControlName="city"
+        ></p-dropdown>
+    </span>
+    <span class="p-float-label mb-6">
+        <p-password
+            class="w-full"
+            id="password"
+            name="password"
+            formControlName="password"
+        ></p-password>
+        <label htmlFor="password">Create your password</label>
+    </span>
+</form>
+<div class="controller d-flex gap-4">
     <p-button styleClass="p-button-primary p-button-text" (click)="prevStep()">
         <- Back
     </p-button>
-    <p-button styleClass="p-button-primary p-button-text" (click)="nextStep()">
+    <p-button
+        styleClass="p-button-primary p-button-text"
+        (click)="nextStep()"
+        [disabled]="!personalInfoForm.valid"
+    >
         Next ->
     </p-button>
 </div>
