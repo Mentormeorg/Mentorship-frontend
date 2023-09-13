@@ -1,5 +1,4 @@
 import { Component, ViewEncapsulation, inject } from '@angular/core';
-import { RolesEnum } from '@core/enums';
 import { SteperService } from '@modules/registration-steps/services/steper.service';
 
 @Component({
@@ -10,5 +9,4 @@ import { SteperService } from '@modules/registration-steps/services/steper.servi
 })
 export class RegistrationStepsLayoutComponent {
     steprSerivce: SteperService = inject(SteperService);
-    userRoles = RolesEnum;
 }
