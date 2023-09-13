@@ -12,24 +12,17 @@ export interface IStep1 {
 export interface IStep2 {
     fullname: string;
     gender: GenderEnum;
-    location: {
-        name: LocationEnum;
-        code: LocationEnum;
-    };
-    phonebumber: string;
+    location: LocationEnum;
     password?: string;
 }
 
 export interface IStep3 {
-    portofolio: string | null;
-    experinces: IExperince[];
+    jobTitle: string;
+    workedAt: string;
+    experienceYears: number;
+    link?: string;
 }
-
-export interface IExperince {
-    jobtitle: string | null | undefined;
-    workedat: string | null;
-    experienceyears: number | null;
-}
+[];
 
 export interface IStep4 {
     skills: string[];
@@ -39,7 +32,14 @@ export interface IStep4 {
 }
 
 export interface IStep5 {
-    timeToSpend: number;
-    pricePerHour: number;
-    numberOfMentees: number;
+    mentor?: {
+        timeToSpend: number;
+        pricePerHour: number;
+        numberOfMentees: number;
+    };
+    mentee?: {
+        menteorValue: string[];
+        communicationType: string;
+        feedbackStyle: string;
+    };
 }

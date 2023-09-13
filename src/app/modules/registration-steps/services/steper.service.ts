@@ -22,7 +22,7 @@ export class SteperService {
         routerLink: string;
         intro: {
             header: string;
-            description?: string;
+            description: string;
         };
     }> = [];
     public totalSteps = 0;
@@ -43,6 +43,8 @@ export class SteperService {
                 routerLink: 'personal-info',
                 intro: {
                     header: 'Personal information ',
+                    description:
+                        'Lorem ipsum dolor sit amet consectetur. Nec aenean pellentesque est porta gravida aliquam sed.',
                 },
             },
             {
@@ -98,7 +100,6 @@ export class SteperService {
         );
         this.currentStep$.next(this.getCurrentStepIndex() + 1);
     }
-
     private getCurrentStepIndex(): number {
         if (this.stepsData instanceof Array) {
             return this.stepsData.length > this.totalSteps
@@ -128,13 +129,8 @@ export class SteperService {
         if (this.currentStep$.value < this.totalSteps) {
             if (!(this.stepsData instanceof Array)) this.stepsData = [];
             this.currentStep$.next(this.currentStep$.value + 1);
-            this.stepsData[this.currentStep$.value - 2] = stepData;
-            // this.stepsData.push(stepData);
-            this.stepsData.filter(
-                (item) => item !== undefined && item !== null
-            );
+            this.stepsData.push(stepData);
             setStorage(StorageKeys.STEPS_DATA, this.stepsData);
-
             this.navigateToLastStep();
         }
         return this.stepsData;
@@ -150,8 +146,8 @@ export class SteperService {
     public previousStep(): Array<IStepsData['stepsData']> {
         if (this.currentStep$.value > this._initialStep) {
             this.currentStep$.next(this.currentStep$.value - 1);
-            // this.stepsData.pop();
-            // setStorage(StorageKeys.STEPS_DATA, this.stepsData);
+            this.stepsData.pop();
+            setStorage(StorageKeys.STEPS_DATA, this.stepsData);
             this.navigateToLastStep();
         }
         return this.stepsData;
@@ -160,7 +156,7 @@ export class SteperService {
     public finish(stepData: IStep5) {
         this.stepsData.push(stepData);
         setStorage(StorageKeys.STEPS_DATA, this.stepsData);
-        console.log(this.stepsData);
+
         // submit form
     }
 }
