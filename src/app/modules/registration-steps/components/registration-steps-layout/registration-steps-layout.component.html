@@ -21,7 +21,7 @@
                 <p class="steps-info">
                     Step {{ steprSerivce.currentStep$ | async }} of
                     {{
-                        $any(steprSerivce.stepsData[0]).role ===
+                        $any(steprSerivce.stepsData[0])?.role ===
                         userRoles.MENTEE
                             ? steprSerivce.totalSteps - 1
                             : steprSerivce.totalSteps
@@ -29,7 +29,7 @@
                 </p>
                 <p-steps
                     [model]="
-                        $any(steprSerivce.stepsData[0]).role ===
+                        $any(steprSerivce.stepsData[0])?.role ===
                         userRoles.MENTEE
                             ? steprSerivce.stepsItems.slice(0, -1)
                             : steprSerivce.stepsItems
