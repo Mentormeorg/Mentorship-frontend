@@ -19,6 +19,14 @@ export class RoleInfoComponent {
             nonNullable: true,
         }),
     });
+
+    ngOnInit(): void {
+        this.steprSerivce.currentStep$.subscribe((step) => {
+            if (step === 1 && this.steprSerivce.stepsData[0]) {
+                this.roleForm.patchValue(this.steprSerivce.stepsData[0]);
+            }
+        });
+    }
     stepeData: IStep1 = {
         role: RolesEnum.MENTEE,
     };

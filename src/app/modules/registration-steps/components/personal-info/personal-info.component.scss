@@ -21,7 +21,7 @@ p {
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.6rem;
+        font-size: var(--l_FS);
         background-color: var(--white);
         color: var(--primary_color_5);
         font-weight: var(--normal-font-weight);

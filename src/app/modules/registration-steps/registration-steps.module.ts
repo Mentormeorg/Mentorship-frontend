@@ -4,9 +4,11 @@ import { InputMaskModule } from 'primeng/inputmask';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
+import { ChipsModule } from 'primeng/chips';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextModule } from 'primeng/inputtext';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 import { PasswordModule } from 'primeng/password';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { StepsModule } from 'primeng/steps';
@@ -42,6 +44,8 @@ import { RegistrationStepsRoutingModule } from './registration-steps-routing.mod
         InputTextModule,
         PasswordModule,
         DropdownModule,
+        ChipsModule,
+        InputTextareaModule,
         InputMaskModule,
     ],
 })

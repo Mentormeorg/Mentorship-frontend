@@ -1,10 +1,55 @@
-<p>biography works!</p>
+<form [formGroup]="biographyForm">
+    <span class="p-float-label mb-6">
+        <p-chips
+            class="w-full"
+            id="skills"
+            name="skills"
+            formControlName="skills"
+        ></p-chips>
 
+        <label htmlFor="skills">Skills</label>
+    </span>
+    <span class="p-float-label mb-6">
+        <p-chips
+            class="w-full"
+            id="tools"
+            name="tools"
+            placeholder="Select What Tools You Use"
+            formControlName="tools"
+        ></p-chips>
+
+        <label htmlFor="tools">Tools</label>
+    </span>
+    <span class="p-float-label mb-6">
+        <textarea
+            rows="5"
+            cols="30"
+            pInputTextarea
+            formControlName="careerStory"
+            placeholder="Write your career path story here..."
+        ></textarea>
+
+        <label htmlFor="careerStory">Career Story</label>
+    </span>
+</form>
 <div class="controller d-flex gap-4">
     <p-button styleClass="p-button-primary p-button-text" (click)="prevStep()">
         <- Back
     </p-button>
-    <p-button styleClass="p-button-primary p-button-text" (click)="nextStep()">
+    <p-button
+        styleClass="p-button-primary p-button-text"
+        [disabled]="!biographyForm.valid"
+        (click)="nextStep()"
+        *ngIf="userRole === RolesEnum.MENTOR"
+    >
         Next ->
+    </p-button>
+    <p-button
+        styleClass="p-button-primary p-button-text"
+        [disabled]="!biographyForm.valid"
+        (click)="nextStep()"
+        *ngIf="userRole !== RolesEnum.MENTOR"
+    >
+        Finish
     </p-button>
 </div>

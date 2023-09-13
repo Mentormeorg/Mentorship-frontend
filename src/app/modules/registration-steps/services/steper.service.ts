@@ -160,7 +160,7 @@ export class SteperService {
     public finish(stepData: IStep5) {
         this.stepsData.push(stepData);
         setStorage(StorageKeys.STEPS_DATA, this.stepsData);
-
+        console.log(this.stepsData);
         // submit form
     }
 }

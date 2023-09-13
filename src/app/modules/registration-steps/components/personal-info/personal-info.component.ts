@@ -1,9 +1,9 @@
 import { Component, OnInit, inject } from '@angular/core';
 import {
-    FormBuilder,
-    FormControl,
-    FormGroup,
-    Validators,
+	FormBuilder,
+	FormControl,
+	FormGroup,
+	Validators,
 } from '@angular/forms';
 import { LocationEnum } from '@core/enums/location.enum';
 import { IStep2 } from '@modules/registration-steps/models/interfaces/steps.interface';
@@ -40,6 +40,7 @@ export class PersonalInfoComponent implements OnInit {
             Validators.required
         ),
     });
+
     cities: IStep2['location'][] = Object.values(LocationEnum).map((city) => ({
         name: city,
         code: city,

@@ -20,10 +20,20 @@
                 </div>
                 <p class="steps-info">
                     Step {{ steprSerivce.currentStep$ | async }} of
-                    {{ steprSerivce.totalSteps }}
+                    {{
+                        $any(steprSerivce.stepsData[0]).role ===
+                        userRoles.MENTEE
+                            ? steprSerivce.totalSteps - 1
+                            : steprSerivce.totalSteps
+                    }}
                 </p>
                 <p-steps
-                    [model]="steprSerivce.stepsItems"
+                    [model]="
+                        $any(steprSerivce.stepsData[0]).role ===
+                        userRoles.MENTEE
+                            ? steprSerivce.stepsItems.slice(0, -1)
+                            : steprSerivce.stepsItems
+                    "
                     [readonly]="true"
                 ></p-steps>
                 <router-outlet class="hide"></router-outlet>
