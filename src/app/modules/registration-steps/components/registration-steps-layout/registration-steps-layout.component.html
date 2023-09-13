@@ -1,33 +1,47 @@
-<div class="grid h-full">
-    <div class="card col">
-        <div class="intro">
-            <h1>
-                {{
-                    steprSerivce.stepsItems[
-                        ((steprSerivce.currentStep$ | async) || 0) - 1
-                    ].intro.header
-                }}
-            </h1>
-            <p>
-                {{
-                    steprSerivce.stepsItems[
-                        ((steprSerivce.currentStep$ | async) || 1) - 1
-                    ].intro.description
-                }}
-            </p>
+<div class="h-full">
+    <div class="card h-full">
+        <div class="step-container">
+            <div class="step-content">
+                <div class="intro">
+                    <h1>
+                        {{
+                            steprSerivce.stepsItems[
+                                ((steprSerivce.currentStep$ | async) || 0) - 1
+                            ].intro.header
+                        }}
+                    </h1>
+                    <p>
+                        {{
+                            steprSerivce.stepsItems[
+                                ((steprSerivce.currentStep$ | async) || 1) - 1
+                            ].intro.description
+                        }}
+                    </p>
+                </div>
+                <p class="steps-info">
+                    Step {{ steprSerivce.currentStep$ | async }} of
+                    {{
+                        $any(steprSerivce.stepsData[0]).role ===
+                        userRoles.MENTEE
+                            ? steprSerivce.totalSteps - 1
+                            : steprSerivce.totalSteps
+                    }}
+                </p>
+                <p-steps
+                    [model]="
+                        $any(steprSerivce.stepsData[0]).role ===
+                        userRoles.MENTEE
+                            ? steprSerivce.stepsItems.slice(0, -1)
+                            : steprSerivce.stepsItems
+                    "
+                    [readonly]="true"
+                ></p-steps>
+                <router-outlet class="hide"></router-outlet>
+            </div>
         </div>
-        <p class="steps-info">
-            step {{ steprSerivce.currentStep$ | async }} of
-            {{ steprSerivce.totalSteps }}
-        </p>
-        <p-steps [model]="steprSerivce.stepsItems" [readonly]="true"></p-steps>
-        <router-outlet class="hide"></router-outlet>
-    </div>
-    <div class="banner col-3">
-        <img
-            class="h-full"
-            src="assets/images/mentor-steps-banner.png"
-            alt=""
-        />
+        <div class="banner">
+            <!-- TODO : Should be replaced with dynamic content -->
+            <app-registration-banner></app-registration-banner>
+        </div>
     </div>
 </div>
