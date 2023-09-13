@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "mentorchief-383902"
+  },
+  "targets": {
+    "mentorchief-383902": {
+      "hosting": {
+        "Mentorship-frontend": [
+          "mentorchief-383902"
+        ]
+      }
+    }
+  }
+}

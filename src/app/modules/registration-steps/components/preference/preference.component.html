@@ -1,6 +1,63 @@
-<p-button
-    styleClass="p-button-primary p-button-text"
-    (click)="finish(stepeData)"
->
-    finish
-</p-button>
+<form [formGroup]="perferenceForm">
+    <span class="d-block mb-6">
+        <p class="d-block mb-3 lable">
+            how much time want to spend mentoring someone?
+        </p>
+        <div class="p-inputgroup">
+            <input
+                pInputText
+                placeholder="placeholder"
+                formControlName="timeToSpend"
+            />
+            <span class="p-inputgroup-addon"> Hr </span>
+        </div>
+    </span>
+    <span class="d-block mb-6">
+        <p class="d-block mb-3 lable">
+            how much your price for mentoring someone per hour?
+        </p>
+
+        <div class="p-inputgroup">
+            <input
+                pInputText
+                placeholder="placeholder"
+                formControlName="pricePerHour"
+            />
+            <span class="p-inputgroup-addon"> $ </span>
+        </div>
+    </span>
+    <span class="d-block mb-6">
+        <p class="d-block mb-3 lable">
+            how many mentees capacity you can have?
+        </p>
+        <p-inputNumber
+            class="d-flex"
+            styleClass="w-full "
+            [showButtons]="true"
+            buttonLayout="horizontal"
+            inputId="horizontal"
+            placeholder="placeholder"
+            formControlName="numberOfMentees"
+            spinnerMode="horizontal"
+            [step]="1"
+            [max]="4"
+            [min]="0"
+            decrementButtonClass="p-button-parimary"
+            incrementButtonClass="p-button-parimary"
+            incrementButtonIcon="pi pi-plus"
+            decrementButtonIcon="pi pi-minus"
+        ></p-inputNumber>
+    </span>
+</form>
+<div class="controller d-flex gap-4">
+    <p-button styleClass="p-button-primary p-button-text" (click)="prevStep()">
+        <- Back
+    </p-button>
+    <p-button
+        styleClass="p-button-primary p-button-text"
+        [disabled]="!perferenceForm.valid"
+        (click)="finish(perferenceForm.value)"
+    >
+        Finish
+    </p-button>
+</div>
