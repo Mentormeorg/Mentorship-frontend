@@ -25,7 +25,7 @@
                 p {
                     font-size: 1.4rem;
                     font-weight: 400;
-                    color: var(--primary_color_5);
+                    color: var(--secondary_fc);
                 }
             }
         }
@@ -47,7 +47,7 @@
                 overflow: hidden;
 
                 &.p-steps-current {
-                    background-color: $yellow !important;
+                    background-color: var(--primary_color_500) !important;
                 }
                 &::before {
                     display: none !important;

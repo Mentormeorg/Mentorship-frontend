@@ -1,9 +1,12 @@
 p {
     font-size: var(--base_FS);
-    color: var(--primary_color);
+    color: var(--gray_7000);
     font-weight: 300;
     margin-bottom: 0.5rem;
     margin-left: 1rem;
+}
+.gender {
+    font-weight: 500;
 }
 .form-check {
     display: flex;
@@ -23,8 +26,8 @@ p {
         justify-content: center;
         font-size: var(--l_FS);
         background-color: var(--white);
-        color: var(--primary_color_5);
-        font-weight: var(--normal-font-weight);
+        color: var(--gray_700);
+        font-weight: var(--light-font-weight);
         cursor: pointer;
         input {
             display: none;

@@ -55,9 +55,10 @@
             line-height: 2rem;
             text-align: center;
             a {
-                color: $blue;
-                font-weight: 800;
+                color: var(--primary_color_600);
+                font-weight: 700;
                 text-decoration: none;
+                text-transform: uppercase;
             }
         }
     }
