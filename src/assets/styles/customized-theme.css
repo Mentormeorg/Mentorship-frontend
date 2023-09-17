@@ -760,7 +760,6 @@ p-checkbox.ng-dirty.ng-invalid > .p-checkbox > .p-checkbox-box {
 .p-chips .p-chips-multiple-container {
     padding: 1rem 1.4rem;
     gap: 0.5rem;
-    height: 5.4rem;
 }
 .p-chips .p-chips-multiple-container:not(.p-disabled):hover {
     border-color: rgba(2, 22, 56, 0.1);
@@ -768,14 +767,14 @@ p-checkbox.ng-dirty.ng-invalid > .p-checkbox > .p-checkbox-box {
 .p-chips .p-chips-multiple-container:not(.p-disabled).p-focus {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--white);
+    box-shadow: 0px 0px 0px 4px #f4ebff, 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
     border-color: var(--primary_color);
 }
 .p-chips .p-chips-multiple-container .p-chips-token {
     padding: 0.5rem 1.2rem;
-    background: var(--blue_1);
-    color: var(--blue);
-    border-radius: 0.5rem;
+    background: var(--primary_color_50);
+    color: var(--primary_color_700);
+    border-radius: 0.8rem;
 }
 .p-chips .p-chips-multiple-container .p-chips-token .p-chips-token-icon {
     margin-left: 1.1rem;
@@ -824,7 +823,7 @@ p-chips.p-chips-clearable .p-chips-clear-icon {
 }
 .p-dropdown {
     background: var(--white);
-    border: 0.1rem solid var(--primary_color_1);
+    border: 0.1rem solid var(--gray_3000);
     transition: background-color 0.2s, color 0.2s, border-color 0.2s,
         box-shadow 0.2s;
     border-radius: var(--button-radius);
@@ -1227,12 +1226,13 @@ p-inputswitch.ng-dirty.ng-invalid > .p-inputswitch {
     font-size: var(--l_FS);
     color: var(--gray_9000);
     background: var(--white);
-    padding: 1rem 1.2rem;
+    padding: 1rem 1.4rem;
     border: 0.1rem solid var(--gray_3000);
     transition: background-color 0.2s, color 0.2s, border-color 0.2s,
         box-shadow 0.2s;
     appearance: none;
     border-radius: 0.8rem;
+    line-height: 2.4rem;
     font-weight: var(--light-font-weight);
     width: 100%;
 }
@@ -1312,7 +1312,7 @@ p-inputswitch.ng-dirty.ng-invalid > .p-inputswitch {
     padding-right: 2.5rem;
 }
 ::-webkit-input-placeholder {
-    color: var(--primary_color_5);
+    color: var(--gray_5000);
 }
 :-moz-placeholder {
     color: var(--primary_color_5);
@@ -2004,26 +2004,26 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
     border-color: var(--primary_color);
 }
 .p-button.p-button-outlined {
-    background-color: transparent;
-    color: var(--primary_color);
-    border: 2px solid;
-    font-weight: var(--bold-font-weight);
+    font-weight: var(--normal-font-weight);
+    border: 1px solid var(--gray_3000);
+    background: var(--base-white, #fff);
+    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+    padding: 1.2rem 2rem;
+    color: var(--gray_700);
 }
 .p-button.p-button-outlined:enabled:hover {
-    background-color: transparent;
-    color: var(--primary_color);
-    border: 2px solid;
-    font-weight: var(--bold-font-weight);
+    color: var(--gray_700);
+    background-color: var(--white);
+    border: 1px solid;
+    font-weight: var(--normal-font-weight);
 }
 .p-button.p-button-outlined:enabled:active {
-    background-color: transparent;
-    color: var(--primary_color);
-    border: 2px solid;
-    font-weight: var(--bold-font-weight);
+    color: var(--gray_700);
+    border: 1px solid;
+    font-weight: var(--normal-font-weight);
 }
 .p-button.p-button-outlined.p-button-plain {
-    color: var(--primary_color_5);
-    border-color: var(--primary_color_5);
+    color: var(--gray_700);
 }
 .p-button.p-button-outlined.p-button-plain:enabled:hover {
     background: #e9ecef;
@@ -7011,9 +7011,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
 }
 .p-terminal .p-terminal-input {
     font-size: var(--base_FS);
-    font-family: 'Inter', sans-serif, -apple-system, BlinkMacSystemFont,
-        'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji',
-        'Segoe UI Emoji', 'Segoe UI Symbol';
+    font-family: var(--font_family);
 }
 .p-button-label {
     font-weight: var(--bold-font-weight);

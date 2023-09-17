@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ViewEncapsulation } from '@angular/core';
 import {
     FormBuilder,
     FormControl,
@@ -15,6 +15,7 @@ import { SteperService } from '@modules/registration-steps/services/steper.servi
     selector: 'app-preference',
     templateUrl: './preference.component.html',
     styleUrls: ['./preference.component.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class PreferenceComponent {
     steprSerivce: SteperService = inject(SteperService);

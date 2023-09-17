@@ -26,7 +26,10 @@ export class CareerInfoComponent {
 
     constructor() {
         this.experincesForm = this.fb.group({
-            portofolio: new FormControl<string | null>(null),
+            portofolio: new FormControl<string | null>(
+                null,
+                Validators.required
+            ),
             experinces: this.fb.array([]),
         });
         this.experincesForm.patchValue(this.steprSerivce.stepsData[2]);

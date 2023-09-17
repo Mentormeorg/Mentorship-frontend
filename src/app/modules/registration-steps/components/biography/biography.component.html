@@ -5,6 +5,11 @@
             id="skills"
             name="skills"
             formControlName="skills"
+            separator=","
+            placeholder="Hint: Angular, React, Vue"
+            [addOnTab]="true"
+            [allowDuplicate]="false"
+            [showClear]="true"
         ></p-chips>
 
         <label htmlFor="skills">Skills</label>
@@ -14,8 +19,12 @@
             class="w-full"
             id="tools"
             name="tools"
-            placeholder="Select What Tools You Use"
+            placeholder="Select What Tools You Use "
+            separator=","
             formControlName="tools"
+            [showClear]="true"
+            [addOnTab]="true"
+            [allowDuplicate]="false"
         ></p-chips>
 
         <label htmlFor="tools">Tools</label>
