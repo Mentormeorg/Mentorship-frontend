@@ -19,10 +19,15 @@
     --yellow_1: #{$yellow_1};
     --yellow_5: #{$yellow_5};
 
+    --gray_1000: #{$gray_1000};
     --gray_3000: #{$gray_3000};
+    --gray_4000: #{$gray_4000};
     --gray_5000: #{$gray_5000};
     --gray_7000: #{$gray_7000};
     --gray_9000: #{$gray_9000};
+
+    --success_5: #{$success_green_5};
+    --success_7: #{$success_green_7};
 
     --pink: #{$pink};
     --pink_1: #{$pink_1};
@@ -31,6 +36,8 @@
     --green: #{$green};
     --green_1: #{$green_1};
     --green_5: #{$green_5};
+
+    --warning_4: #{$yellow_4};
 
     --white: #{$white};
     --blck: #{$blck};
@@ -50,10 +57,13 @@
     --normal-font-weight: #{$normal-font-weight}; //500
     --light-font-weight: #{$light-font-weight}; //400
     --bold-font-weight: #{$bold-font-weight}; //700
+    --semi-bold-font-weight: #{$semi-bold-font-weight}; //600
     --line-height: #{$line-height}; //2rem
 
     // components
     --button-radius: 0.8rem;
+    --tag-radius: 1.6rem;
+    --layout-container: 84.44%;
 
     //Breakpoints
     --xs: #{$xs}; //600px
@@ -80,6 +90,11 @@ html {
     }
     color: $primary_fc;
     background-color: #f4f4f4;
+}
+
+.layout-container {
+    max-width: var(--layout-container);
+    margin: auto;
 }
 
 p,

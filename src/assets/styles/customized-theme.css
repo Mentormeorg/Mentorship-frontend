@@ -1676,7 +1676,7 @@ p-radiobutton.ng-dirty.ng-invalid > .p-radiobutton > .p-radiobutton-box {
     gap: 0.5rem;
 }
 .p-rating .p-rating-icon {
-    color: var(--primary_color);
+    color: var(--warning_4);
     margin-left: 0.5rem;
     transition: background-color 0.2s, color 0.2s, border-color 0.2s,
         box-shadow 0.2s;
@@ -1698,10 +1698,10 @@ p-radiobutton.ng-dirty.ng-invalid > .p-radiobutton > .p-radiobutton-box {
     margin-left: 0;
 }
 .p-rating .p-rating-icon.p-rating-icon-active {
-    color: var(--primary_color);
+    color: var(--warning_4);
 }
 .p-rating:not(.p-disabled):not(.p-readonly) .p-rating-icon:hover {
-    color: var(--primary_color);
+    color: var(--warning_4);
 }
 .p-rating:not(.p-disabled):not(.p-readonly)
     .p-rating-icon.p-rating-cancel:hover {
@@ -6972,16 +6972,18 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
     );
 }
 .p-tag {
-    background: var(--primary_color);
-    color: var(--white);
-    font-size: 0.75rem;
-    font-weight: var(--bold-font-weight);
-    padding: 0.25rem 0.4rem;
-    border-radius: var(--button-radius);
+    background: var(--primary_color_50);
+    color: var(--primary_color_700);
+    font-size: 1.4rem;
+    font-weight: var(--normal-font-weight);
+    padding: 0.4rem 1.2rem;
+    border-radius: var(--tag-radius);
+    mix-blend-mode: multiply;
+    margin: 0 0.4rem;
 }
 .p-tag.p-tag-success {
-    background-color: #68d98c;
-    color: var(--white);
+    background: var(--success_5);
+    color: var(--success_7);
 }
 .p-tag.p-tag-info {
     background-color: #3bc9fb;

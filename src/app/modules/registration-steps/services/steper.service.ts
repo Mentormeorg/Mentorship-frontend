@@ -12,6 +12,7 @@ export class SteperService {
     private readonly _initialStep: number = 1;
     private readonly baseRegistrationStepsUrl = 'auth/registeration-steps/';
     private router: Router = inject(Router);
+    public totalSteps = 0;
 
     public stepsData: Array<IStepsData['stepsData']> = [];
     public currentStep$: BehaviorSubject<number> = new BehaviorSubject<number>(
@@ -25,7 +26,6 @@ export class SteperService {
             description?: string;
         };
     }> = [];
-    public totalSteps = 0;
 
     constructor() {
         this.stepsItems = [
@@ -129,7 +129,6 @@ export class SteperService {
             if (!(this.stepsData instanceof Array)) this.stepsData = [];
             this.currentStep$.next(this.currentStep$.value + 1);
             this.stepsData[this.currentStep$.value - 2] = stepData;
-            // this.stepsData.push(stepData);
             this.stepsData.filter(
                 (item) => item !== undefined && item !== null
             );
@@ -150,8 +149,6 @@ export class SteperService {
     public previousStep(): Array<IStepsData['stepsData']> {
         if (this.currentStep$.value > this._initialStep) {
             this.currentStep$.next(this.currentStep$.value - 1);
-            // this.stepsData.pop();
-            // setStorage(StorageKeys.STEPS_DATA, this.stepsData);
             this.navigateToLastStep();
         }
         return this.stepsData;
