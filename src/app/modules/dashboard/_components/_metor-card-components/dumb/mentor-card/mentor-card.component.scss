@@ -1,0 +1,152 @@
+.mentor-card {
+    border-radius: 1.6rem;
+    border: 1px solid var(--gray_3000);
+    padding: 3.6rem;
+    display: flex;
+    font-size: 1.6rem;
+    @media all and (width<= 900px) {
+        font-size: 1.3rem;
+        flex-wrap: wrap;
+    }
+    @media all and (width<= 950px) {
+        font-size: 1.5rem;
+    }
+    font-weight: var(--light-font-weight);
+    justify-content: space-between;
+    .left {
+        gap: 3.6rem;
+        @media all and (width<= 630px) {
+            flex-wrap: wrap;
+        }
+        .profile-photo {
+            @media all and (width<= 630px) {
+                width: 100%;
+            }
+            .photo-container {
+                border-radius: 1.6rem;
+                overflow: hidden;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-width: 50%;
+                width: 24.8rem;
+                height: 24.8rem;
+                @media all and (width<= 630px) {
+                    width: 100%;
+                }
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+        }
+
+        .content {
+            h3 {
+                font-size: 3rem;
+                font-weight: var(--semi-bold-font-weight);
+                @media all and (width<= 900px) {
+                    font-size: 1.5rem;
+                }
+                @media all and (width<= 950px) {
+                    font-size: 2.5rem;
+                }
+                & + span {
+                    display: flex;
+                    align-items: center;
+                    margin-left: 0.5rem;
+                    max-width: 63.5rem;
+
+                    img {
+                        width: 20px;
+                    }
+                }
+            }
+
+            .short-description {
+                margin-top: 0.6rem;
+                margin-bottom: 1.1rem;
+                .job-title {
+                    gap: 0.6rem;
+                    min-width: fit-content;
+
+                    .pi {
+                        margin-top: 0.2rem;
+                        margin-right: 0.4rem;
+                        color: var(--gray_7000);
+                    }
+
+                    .company-name {
+                        font-weight: var(-normal-font-weight);
+                    }
+                }
+                .rating {
+                    display: flex;
+                    align-items: center;
+                    min-width: fit-content;
+
+                    p-rating {
+                        height: fit-content;
+                        margin: 0 1rem;
+                        margin-left: 0.5rem;
+                    }
+                    .rating-value {
+                        font-weight: var(--semi-bold-font-weight);
+                    }
+                }
+
+                .review-number {
+                    margin-left: 0.5rem;
+                    font-weight: var(--light-font-weight);
+                }
+            }
+
+            .long-description {
+                color: var(--gray_7000);
+                font-weight: var(--light-font-weight);
+                margin-bottom: 1.1rem;
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-line-clamp: 4;
+                line-clamp: 4;
+                -webkit-box-orient: vertical;
+            }
+        }
+    }
+
+    .right {
+        flex-shrink: 0;
+        color: var(--primary_color_600);
+        height: fit-content;
+        @media all and (width<= 992px) {
+            justify-content: end;
+            margin-top: 1rem;
+        }
+
+        p {
+            font-size: 2.4rem;
+            align-items: center;
+            display: flex;
+            @media all and (width<= 900px) {
+                font-size: 1.4rem;
+            }
+            @media all and (width<= 950px) {
+                font-size: 1.2rem;
+            }
+            font-weight: var(--light-font-weight);
+        }
+        p.price {
+            font-weight: var(--semi-bold-font-weight);
+            font-size: 3rem;
+            display: flex;
+
+            @media all and (width<= 900px) {
+                font-size: 1.5rem;
+            }
+            @media all and (width<= 950px) {
+                font-size: 2.5rem;
+            }
+        }
+    }
+}

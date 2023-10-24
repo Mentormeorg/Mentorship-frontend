@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { NotFoundComponent } from './_common/not-found/not-found.component';
 
 const routes: Routes = [
     {
@@ -16,8 +15,25 @@ const routes: Routes = [
             ),
     },
     {
+        path: 'home',
+        loadComponent: () => {
+            return import('./landing-page/home/home.component').then(
+                (m) => m.HomeComponent
+            );
+        },
+    },
+    {
+        path: 'dashboard',
+        loadChildren: () => {
+            return import('./dashboard/dashboard.module').then(
+                (m) => m.DashboardModule
+            );
+        },
+    },
+    {
         path: '**',
-        component: NotFoundComponent,
+        redirectTo: 'home',
+        pathMatch: 'full',
     },
 ];
 

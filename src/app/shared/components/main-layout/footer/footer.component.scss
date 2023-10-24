@@ -1,0 +1,30 @@
+footer {
+    padding: 4.8rem 0;
+    .layout-container {
+        div {
+            display: flex;
+            align-items: center;
+        }
+        .footer-right {
+            p {
+                font-size: var(--l_FS);
+                color: var(--gray_4000);
+                font-weight: var(--light-font-weight);
+            }
+        }
+        .footer-menu {
+            .quick-links {
+                gap: 2.4rem;
+                li {
+                    a {
+                        color: var(--gray_5000);
+                        font-size: var(--l_FS);
+                        font-weight: var(--normal-font-weight);
+                    }
+                }
+            }
+        }
+        .footer-left {
+        }
+    }
+}

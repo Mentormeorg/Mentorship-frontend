@@ -1,0 +1,32 @@
+app-navbar {
+    border-bottom: 1px solid var(--gray_1000);
+    display: block;
+    nav {
+        .layout-container {
+            .nav-content {
+                height: 8rem;
+                align-items: center;
+                .nav-right {
+                    .nav-links {
+                        gap: 3.2rem;
+                        a {
+                            color: var(--gray_5000);
+                            font-size: var(--l_FS);
+                            font-weight: var(--normal-font-weight);
+                            padding: 0.4rem 0;
+                            display: flex;
+                            align-items: center;
+                        }
+                        .auth-links {
+                            margin-left: 5rem;
+                            gap: 3.2rem;
+                            .signup-button-text {
+                                padding: 1rem 1.8rem;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
