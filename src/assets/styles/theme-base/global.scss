@@ -3,11 +3,11 @@
 :root {
     // Colors
     --primary_color: #{$purbal};
-    --primary_color_700: #{$purbal_700};
-    --primary_color_600: #{$purbal_600};
-    --primary_color_500: #{$purbal_500};
     --primary_color_50: #{$purbal_50};
     --primary_color_100: #{$purbal_100};
+    --primary_color_700: #{$purbal_700};
+    --primary_color_500: #{$purbal_500};
+    --primary_color_600: #{$purbal_600};
     --primary_color_1: #{$purbal_1};
     --primary_color_5: #{$purbal_5};
 
@@ -57,12 +57,13 @@
     --normal-font-weight: #{$normal-font-weight}; //500
     --light-font-weight: #{$light-font-weight}; //400
     --bold-font-weight: #{$bold-font-weight}; //700
+    --heavy-bold-font-weight: #{$heavy-bold-font-weight}; //900
     --semi-bold-font-weight: #{$semi-bold-font-weight}; //600
     --line-height: #{$line-height}; //2rem
 
     // components
     --button-radius: 0.8rem;
-    --tag-radius: 1.6rem;
+    --medium-border-radius: 1.6rem;
     --layout-container: 84.44%;
 
     //Breakpoints
@@ -85,11 +86,15 @@ router-outlet {
 html {
     font-family: $font_family;
     font-size: 10px;
+    color: $primary_fc;
+    background-color: #f4f4f4;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-smooth: never;
+
     @media all and (width <= $sm) {
         font-size: 8px;
     }
-    color: $primary_fc;
-    background-color: #f4f4f4;
 }
 
 .layout-container {

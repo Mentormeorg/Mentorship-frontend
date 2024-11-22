@@ -1,6 +1,8 @@
+import { countryCode } from 'flag-pipe/lib/types';
+
 export interface IMentor {
     name: string;
-    country: string;
+    country: countryCode;
     profilePicture: string;
     jobTitle: string;
     company: string;

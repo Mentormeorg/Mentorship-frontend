@@ -1,7 +1,7 @@
 app-navbar {
-    border-bottom: 1px solid var(--gray_1000);
-    display: block;
     nav {
+        border-bottom: 1px solid var(--gray_1000);
+        margin-bottom: 2rem;
         .layout-container {
             .nav-content {
                 height: 8rem;
@@ -18,9 +18,10 @@ app-navbar {
                             align-items: center;
                         }
                         .auth-links {
-                            margin-left: 5rem;
+                            margin-left: 3rem;
                             gap: 3.2rem;
                             .signup-button-text {
+                                font-weight: var(--normal-font-weight);
                                 padding: 1rem 1.8rem;
                             }
                         }

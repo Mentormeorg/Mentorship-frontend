@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { PATHS } from '@core/paths';
 
 @Component({
     selector: 'app-navbar',
@@ -6,4 +7,6 @@ import { Component, ViewEncapsulation } from '@angular/core';
     styleUrls: ['./navbar.component.scss'],
     encapsulation: ViewEncapsulation.None,
 })
-export class NavbarComponent {}
+export class NavbarComponent {
+    paths = PATHS;
+}

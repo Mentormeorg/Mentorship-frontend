@@ -1246,7 +1246,7 @@ p-inputswitch.ng-dirty.ng-invalid > .p-inputswitch {
 .p-inputtext:enabled:focus {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0px 0px 0px 4px #f4ebff, 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+    /*box-shadow: 0px 0px 0px 4px #f4ebff, 0px 1px 2px 0px rgba(16, 24, 40, 0.05);*/
     border-color: var(--gray_3000);
 }
 .p-inputtext.ng-dirty.ng-invalid {
@@ -1756,7 +1756,6 @@ p-selectbutton.ng-dirty.ng-invalid > .p-selectbutton > .p-button {
     border-color: #eb516c;
 }
 .p-slider {
-    background: var(--white);
     border: 0 none;
     border-radius: var(--button-radius);
 }
@@ -6977,7 +6976,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
     font-size: 1.4rem;
     font-weight: var(--normal-font-weight);
     padding: 0.4rem 1.2rem;
-    border-radius: var(--tag-radius);
+    border-radius: var(--medium-border-radius);
     mix-blend-mode: multiply;
     margin: 0 0.4rem;
 }

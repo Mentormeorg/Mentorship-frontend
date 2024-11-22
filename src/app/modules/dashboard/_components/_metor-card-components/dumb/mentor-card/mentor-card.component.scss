@@ -1,9 +1,9 @@
 .mentor-card {
-    border-radius: 1.6rem;
+    border-radius: var(--medium-border-radius);
     border: 1px solid var(--gray_3000);
     padding: 3.6rem;
     display: flex;
-    font-size: 1.6rem;
+    font-size: var(--l_FS);
     @media all and (width<= 900px) {
         font-size: 1.3rem;
         flex-wrap: wrap;
@@ -23,7 +23,7 @@
                 width: 100%;
             }
             .photo-container {
-                border-radius: 1.6rem;
+                border-radius: var(--medium-border-radius);
                 overflow: hidden;
                 display: flex;
                 justify-content: center;
@@ -78,7 +78,7 @@
                     }
 
                     .company-name {
-                        font-weight: var(-normal-font-weight);
+                        font-weight: var(--semi-bold-font-weight);
                     }
                 }
                 .rating {

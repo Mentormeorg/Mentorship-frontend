@@ -1,10 +1,17 @@
 {
 	"root": true,
-	"ignorePatterns": ["projects/**/*"],
-	"plugins": [ "check-file","@angular-eslint"],
+	"ignorePatterns": [
+		"projects/**/*"
+	],
+	"plugins": [
+		"check-file",
+		"@angular-eslint"
+	],
 	"overrides": [
 		{
-			"files": ["*.ts"],
+			"files": [
+				"*.ts"
+			],
 			"extends": [
 				"eslint:recommended",
 				"plugin:@typescript-eslint/recommended",
@@ -29,7 +36,7 @@
 					}
 				],
 				"@typescript-eslint/no-explicit-any": "error",
-				"no-console":"warn",
+				"no-console": "warn",
 				"no-unneeded-ternary": "error",
 				"max-lines": [
 					"error",
@@ -41,11 +48,11 @@
 				],
 				"check-file/no-index": "off",
 				"check-file/filename-blocklist": [
-						"error",
-						{
-								"**/*.model.ts": "*.models.ts",
-								"**/*.util.ts": "*.utils.ts"
-						}
+					"error",
+					{
+						"**/*.model.ts": "*.models.ts",
+						"**/*.util.ts": "*.utils.ts"
+					}
 				],
 				"check-file/filename-naming-convention": [
 					"warn",
@@ -58,7 +65,7 @@
 					}
 				],
 				"check-file/folder-naming-convention": [
-				"error",
+					"error",
 					{
 						"src/**/": "KEBAB_CASE"
 					}
@@ -66,8 +73,12 @@
 			}
 		},
 		{
-			"files": ["*.html"],
-			"extends": ["plugin:@angular-eslint/template/recommended"],
+			"files": [
+				"*.html"
+			],
+			"extends": [
+				"plugin:@angular-eslint/template/recommended"
+			],
 			"rules": {}
 		}
 	]

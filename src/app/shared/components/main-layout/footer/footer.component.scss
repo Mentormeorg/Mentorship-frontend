@@ -5,17 +5,16 @@ footer {
             display: flex;
             align-items: center;
         }
-        .footer-right {
-            p {
-                font-size: var(--l_FS);
-                color: var(--gray_4000);
-                font-weight: var(--light-font-weight);
+        .footer-left {
+            img {
+                height: 3rem;
             }
         }
         .footer-menu {
             .quick-links {
-                gap: 2.4rem;
                 li {
+                    margin-right: 2.4rem;
+                    margin-bottom: 0.5rem;
                     a {
                         color: var(--gray_5000);
                         font-size: var(--l_FS);
@@ -24,7 +23,17 @@ footer {
                 }
             }
         }
-        .footer-left {
+        .footer-right {
+            @media all and (width <= 1053px) {
+                text-align: center;
+                display: block;
+                width: 100%;
+            }
+            p {
+                font-size: var(--l_FS);
+                color: var(--gray_4000);
+                font-weight: var(--light-font-weight);
+            }
         }
     }
 }

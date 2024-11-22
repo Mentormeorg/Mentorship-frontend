@@ -1,0 +1,67 @@
+<form *ngIf="filterConfig && filterObj" [formGroup]="filterObj" class="filters-form">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-12">
+
+				<!--	Search By Text -->
+				<div class="d-flex align-content-center gap-3">
+					<input formControlName="text" pInputText placeholder="Search for" type="text"/>
+					<p-button (click)="submitFilters()" class="p-button-primary flex justify-content-center">Search</p-button>
+				</div>
+			</div>
+
+			<!-- speciality -->
+			<div class="col-3">
+				<p-dropdown
+					[filter]="true"
+					[options]="filterConfig.speciality.options"
+					[showClear]=true
+					formControlName="speciality"
+					placeholder="Speciality"></p-dropdown>
+			</div>
+
+			<!-- country -->
+			<div class="col-3">
+				<p-dropdown [filter]="true"
+										[options]="filterConfig.country.options"
+										[showClear]=true
+										formControlName="country"
+										optionLabel="name"
+										placeholder="Country"
+				></p-dropdown>
+			</div>
+
+			<!-- rate -->
+			<div class="col-3">
+				<p-dropdown [options]="filterConfig.rate.options" [showClear]=true formControlName="rate"
+										placeholder="Rate"></p-dropdown>
+			</div>
+
+			<!-- experience -->
+			<div class="col-3">
+				<p-dropdown [options]="filterConfig.experience.options" [showClear]=true
+										formControlName="experience"
+										name="experience" placeholder="Experience"></p-dropdown>
+			</div>
+
+			<!-- price slider -->
+			<div class="col-12">
+				<p-slider [max]="filterConfig.price.max" [min]="filterConfig.price.min"
+									[range]="true" formControlName="price"></p-slider>
+				<div class="slider-result d-flex justify-content-between mt-3">
+					<h3 class="font-bold">Min: {{ filterObj.value?.price[0] }} EGP</h3>
+					<h3 class="font-bold">Max: {{ filterObj.value?.price[1] }} EGP</h3>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</form>
+
+<!-- sort by -->
+<div *ngIf="filterConfig" class="col-12 d-flex justify-content-end">
+	<p-selectButton (onChange)="changeSortBy($event)" [(ngModel)]="sortBy"
+									[options]="filterConfig.sortBy.options"
+	></p-selectButton>
+</div>
+

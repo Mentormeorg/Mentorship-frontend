@@ -12,14 +12,15 @@
             </div>
             <div class="nav-right">
                 <div class="nav-links d-flex">
-                    <a>Become a mentor</a>
-                    <a>Find a mentor</a>
+                    <a routerLink="#">Become a mentor</a>
+                    <a [routerLink]="'../' + paths.DISCOVER">Find a mentor</a>
                     <div class="auth-links d-flex">
-                        <a>Login</a>
+                        <a [routerLink]="'../' + paths.AUTH__SIGN_IN">Login</a>
                         <p-button
+                            [routerLink]="'../' + paths.AUTH__SIGN_UP"
                             styleClass="p-button-primary signup-button-text w-full flex justify-content-center"
                         >
-                            Signup
+                            Sign up
                         </p-button>
                     </div>
                 </div>

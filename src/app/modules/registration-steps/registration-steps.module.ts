@@ -1,17 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { InputMaskModule } from 'primeng/inputmask';
-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ButtonModule } from 'primeng/button';
-import { ChipsModule } from 'primeng/chips';
-import { DropdownModule } from 'primeng/dropdown';
-import { InputNumberModule } from 'primeng/inputnumber';
-import { InputTextModule } from 'primeng/inputtext';
-import { InputTextareaModule } from 'primeng/inputtextarea';
-import { PasswordModule } from 'primeng/password';
-import { RadioButtonModule } from 'primeng/radiobutton';
-import { StepsModule } from 'primeng/steps';
+import { SharedModule } from '@shared/shared.module';
 import { BiographyComponent } from './components/biography/biography.component';
 import { CareerInfoComponent } from './components/career-info/career-info.component';
 import { PersonalInfoComponent } from './components/personal-info/personal-info.component';
@@ -34,19 +24,10 @@ import { RegistrationStepsRoutingModule } from './registration-steps-routing.mod
     imports: [
         CommonModule,
         RegistrationStepsRoutingModule,
-        StepsModule,
         FormsModule,
-        ButtonModule,
         ReactiveFormsModule,
-        InputNumberModule,
         FormsModule,
-        RadioButtonModule,
-        InputTextModule,
-        PasswordModule,
-        DropdownModule,
-        ChipsModule,
-        InputTextareaModule,
-        InputMaskModule,
+        SharedModule,
     ],
 })
 export class RegistrationStepsModule {}

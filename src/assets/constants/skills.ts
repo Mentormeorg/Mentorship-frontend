@@ -1,0 +1,91 @@
+const skillsAndSpecialties = [
+	// General Skills and Specialties
+	"Coding", "Problem-solving", "Application development", "Software design", "System architecture", "Algorithm design",
+	"Testing", "Full stack development", "API integration", "Databases", "Security", "Automation", "CI/CD", "Cloud deployment",
+	"Site reliability", "Performance optimization", "Bug tracking", "Performance profiling", "System monitoring", "Scalability",
+	"Code debugging", // etc.
+
+	// Frontend Development
+	"UI/UX design", "Browser compatibility", "HTML", "CSS", "JavaScript", "React", "Angular", "Vue.js", "Bootstrap",
+	"Tailwind CSS", "jQuery", // etc.
+
+	// Backend Development
+	"Server-side logic", "APIs", "RESTful services", "GraphQL", "Database design", "Backend systems", "Node.js", "Express.js",
+	"Ruby on Rails", "Spring Boot", "Laravel", "Django", "Flask", // etc.
+
+	// Mobile Development
+	"Mobile app development", "Cross-platform solutions", "Mobile frameworks", "React Native", "Flutter", "Xamarin", "Ionic",
+	"Kotlin", "Swift", "Objective-C", "Mobile optimization", // etc.
+
+	// Cloud & DevOps
+	"Cloud platforms", "Cloud architecture", "Cloud security", "Kubernetes", "Docker", "Terraform", "Jenkins", "Ansible",
+	"Chef", "Puppet", "Git", "GitHub", "GitLab", "Bitbucket", "CI/CD", "Jira", "Trello", "Slack", "Confluence",
+	"AWS", "Google Cloud", "Azure", // etc.
+
+	// Data Science & AI
+	"Machine learning", "Artificial intelligence", "Neural networks", "Data analysis", "Big data technologies", "Data pipelines",
+	"ETL", "Data visualization", "Predictive modeling", "Deep learning", // etc.
+
+	// Specialized Roles
+	"Blockchain development", "Smart contracts", "Cryptocurrency", "Robotics design", "Embedded systems", "IoT architecture",
+	"Augmented reality", "Virtual reality", "Quantum algorithms", "Bioinformatics", "Geospatial data", "Simulation software",
+	"Hardware/software integration", "Data transmission", "Vulnerability assessment", // etc.
+
+	// Testing and QA
+	"Manual testing", "Automated testing", "Load testing", "Penetration testing", "Security testing", "Vulnerability assessment",
+	"Bug tracking", // etc.
+
+	// Management & Leadership
+	"Technical leadership", "Architecture design", "Mentoring", "Project management", "Team management", "Agile methodologies",
+	"Scrum", "Sprint planning", "Client needs analysis", // etc.
+
+	// Programming Languages
+	"Python", "JavaScript", "Java", "C#", "C++", "Ruby", "Go", "Swift", "PHP", "TypeScript", "Objective-C", "Kotlin", "Rust",
+	"Scala", "SQL", "NoSQL", "R", "MATLAB", "Perl", // etc.
+
+	// Frameworks and Libraries
+	"React", "Angular", "Vue.js", "Node.js", "Django", "Flask", "Spring Boot", "Laravel", "Express.js", "Ruby on Rails",
+	"React Native", "Flutter", "Xamarin", "Ionic", "Bootstrap", "Tailwind CSS", "jQuery", "Redis", "PostgreSQL", "MySQL",
+	"MongoDB", "Firebase", "SQLite", "Oracle DB", "GraphQL", "REST APIs", "WebSocket", // etc.
+
+	// Tools and Platforms
+	"AWS", "Google Cloud", "Azure", "Docker", "Kubernetes", "Terraform", "Jenkins", "Ansible", "Chef", "Puppet", "Vagrant",
+	"Git", "GitHub", "GitLab", "Bitbucket", "CI/CD", "Jira", "Trello", "Slack", "Confluence", // Project management & collaboration
+	"Postman", "Swagger", "Jupyter Notebook", "PyCharm", "Visual Studio", "Eclipse", "IntelliJ IDEA", "Xcode", "Android Studio",
+	"NetBeans", "Sublime Text", "Atom", "Vim", "Docker Compose", "Kubernetes Helm", "Travis CI", "CircleCI", "Azure DevOps",
+	"New Relic", "Datadog", "Prometheus", "Grafana", "Splunk", "ELK Stack (Elasticsearch, Logstash, Kibana)", "SonarQube",
+	"FastAPI", "Flask-RESTful", "Celery", "RabbitMQ", "Nginx", "Apache HTTP Server", "Varnish", "Cloudflare", "Contentful",
+	"Algolia", "Firebase Realtime Database", "Slack API", "Zapier", "Heroku", "DigitalOcean", "Linode", "Vercel", "Netlify",
+	"Content Delivery Network (CDN)", "Trello", "Basecamp", "Asana", "ClickUp", "Notion", "Monday.com", "Zoom", "Microsoft Teams",
+	"Slack", "GitLab CI/CD", "Katalon Studio", "Selenium", "TestComplete", "Appium", "Cucumber", "JUnit", "TestNG", "Jest",
+	"Mocha", "Cypress", "Postman", "Bugzilla", "Redmine", "Maven", "Gradle", "Composer", "npm", "Yarn", "Bash", "PowerShell",
+	"Zsh", "Docker Hub", "Helm", "Vagrant", "VirtualBox", "VMware", "Hyper-V", "JupyterLab", "CloudFormation", "Ansible Tower",
+	"Minitest", "Karma", "RSpec", "CodeClimate", "Coveralls", "Codecov", "GitLab Runner", "Puppet Enterprise", "Chef Infra",
+	"Terraform Cloud", "AWS CloudFormation", "Azure Pipelines", "CircleCI", "Drone", "GitLab CI", "Netlify", "Vercel", "Fastly",
+	"Lightstep", "PagerDuty", "Raygun", "BugSnag", "Gitpod", "CodeSandbox", "GitHub Codespaces", "Jitsi", "BigQuery", "Redshift",
+
+	// UI/UX Design Tools
+	"Figma", // Collaborative interface design tool
+	"Adobe XD", // Design tool for wireframes, UI, and UX design
+	"Sketch", // Design tool for macOS for creating high-fidelity UI designs
+	"InVision", // Prototyping tool for creating interactive designs
+	"Marvel", // Design and prototyping tool for UI/UX
+	"Axure RP", // Wireframinےg and prototyping tool for UX design
+	"Balsamiq", // Rapid wireframing tool for low-fidelity prototypes
+	"Adobe Illustrator", // Graphic design tool, often used for vector graphics
+	"Photoshop", // Graphic editing and design software
+	"Zeplin", // Collaboration tool between design and development teams
+	"Framer", // Prototyping tool for creating interactive web designs
+	"Principle", // Tool for creating animations and interactions for user interfaces
+	"Affinity Designer", // Vector graphic design tool for UI/UX designs
+	"Blender", // 3D design software (used in UI design for 3D elements)
+	"Proto.io", // Tool for building interactive web and mobile prototypes
+	"UXPin", // UX design tool for collaboration, prototyping, and wireframing
+	"Wireframe.cc", // Simple wireframing tool for creating UI prototypes
+	"Marvel App", // Collaborative design tool for UI/UX teams
+	"Fluid UI", // Tool for creating mobile and web prototypes
+	"Lottie", // Animation tool to render animations in mobile and web apps
+];
+
+
+export default skillsAndSpecialties;
