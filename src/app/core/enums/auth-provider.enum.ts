@@ -1,6 +1,6 @@
 export enum AuthProviderEnum {
-    GOOGLE = 'google',
-    LINKEDIN = 'linkedin',
-    GITHUB = 'github',
-    EMAIL = 'email',
+  GOOGLE = 'google',
+  LINKEDIN = 'linkedin',
+  GITHUB = 'github',
+  EMAIL = 'email',
 }

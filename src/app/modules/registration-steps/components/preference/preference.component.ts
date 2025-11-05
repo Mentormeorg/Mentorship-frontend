@@ -1,47 +1,46 @@
 import { Component, inject, ViewEncapsulation } from '@angular/core';
 import {
-    FormBuilder,
-    FormControl,
-    FormGroup,
-    Validators,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
 } from '@angular/forms';
 import {
-    IStep5,
-    IStepsData,
+  IStep5,
+  IStepsData,
 } from '@modules/registration-steps/models/interfaces/steps.interface';
 import { SteperService } from '@modules/registration-steps/services/steper.service';
 
 @Component({
-    selector: 'app-preference',
-    templateUrl: './preference.component.html',
-    styleUrls: ['./preference.component.scss'],
-    encapsulation: ViewEncapsulation.None,
+  selector: 'app-preference',
+  templateUrl: './preference.component.html',
+  styleUrls: ['./preference.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class PreferenceComponent {
-    steprSerivce: SteperService = inject(SteperService);
+  steprSerivce: SteperService = inject(SteperService);
 
-    formBuilder: FormBuilder = inject(FormBuilder);
+  formBuilder: FormBuilder = inject(FormBuilder);
 
-    perferenceForm: FormGroup = this.formBuilder.group({
-        timeToSpend: new FormControl<IStep5['timeToSpend'] | null>(1, [
-            Validators.required,
-            Validators.min(1),
-        ]),
-        pricePerHour: new FormControl<IStep5['pricePerHour'] | null>(1, [
-            Validators.required,
-            Validators.min(1),
-        ]),
-        numberOfMentees: new FormControl<IStep5['numberOfMentees'] | null>(1, [
-            Validators.required,
-            Validators.min(1),
-        ]),
-    });
+  perferenceForm: FormGroup = this.formBuilder.group({
+    timeToSpend: new FormControl<IStep5['timeToSpend'] | null>(1, [
+      Validators.required,
+      Validators.min(1),
+    ]),
+    pricePerHour: new FormControl<IStep5['pricePerHour'] | null>(1, [
+      Validators.required,
+      Validators.min(1),
+    ]),
+    numberOfMentees: new FormControl<
+      IStep5['numberOfMentees'] | null
+    >(1, [Validators.required, Validators.min(1)]),
+  });
 
-    finish($event?: IStepsData['stepsData']) {
-        this.steprSerivce.finish(this.perferenceForm.value);
-    }
+  finish($event?: IStepsData['stepsData']) {
+    this.steprSerivce.finish(this.perferenceForm.value);
+  }
 
-    prevStep() {
-        this.steprSerivce.previousStep();
-    }
+  prevStep() {
+    this.steprSerivce.previousStep();
+  }
 }

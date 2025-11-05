@@ -1,23 +1,29 @@
 export function getStorage(isLocalStorage = true): Storage {
-    return isLocalStorage ? localStorage : sessionStorage;
+  return isLocalStorage ? localStorage : sessionStorage;
 }
 
 export function setStorage<T>(
-    key: string,
-    value: T,
-    isLocalStorage?: boolean
+  key: string,
+  value: T,
+  isLocalStorage?: boolean
 ): void {
-    getStorage().setItem(key, JSON.stringify(value));
+  getStorage().setItem(key, JSON.stringify(value));
 }
 
-export function getStorageItem<T>(key: string, isLocalStorage?: boolean): T {
-    return JSON.parse(getStorage().getItem(key) || '{}');
+export function getStorageItem<T>(
+  key: string,
+  isLocalStorage?: boolean
+): T {
+  return JSON.parse(getStorage().getItem(key) || '{}');
 }
 
-export function removeStorageItem(key: string, isLocalStorage?: boolean): void {
-    getStorage().removeItem(key);
+export function removeStorageItem(
+  key: string,
+  isLocalStorage?: boolean
+): void {
+  getStorage().removeItem(key);
 }
 
 export function clearStorage(isLocalStorage?: boolean): void {
-    getStorage().clear();
+  getStorage().clear();
 }

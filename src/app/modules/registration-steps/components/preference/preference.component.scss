@@ -1,50 +1,56 @@
 app-preference {
-    .lable {
-        font-weight: 400;
-        line-height: normal;
-        text-transform: capitalize;
-        font-size: 1.4rem;
-        color: var(--gray_7000);
-    }
+  .lable {
+    font-weight: 400;
+    line-height: normal;
+    text-transform: capitalize;
+    font-size: 1.4rem;
+    color: var(--gray_7000);
+  }
 
-    input {
-        border-right: none;
-        border-top-left-radius: 0.8rem !important;
-        border-bottom-left-radius: 0.8rem !important;
-    }
-    .p-inputgroup-addon {
-        padding: 1.2rem 2rem;
-        font-size: var(--l_FS);
-        color: var(--gray_9000);
-        background-color: var(--white);
-        border-color: var(--gray_3000);
-        border-radius: 0 0.8rem 0.8rem 0;
-    }
+  input {
+    border-right: none;
+    border-top-left-radius: 0.8rem !important;
+    border-bottom-left-radius: 0.8rem !important;
+  }
+  .p-inputgroup-addon {
+    padding: 1.2rem 2rem;
+    font-size: var(--l_FS);
+    color: var(--gray_9000);
+    background-color: var(--white);
+    border-color: var(--gray_3000);
+    border-radius: 0 0.8rem 0.8rem 0;
+  }
 
-    .p-inputgroup-addon:last-child,
-    .p-inputgroup button:last-child,
-    .p-inputgroup input:last-child,
-    .p-inputgroup > .p-inputwrapper:last-child > .p-component,
-    .p-inputgroup > .p-inputwrapper:last-child > .p-component > .p-inputtext {
-        border: 1px solid var(--gray_3000);
-        border-radius: 0.8rem;
-        border-bottom-left-radius: 0;
-        border-top-left-radius: 0;
-    }
+  .p-inputgroup-addon:last-child,
+  .p-inputgroup button:last-child,
+  .p-inputgroup input:last-child,
+  .p-inputgroup > .p-inputwrapper:last-child > .p-component,
+  .p-inputgroup
+    > .p-inputwrapper:last-child
+    > .p-component
+    > .p-inputtext {
+    border: 1px solid var(--gray_3000);
+    border-radius: 0.8rem;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+  }
 
-    .p-inputnumber-buttons-horizontal .p-button.p-inputnumber-button-up,
-    .p-inputnumber-buttons-horizontal .p-button.p-inputnumber-button-down {
-        background-color: var(--white);
-        color: var(--gray_5000);
-        border: 1px solid var(--gray_3000);
-    }
-    .p-inputnumber-buttons-horizontal .p-button.p-inputnumber-button-up {
-        border-left: none;
-    }
-    .p-inputnumber-buttons-horizontal .p-button.p-inputnumber-button-down {
-        border-right: none;
-    }
-    .p-inputnumber-buttons-horizontal .p-inputnumber-input {
-        border-radius: 0 !important;
-    }
+  .p-inputnumber-buttons-horizontal .p-button.p-inputnumber-button-up,
+  .p-inputnumber-buttons-horizontal
+    .p-button.p-inputnumber-button-down {
+    background-color: var(--white);
+    color: var(--gray_5000);
+    border: 1px solid var(--gray_3000);
+  }
+  .p-inputnumber-buttons-horizontal
+    .p-button.p-inputnumber-button-up {
+    border-left: none;
+  }
+  .p-inputnumber-buttons-horizontal
+    .p-button.p-inputnumber-button-down {
+    border-right: none;
+  }
+  .p-inputnumber-buttons-horizontal .p-inputnumber-input {
+    border-radius: 0 !important;
+  }
 }

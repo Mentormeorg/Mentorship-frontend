@@ -9,23 +9,23 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { NgPrimeModule } from './ng-prime.module';
 
 @NgModule({
-	declarations: [
-		NotFoundComponent,
-		NavbarComponent,
-		FooterComponent,
-		MainLayoutComponent,
-	],
-	imports: [
-		CommonModule,
-		NgPrimeModule,
-		flagPipeModule.forRoot({
-			config: {
-				flagExtensions: 'png',
-				flagType: 'WAVY',
-				flagSize: '24x18',
-			},
-		}),
-	],
-	exports: [NotFoundComponent, MainLayoutComponent, NgPrimeModule],
+  declarations: [
+    NotFoundComponent,
+    NavbarComponent,
+    FooterComponent,
+    MainLayoutComponent,
+  ],
+  imports: [
+    CommonModule,
+    NgPrimeModule,
+    flagPipeModule.forRoot({
+      config: {
+        flagExtensions: 'png',
+        flagType: 'WAVY',
+        flagSize: '24x18',
+      },
+    }),
+  ],
+  exports: [NotFoundComponent, MainLayoutComponent, NgPrimeModule],
 })
-export class SharedModule { }
+export class SharedModule {}

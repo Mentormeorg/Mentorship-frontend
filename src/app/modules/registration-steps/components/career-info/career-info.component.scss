@@ -1,57 +1,57 @@
 .p-inputgroup-addon {
-	border: none;
-	background-color: var(--primary_color_1);
-	color: var(--primary_fc);
+  border: none;
+  background-color: var(--primary_color_1);
+  color: var(--primary_fc);
 }
 
 .p-inputgroup-addon ~ input:enabled:focus {
-	box-shadow: none;
-	border-color: var(--primary_color_1);
+  box-shadow: none;
+  border-color: var(--primary_color_1);
 }
 
 .portfolio-input::placeholder {
-	color: var(--gray_5000);
+  color: var(--gray_5000);
 }
 
 .experinces-form-container {
-	position: relative;
+  position: relative;
 
-	.delete {
-		position: absolute;
-		top: 1.2rem;
-		right: 1.2rem;
-		z-index: 1000;
-		background-color: var(--white);
-		border-radius: 50%;
-		box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.2);
-		transform: translate(100%, -100%);
-		font-size: 2rem;
-		color: var(--primary_color);
-		width: 2rem;
-		height: 2rem;
-		align-items: center;
-		cursor: pointer;
-		justify-content: center;
-		display: none;
-		border-bottom: 1px solid var(--primary_color_1);
+  .delete {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.2rem;
+    z-index: 1000;
+    background-color: var(--white);
+    border-radius: 50%;
+    box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.2);
+    transform: translate(100%, -100%);
+    font-size: 2rem;
+    color: var(--primary_color);
+    width: 2rem;
+    height: 2rem;
+    align-items: center;
+    cursor: pointer;
+    justify-content: center;
+    display: none;
+    border-bottom: 1px solid var(--primary_color_1);
 
-		i {
-			font-size: 2rem;
-		}
+    i {
+      font-size: 2rem;
+    }
 
-		&:hover {
-			background-color: var(--primary_color);
-			color: var(--white);
-		}
+    &:hover {
+      background-color: var(--primary_color);
+      color: var(--white);
+    }
 
-		&:last-child {
-			border-bottom: none;
-		}
-	}
+    &:last-child {
+      border-bottom: none;
+    }
+  }
 
-	&:hover {
-		.delete {
-			display: flex;
-		}
-	}
+  &:hover {
+    .delete {
+      display: flex;
+    }
+  }
 }

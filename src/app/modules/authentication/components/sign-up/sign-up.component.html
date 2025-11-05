@@ -1,76 +1,80 @@
 <div class="signup-container signup">
-    <div class="signup-intro intro text-center">
-        <h1 class="intro-header">Welcome to Mentorchief</h1>
-        <p class="intro-desc">
-            Lorem ipsum dolor sit amet consectetur. Nec aenean pellentesque est
-            porta gravida aliquam sed.
-        </p>
+  <div class="signup-intro intro text-center">
+    <h1 class="intro-header">Welcome to Mentorchief</h1>
+    <p class="intro-desc">
+      Lorem ipsum dolor sit amet consectetur. Nec aenean pellentesque
+      est porta gravida aliquam sed.
+    </p>
+  </div>
+  <div class="signup-social_buttons">
+    <p-button
+      styleClass="p-button-secondary p-button-text"
+      (click)="authService.socialAuth(providers.GOOGLE)"
+    >
+      <span
+        class="flex gap-3 align-items-center justify-content-center flex-1"
+      >
+        <img src="assets/images/helpers/Google.png" alt="" />
+        <p class="button-label text-center">Continue with Google</p>
+      </span>
+    </p-button>
+
+    <p-button
+      styleClass="p-button-secondary p-button-text"
+      (click)="authService.socialAuth(providers.LINKEDIN)"
+    >
+      <span
+        class="flex gap-3 align-items-center justify-content-center flex-1"
+      >
+        <img src="assets/images/helpers/Linkedin.png" alt="" />
+        <p class="text-center button-label">Continue with LinkedIn</p>
+      </span>
+    </p-button>
+    <p-button
+      styleClass="p-button-secondary p-button-text"
+      (click)="authService.socialAuth(providers.GITHUB)"
+    >
+      <span
+        class="flex gap-3 align-items-center justify-content-center flex-1"
+      >
+        <img
+          width="30"
+          src="assets/images/helpers/github.png"
+          alt=""
+        />
+        <p class="text-center button-label">Continue with Github</p>
+      </span>
+    </p-button>
+  </div>
+  <p-divider align="center" class="block divider">
+    <div class="inline-flex align-items-center">
+      <span>or</span>
     </div>
-    <div class="signup-social_buttons">
-        <p-button
-            styleClass="p-button-secondary p-button-text"
-            (click)="authService.socialAuth(providers.GOOGLE)"
-        >
-            <span
-                class="flex gap-3 align-items-center justify-content-center flex-1"
-            >
-                <img src="assets/images/helpers/Google.png" alt="" />
-                <p class="button-label text-center">Continue with Google</p>
-            </span>
-        </p-button>
+  </p-divider>
 
-        <p-button
-            styleClass="p-button-secondary p-button-text"
-            (click)="authService.socialAuth(providers.LINKEDIN)"
-        >
-            <span
-                class="flex gap-3 align-items-center justify-content-center flex-1"
-            >
-                <img src="assets/images/helpers/Linkedin.png" alt="" />
-                <p class="text-center button-label">Continue with LinkedIn</p>
-            </span>
-        </p-button>
-        <p-button
-            styleClass="p-button-secondary p-button-text"
-            (click)="authService.socialAuth(providers.GITHUB)"
-        >
-            <span
-                class="flex gap-3 align-items-center justify-content-center flex-1"
-            >
-                <img width="30" src="assets/images/helpers/github.png" alt="" />
-                <p class="text-center button-label">Continue with Github</p>
-            </span>
-        </p-button>
-    </div>
-    <p-divider align="center" class="block divider">
-        <div class="inline-flex align-items-center">
-            <span>or</span>
-        </div>
-    </p-divider>
+  <div class="signup-form">
+    <form>
+      <span class="p-float-label">
+        <input
+          class="w-full"
+          pInputText
+          id="signIn-email"
+          autocomplete="off"
+          type="email"
+        />
+        <label htmlFor="email">Email</label>
+      </span>
 
-    <div class="signup-form">
-        <form>
-            <span class="p-float-label">
-                <input
-                    class="w-full"
-                    pInputText
-                    id="signIn-email"
-                    autocomplete="off"
-                    type="email"
-                />
-                <label htmlFor="email">Email</label>
-            </span>
+      <p-button
+        styleClass="p-button-primary submit-email p-button-text w-full flex justify-content-center"
+      >
+        Continue with email
+      </p-button>
 
-            <p-button
-                styleClass="p-button-primary submit-email p-button-text w-full flex justify-content-center"
-            >
-                Continue with email
-            </p-button>
-
-            <p class="hint">
-                Already have an account ?
-                <a class="mr-2 uppercase" [routerLink]="'/'">sign in</a>
-            </p>
-        </form>
-    </div>
+      <p class="hint">
+        Already have an account ?
+        <a class="mr-2 uppercase" [routerLink]="'/'">sign in</a>
+      </p>
+    </form>
+  </div>
 </div>

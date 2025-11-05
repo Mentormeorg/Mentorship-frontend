@@ -12,22 +12,22 @@ import { RoleInfoComponent } from './components/role-info/role-info.component';
 import { RegistrationStepsRoutingModule } from './registration-steps-routing.module';
 
 @NgModule({
-    declarations: [
-        RegistrationStepsLayoutComponent,
-        RoleInfoComponent,
-        PersonalInfoComponent,
-        CareerInfoComponent,
-        BiographyComponent,
-        PreferenceComponent,
-        RegistrationBannerComponent,
-    ],
-    imports: [
-        CommonModule,
-        RegistrationStepsRoutingModule,
-        FormsModule,
-        ReactiveFormsModule,
-        FormsModule,
-        SharedModule,
-    ],
+  declarations: [
+    RegistrationStepsLayoutComponent,
+    RoleInfoComponent,
+    PersonalInfoComponent,
+    CareerInfoComponent,
+    BiographyComponent,
+    PreferenceComponent,
+    RegistrationBannerComponent,
+  ],
+  imports: [
+    CommonModule,
+    RegistrationStepsRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    FormsModule,
+    SharedModule,
+  ],
 })
 export class RegistrationStepsModule {}

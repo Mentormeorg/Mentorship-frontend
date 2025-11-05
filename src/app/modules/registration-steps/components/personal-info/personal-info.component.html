@@ -1,76 +1,79 @@
 <form [formGroup]="personalInfoForm">
-    <span class="p-float-label mb-6">
+  <span class="p-float-label mb-6">
+    <input
+      class="w-full"
+      formControlName="fullName"
+      id="fullName"
+      name="fullName"
+      pInputText
+    />
+    <label htmlFor="fullName">Full name</label>
+  </span>
+  <span class="p-float-label mb-4">
+    <p-inputMask
+      formControlName="phoneNumber"
+      mask="999-99999999"
+      placeholder="(999)-99999999"
+    ></p-inputMask>
+    <label htmlFor="phone">Phone number</label>
+  </span>
+  <div class="mb-6">
+    <p class="gender">Gender</p>
+    <span class="d-flex form-check">
+      <label for="male">
+        👦 Male
         <input
-					class="w-full"
-					formControlName="fullName"
-					id="fullName"
-					name="fullName"
-					pInputText
-				/>
-        <label htmlFor="fullName">Full name</label>
+          formControlName="gender"
+          id="male"
+          name="gender"
+          type="radio"
+          value="male"
+        />
+      </label>
+      <label for="female">
+        👩 Female
+        <input
+          formControlName="gender"
+          id="female"
+          name="gender"
+          type="radio"
+          value="female"
+        />
+      </label>
     </span>
-	<span class="p-float-label mb-4">
-        <p-inputMask
-					formControlName="phoneNumber"
-					mask="999-99999999"
-					placeholder="(999)-99999999"
-				></p-inputMask>
-        <label htmlFor="phone">Phone number</label>
-    </span>
-	<div class="mb-6">
-		<p class="gender">Gender</p>
-		<span class="d-flex form-check">
-            <label for="male">
-                👦 Male
-                <input
-									formControlName="gender"
-									id="male"
-									name="gender"
-									type="radio"
-									value="male"
-								/>
-            </label>
-            <label for="female">
-                👩 Female
-                <input
-									formControlName="gender"
-									id="female"
-									name="gender"
-									type="radio"
-									value="female"
-								/>
-            </label>
-        </span>
-	</div>
+  </div>
 
-	<span class="mb-6 d-block">
-        <p-dropdown
-					[options]="cities"
-					formControlName="city"
-					optionLabel="name"
-					placeholder="Where are you from"
-					styleClass="w-full"
-				></p-dropdown>
-    </span>
-	<span class="p-float-label mb-6">
-        <p-password
-					class="w-full"
-					formControlName="password"
-					id="password"
-					name="password"
-				></p-password>
-        <label htmlFor="password">Create your password</label>
-    </span>
+  <span class="mb-6 d-block">
+    <p-dropdown
+      [options]="cities"
+      formControlName="city"
+      optionLabel="name"
+      placeholder="Where are you from"
+      styleClass="w-full"
+    ></p-dropdown>
+  </span>
+  <span class="p-float-label mb-6">
+    <p-password
+      class="w-full"
+      formControlName="password"
+      id="password"
+      name="password"
+    ></p-password>
+    <label htmlFor="password">Create your password</label>
+  </span>
 </form>
 <div class="controller d-flex gap-4">
-	<p-button (click)="prevStep()" styleClass="p-button-primary p-button-text">
-		<- Back
-	</p-button>
-	<p-button
-		(click)="nextStep()"
-		[disabled]="!personalInfoForm.valid"
-		styleClass="p-button-primary p-button-text"
-	>
-		Next ->
-	</p-button>
+  <p-button
+    (click)="prevStep()"
+    styleClass="p-button-primary p-button-text"
+  >
+    <- Back
+  </p-button>
+  <p-button
+    (click)="nextStep()"
+    [disabled]="!personalInfoForm.valid"
+    styleClass="p-button-primary p-button-text"
+  >
+    Next ->
+  </p-button>
 </div>

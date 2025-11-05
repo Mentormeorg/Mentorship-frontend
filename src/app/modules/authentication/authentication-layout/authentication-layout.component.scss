@@ -1,26 +1,26 @@
 @import '../../../../assets/styles/theme-base/breakpoints.scss';
 :host {
-    width: 100%;
-    display: flex;
-    align-items: center;
+  width: 100%;
+  display: flex;
+  align-items: center;
 }
 .auth-layout {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding-right: 1rem;
+  &__form-container {
     display: flex;
-    justify-content: space-between;
-    width: 100%;
-    padding-right: 1rem;
-    &__form-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    justify-content: center;
+    align-items: center;
 
-        &-content {
-            width: 100%;
-            max-width: 63.33333333%;
-            @media all and (max-width: $sm) {
-                max-width: 95%;
-            }
-            margin: 0 auto;
-        }
+    &-content {
+      width: 100%;
+      max-width: 63.33333333%;
+      @media all and (max-width: $sm) {
+        max-width: 95%;
+      }
+      margin: 0 auto;
     }
+  }
 }

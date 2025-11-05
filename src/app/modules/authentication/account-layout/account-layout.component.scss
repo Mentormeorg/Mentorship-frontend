@@ -1,47 +1,47 @@
 app-auth-layout {
-    height: 100vh;
-    display: flex;
-    overflow-x: hidden;
+  height: 100vh;
+  display: flex;
+  overflow-x: hidden;
 }
 .auth-container {
-    display: grid;
-    padding-top: 0;
-    width: 95%;
-    margin: 0 auto;
-    grid-template-rows: 9rem auto 5rem;
-    .nav {
-        margin: 0;
-        height: 7rem;
-        display: flex;
-        align-items: flex-end;
-    }
+  display: grid;
+  padding-top: 0;
+  width: 95%;
+  margin: 0 auto;
+  grid-template-rows: 9rem auto 5rem;
+  .nav {
+    margin: 0;
+    height: 7rem;
+    display: flex;
+    align-items: flex-end;
+  }
 
-    .footer {
-        position: absolute;
-        bottom: 2rem;
-        &-langs {
-            display: flex;
-            align-items: center;
-            min-width: 5.5rem;
-            width: fit-content;
-            margin-left: 0;
-            justify-self: flex-end;
-            .p-dropdown {
-                border: none;
-                background-color: transparent;
-                .p-dropdown-label {
-                    padding: 0;
-                    font-style: normal;
-                    font-weight: 600;
-                    font-size: 2rem;
-                    line-height: 2.8rem;
-                    padding-left: 0.5rem;
-                }
-
-                .p-dropdown-trigger {
-                    display: none;
-                }
-            }
+  .footer {
+    position: absolute;
+    bottom: 2rem;
+    &-langs {
+      display: flex;
+      align-items: center;
+      min-width: 5.5rem;
+      width: fit-content;
+      margin-left: 0;
+      justify-self: flex-end;
+      .p-dropdown {
+        border: none;
+        background-color: transparent;
+        .p-dropdown-label {
+          padding: 0;
+          font-style: normal;
+          font-weight: 600;
+          font-size: 2rem;
+          line-height: 2.8rem;
+          padding-left: 0.5rem;
         }
+
+        .p-dropdown-trigger {
+          display: none;
+        }
+      }
     }
+  }
 }

@@ -1,82 +1,82 @@
 @import '../../../../../assets/styles/theme-base/variables.scss';
 .card {
-    display: grid;
-    grid-template-columns: 65% 35%;
+  display: grid;
+  grid-template-columns: 65% 35%;
+  @media all and (width<= $sm) {
+    grid-template-columns: 100% 0%;
+  }
+  justify-content: center;
+  .step-container {
+    .step-content {
+      max-width: 73.7%;
+      @media all and (width<= $sm) {
+        max-width: 90%;
+      }
+      display: block;
+      margin: 0 auto;
+      .intro {
+        height: 7.7rem;
+        margin-bottom: 2rem;
+        h1 {
+          font-size: 3rem;
+          font-weight: 700;
+          margin-bottom: 0.7rem;
+        }
+        p {
+          font-size: 1.4rem;
+          font-weight: 400;
+          color: var(--secondary_fc);
+        }
+      }
+    }
+    .steps-info {
+      font-size: var(--base_FS);
+      font-weight: var(--light-font-weight);
+      margin-bottom: 1rem;
+    }
+
+    .p-steps ul {
+      gap: 1rem !important;
+      margin-bottom: 6rem;
+      .p-steps-item {
+        height: 5px !important;
+        width: 80% !important;
+        // max-width: 10.8rem;
+        background-color: $navy_blue_1 !important;
+        border-radius: 3px;
+        overflow: hidden;
+
+        &.p-steps-current {
+          background-color: var(--primary_color_500) !important;
+        }
+        &::before {
+          display: none !important;
+        }
+        a {
+          width: 100%;
+          opacity: 0;
+          display: block;
+          overflow: hidden;
+        }
+      }
+    }
+  }
+  .banner {
     @media all and (width<= $sm) {
-        grid-template-columns: 100% 0%;
+      display: none;
     }
-    justify-content: center;
-    .step-container {
-        .step-content {
-            max-width: 73.7%;
-            @media all and (width<= $sm) {
-                max-width: 90%;
-            }
-            display: block;
-            margin: 0 auto;
-            .intro {
-                height: 7.7rem;
-                margin-bottom: 2rem;
-                h1 {
-                    font-size: 3rem;
-                    font-weight: 700;
-                    margin-bottom: 0.7rem;
-                }
-                p {
-                    font-size: 1.4rem;
-                    font-weight: 400;
-                    color: var(--secondary_fc);
-                }
-            }
-        }
-        .steps-info {
-            font-size: var(--base_FS);
-            font-weight: var(--light-font-weight);
-            margin-bottom: 1rem;
-        }
-
-        .p-steps ul {
-            gap: 1rem !important;
-            margin-bottom: 6rem;
-            .p-steps-item {
-                height: 5px !important;
-                width: 80% !important;
-                // max-width: 10.8rem;
-                background-color: $navy_blue_1 !important;
-                border-radius: 3px;
-                overflow: hidden;
-
-                &.p-steps-current {
-                    background-color: var(--primary_color_500) !important;
-                }
-                &::before {
-                    display: none !important;
-                }
-                a {
-                    width: 100%;
-                    opacity: 0;
-                    display: block;
-                    overflow: hidden;
-                }
-            }
-        }
-    }
-    .banner {
-        @media all and (width<= $sm) {
-            display: none;
-        }
-    }
+  }
 }
 
 p-button {
-    flex-grow: 1;
-    justify-content: center;
-    width: 100%;
-    display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  width: 100%;
+  display: flex;
 }
 .p-button.p-button-text {
-    width: 100%;
-    justify-content: center;
-    gap: 0.8rem;
-    line-height: 2rem;
+  width: 100%;
+  justify-content: center;
+  gap: 0.8rem;
+  line-height: 2rem;
 }

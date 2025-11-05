@@ -15,23 +15,23 @@ import { MultiFiltersFormComponent } from './_components/_filters-components/dum
 import { SmartMultiFiltersFormComponent } from './_components/_filters-components/smart/smart-multi-filters-form/smart-multi-filters-form.component';
 
 @NgModule({
-	declarations: [
-		DashboardMainComponent,
-		MentorCardComponent,
-		SmartMentorCardsComponent,
-		DiscoverPageComponent,
-		MultiFiltersFormComponent,
-  SmartMultiFiltersFormComponent,
-	],
-	imports: [
-		SharedModule,
-		flagPipeModule,
-		CommonModule,
-		DashboardRoutingModule,
-		FormsModule,
-		NgOptimizedImage,
-		SharedModule,
-		ReactiveFormsModule
-	],
+  declarations: [
+    DashboardMainComponent,
+    MentorCardComponent,
+    SmartMentorCardsComponent,
+    DiscoverPageComponent,
+    MultiFiltersFormComponent,
+    SmartMultiFiltersFormComponent,
+  ],
+  imports: [
+    SharedModule,
+    flagPipeModule,
+    CommonModule,
+    DashboardRoutingModule,
+    FormsModule,
+    NgOptimizedImage,
+    SharedModule,
+    ReactiveFormsModule,
+  ],
 })
-export class DashboardModule { }
+export class DashboardModule {}

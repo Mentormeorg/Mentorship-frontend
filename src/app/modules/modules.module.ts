@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 import { ModulesRoutingModule } from './modules-routing.module';
 
 @NgModule({
-    declarations: [],
-    imports: [CommonModule, ModulesRoutingModule],
-    exports: [],
+  declarations: [],
+  imports: [CommonModule, ModulesRoutingModule],
+  exports: [],
 })
 export class ModulesModule {}

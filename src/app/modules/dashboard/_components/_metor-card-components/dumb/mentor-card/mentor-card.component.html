@@ -1,94 +1,94 @@
 <div class="mentor-card">
-    <div class="left d-flex">
-        <div class="profile-photo">
-            <div class="photo-container">
-                <img [src]="mentor?.profilePicture" />
-            </div>
-        </div>
-
-        <div class="content">
-            <div
-                class="d-flex align-content-center gap-2 justify-content-between"
-            >
-                <div class="d-flex gap-2">
-                    <h3>{{ mentor?.name }}</h3>
-                    <span><img [src]="mentor?.country | flag" /></span>
-                </div>
-                <div class="right d-lg-flex d-none">
-                    <span class="price d-flex flex-shrink-0">
-                        <p class="price">
-                            {{ mentor?.price }} {{ mentor?.currency }}
-                        </p>
-                        <p>/month</p></span
-                    >
-                </div>
-            </div>
-            <!-- Short Description -->
-            <div class="short-description">
-                <div class="d-flex gap-2 align-content-center flex-wrap">
-                    <!-- Job title -->
-                    <div class="job-title d-flex flex-nowrap">
-                        <span class="pi pi-briefcase d-flex"></span>
-                        <p class="d-flex flex-shrink-0">
-                            {{ mentor?.jobTitle }} at
-                        </p>
-                        <p class="company-name">{{ mentor?.company }}</p>
-                    </div>
-
-                    <!-- Rating -->
-                    <div class="d-flex">
-                        <div class="rating flex-nowrap">
-                            <p-rating
-                                *ngIf="mentor"
-                                [(ngModel)]="mentor.rating"
-                                [readonly]="true"
-                                [cancel]="false"
-                            ></p-rating>
-                            <span class="rating-value">{{
-                                mentor?.rating | number : '1.1'
-                            }}</span>
-                        </div>
-
-                        <div class="review-number flex-nowrap">
-                            <p>({{ mentor?.numberOfReviews }} Reviews)</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Long Description -->
-            <div class="long-description">
-                <p>{{ mentor?.description }}</p>
-            </div>
-            <!-- Tags -->
-            <div class="tags">
-                <div class="mb-3">
-                    <p-tag
-                        *ngFor="let skill of mentor?.skills"
-                        [value]="skill"
-                        [rounded]="true"
-                    >
-                    </p-tag>
-                </div>
-                <div>
-                    <p-tag
-                        *ngFor="let badge of mentor?.badges"
-                        [value]="badge"
-                        [rounded]="true"
-                        severity="success"
-                    >
-                    </p-tag>
-                </div>
-            </div>
-
-            <div class="right d-flex d-lg-none">
-                <span class="price d-flex flex-shrink-0">
-                    <p class="price">
-                        {{ mentor?.price }} {{ mentor?.currency }}
-                    </p>
-                    <p>/month</p></span
-                >
-            </div>
-        </div>
+  <div class="left d-flex">
+    <div class="profile-photo">
+      <div class="photo-container">
+        <img [src]="mentor?.profilePicture" />
+      </div>
     </div>
+
+    <div class="content">
+      <div
+        class="d-flex align-content-center gap-2 justify-content-between"
+      >
+        <div class="d-flex gap-2">
+          <h3>{{ mentor?.name }}</h3>
+          <span><img [src]="mentor?.country | flag" /></span>
+        </div>
+        <div class="right d-lg-flex d-none">
+          <span class="price d-flex flex-shrink-0">
+            <p class="price">
+              {{ mentor?.price }} {{ mentor?.currency }}
+            </p>
+            <p>/month</p></span
+          >
+        </div>
+      </div>
+      <!-- Short Description -->
+      <div class="short-description">
+        <div class="d-flex gap-2 align-content-center flex-wrap">
+          <!-- Job title -->
+          <div class="job-title d-flex flex-nowrap">
+            <span class="pi pi-briefcase d-flex"></span>
+            <p class="d-flex flex-shrink-0">
+              {{ mentor?.jobTitle }} at
+            </p>
+            <p class="company-name">{{ mentor?.company }}</p>
+          </div>
+
+          <!-- Rating -->
+          <div class="d-flex">
+            <div class="rating flex-nowrap">
+              <p-rating
+                *ngIf="mentor"
+                [(ngModel)]="mentor.rating"
+                [readonly]="true"
+                [cancel]="false"
+              ></p-rating>
+              <span class="rating-value">{{
+                mentor?.rating | number: '1.1'
+              }}</span>
+            </div>
+
+            <div class="review-number flex-nowrap">
+              <p>({{ mentor?.numberOfReviews }} Reviews)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Long Description -->
+      <div class="long-description">
+        <p>{{ mentor?.description }}</p>
+      </div>
+      <!-- Tags -->
+      <div class="tags">
+        <div class="mb-3">
+          <p-tag
+            *ngFor="let skill of mentor?.skills"
+            [value]="skill"
+            [rounded]="true"
+          >
+          </p-tag>
+        </div>
+        <div>
+          <p-tag
+            *ngFor="let badge of mentor?.badges"
+            [value]="badge"
+            [rounded]="true"
+            severity="success"
+          >
+          </p-tag>
+        </div>
+      </div>
+
+      <div class="right d-flex d-lg-none">
+        <span class="price d-flex flex-shrink-0">
+          <p class="price">
+            {{ mentor?.price }} {{ mentor?.currency }}
+          </p>
+          <p>/month</p></span
+        >
+      </div>
+    </div>
+  </div>
 </div>
