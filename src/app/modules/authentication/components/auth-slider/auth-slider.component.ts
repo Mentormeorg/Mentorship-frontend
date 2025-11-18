@@ -5,6 +5,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
   templateUrl: './auth-slider.component.html',
   styleUrls: ['./auth-slider.component.scss'],
   encapsulation: ViewEncapsulation.None,
+	standalone: false
 })
 export class AuthSliderComponent {
   public sliderInterval = 3000;

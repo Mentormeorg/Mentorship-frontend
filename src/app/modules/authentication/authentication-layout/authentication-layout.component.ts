@@ -4,5 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-authentication',
   templateUrl: './authentication-layout.component.html',
   styleUrls: ['./authentication-layout.component.scss'],
+	standalone: false
 })
 export class AuthenticationLayoutComponent {}

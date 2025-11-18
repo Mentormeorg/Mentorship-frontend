@@ -7,6 +7,7 @@ import { flagTypies } from 'flag-pipe';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+	standalone: false
 })
 export class AppComponent implements OnInit {
   private _translationService = inject(TranslateService);
@@ -19,6 +20,7 @@ export class AppComponent implements OnInit {
     this._translationService.setDefaultLang('en');
     this._translationService.use('en');
 
-    // this._authService.logout().subscribe(console.error);
+    // Initialize authentication state (check if user is already logged in)
+    this._authService.initializeAuth();
   }
 }

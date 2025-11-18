@@ -9,9 +9,14 @@ export const environment = {
     measurementId: 'G-DRJXKHVEVJ',
   },
   production: true,
-  // ! Add base url here / backend localhost server
-  // baseUrl: 'http://api-testing.mentorchief.net/api/v1',
   baseUrl: 'http://localhost:3000/api/v1',
-  // baseUrl: 'http://api.mentorchief.net/api/v1',
   title: 'MentorChief',
+  backend: {
+    type: 'supabase' as 'supabase' | 'rest',
+  },
+  supabase: {
+    url: 'https://ozcodcbhbyhjbadifaco.supabase.co',
+		anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im96Y29kY2JoYnloamJhZGlmYWNvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI0Mjc1OTAsImV4cCI6MjA3ODAwMzU5MH0.g2S_eMDW_CywF0bSC2YekH21HcX9JJ_kizpWnCgB0nQ',
+		redirectUrl:' https://ozcodcbhbyhjbadifaco.supabase.co/auth/v1/callback',
+  },
 };

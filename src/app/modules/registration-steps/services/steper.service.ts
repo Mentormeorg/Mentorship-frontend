@@ -34,6 +34,7 @@ export class SteperService {
   }> = [];
 
   constructor() {
+		debugger;
     this.stepsItems = [
       {
         lable: 'Role Info',
@@ -99,6 +100,7 @@ export class SteperService {
   }
 
   private resetToLastStep() {
+		debugger;
     this.stepsData = getStorageItem<Array<IStepsData['stepsData']>>(
       StorageKeys.STEPS_DATA
     );

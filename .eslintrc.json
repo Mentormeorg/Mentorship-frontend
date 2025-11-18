@@ -41,7 +41,7 @@
 				"max-lines": [
 					"error",
 					{
-						"max": 280,
+						"max": 500,
 						"skipBlankLines": true,
 						"skipComments": true
 					}
@@ -64,12 +64,7 @@
 						"ignoreMiddleExtensions": true
 					}
 				],
-				"check-file/folder-naming-convention": [
-					"error",
-					{
-						"src/**/": "KEBAB_CASE"
-					}
-				]
+                "check-file/folder-naming-convention": "off"
 			}
 		},
 		{

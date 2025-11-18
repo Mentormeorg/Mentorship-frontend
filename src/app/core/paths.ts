@@ -8,7 +8,7 @@ export enum PATHS {
   AUTH__RESET_PASS = 'auth/reset-password',
   AUTH__FORGET_PASS = 'auth/forget-password',
   AUTH__CHECK_EMAIL = 'auth/check-email',
-  AUTH__CALL_BACK = 'auth/callback',
+  // AUTH__CALL_BACK = 'auth/callback',
   // AUTH REG_STEPS PATHS
   AUTH__REG_STEPS__ROLE_INFO = 'auth/registeration-steps/role-info',
   AUTH__REG_STEPS__PERSONAL_INFO = 'auth/registeration-steps/personal-info',

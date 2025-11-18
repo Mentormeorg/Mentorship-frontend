@@ -8,7 +8,7 @@ import { AuthenticationLayoutComponent } from './authentication-layout/authentic
 import { AuthenticationRoutingModule } from './authentication-routing.module';
 
 import { SharedModule } from '@shared/shared.module';
-import { CallbackComponent } from './callback/callback.component';
+// import { CallbackComponent } from './callback/callback.component';
 import {
   AuthSliderComponent,
   ForgetPasswordComponent,
@@ -27,7 +27,7 @@ import { CheckEmailComponent } from './components/check-email/check-email.compon
     ResetPasswordComponent,
     ForgetPasswordComponent,
     AccountLayoutComponent,
-    CallbackComponent,
+    // CallbackComponent,
     CheckEmailComponent,
   ],
   imports: [

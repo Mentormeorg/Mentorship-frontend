@@ -6,6 +6,7 @@ import { AuthenticationService } from '@core/services/authentication.service';
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss'],
+	standalone: false
 })
 export class SignUpComponent implements OnInit {
   public authService: AuthenticationService = inject(

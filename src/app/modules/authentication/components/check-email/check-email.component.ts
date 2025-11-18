@@ -4,5 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-check-email',
   templateUrl: './check-email.component.html',
   styleUrls: ['./check-email.component.scss'],
+	standalone: false
 })
 export class CheckEmailComponent {}

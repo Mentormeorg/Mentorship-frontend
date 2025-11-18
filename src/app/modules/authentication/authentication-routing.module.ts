@@ -55,10 +55,10 @@ const routes: Routes = [
             '../registration-steps/registration-steps.module'
           ).then(m => m.RegistrationStepsModule),
       },
-      {
-        path: 'callback',
-        component: CallbackComponent,
-      },
+      // {
+      //   path: 'callback',
+      //   component: CallbackComponent,
+      // },
       {
         path: '**',
         redirectTo: 'sign-up',

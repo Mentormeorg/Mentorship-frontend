@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './account-layout.component.html',
   styleUrls: ['./account-layout.component.scss'],
   encapsulation: ViewEncapsulation.None,
+	standalone: false
 })
 export class AccountLayoutComponent {
   languagesList = [

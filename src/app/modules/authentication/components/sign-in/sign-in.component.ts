@@ -3,9 +3,10 @@ import { AuthProviderEnum } from '@core/enums';
 import { AuthenticationService } from '@core/services/authentication.service';
 
 @Component({
-  selector: 'app-signIn',
+  selector: 'app-signin',
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss'],
+	standalone: false
 })
 export class SignInComponent implements OnInit {
   public providers = AuthProviderEnum;

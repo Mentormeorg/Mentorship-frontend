@@ -13,4 +13,12 @@ export const environment = {
   // ! Add base url here / backend localhost server
   baseUrl: 'https://api-stagin.mentorchief.net/api/v1',
   title: '[STAGING] MentorChief',
+  backend: {
+    type: 'supabase' as 'supabase' | 'rest',
+  },
+	supabase: {
+		url: 'https://ozcodcbhbyhjbadifaco.supabase.co',
+		anonKey: 'eeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im96Y29kY2JoYnloamJhZGlmYWNvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI0Mjc1OTAsImV4cCI6MjA3ODAwMzU5MH0.g2S_eMDW_CywF0bSC2YekH21HcX9JJ_kizpWnCgB0nQ',
+		redirectUrl: ' https://ozcodcbhbyhjbadifaco.supabase.co/auth/v1/callback',
+	},
 };
