@@ -20,5 +20,8 @@
 			"Git Bash": {
 				"source": "Git Bash"
 			}
-		}
+		},
+		"conventionalCommits.scopes": [
+			"authentication"
+		]
 }
