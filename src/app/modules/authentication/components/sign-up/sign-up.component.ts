@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { AuthProviderEnum } from '@core/enums';
 import { AuthenticationService } from '@core/services/authentication.service';
+import { AuthBaseComponent } from '../auth-base/auth-base.component';
 
 @Component({
   selector: 'app-sign-up',
@@ -8,12 +9,7 @@ import { AuthenticationService } from '@core/services/authentication.service';
   styleUrls: ['./sign-up.component.scss'],
 	standalone: false
 })
-export class SignUpComponent implements OnInit {
-  public authService: AuthenticationService = inject(
-    AuthenticationService
-  );
-  public providers = AuthProviderEnum;
-
+export class SignUpComponent extends AuthBaseComponent implements OnInit {
   ngOnInit() {
     this.authService.authenticationWindowBinder('signup');
   }

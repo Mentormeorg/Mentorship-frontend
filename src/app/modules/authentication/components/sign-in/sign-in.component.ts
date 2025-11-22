@@ -1,23 +1,27 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { AuthProviderEnum } from '@core/enums';
-import { AuthenticationService } from '@core/services/authentication.service';
+import { Component } from '@angular/core';
+import { AuthBaseComponent } from '../auth-base/auth-base.component';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-signin',
-  templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.scss'],
+	selector: 'app-signin',
+	templateUrl: './sign-in.component.html',
+	styleUrls: ['./sign-in.component.scss'],
 	standalone: false
 })
-export class SignInComponent implements OnInit {
-  public providers = AuthProviderEnum;
-  public authService: AuthenticationService = inject(
-    AuthenticationService
-  );
-  public email = '';
-  public password = '';
-  public isAuthenticated = this.authService.isAuthenticated;
 
-  ngOnInit(): void {
-    this.authService.authenticationWindowBinder('signIn');
-  }
+export class SignInComponent extends AuthBaseComponent {
+	public loginForm: FormGroup;
+
+	constructor() {
+		super();
+
+		this.loginForm = this.fb.group<{
+			email: FormControl<string | null>,
+			password: FormControl<string | null>,
+		}>({
+			email: new FormControl<string>('', [Validators.required, Validators.email]),
+			password: new FormControl<string | null>('', [Validators.required, Validators.minLength(6)])
+		})
+	}
+
 }

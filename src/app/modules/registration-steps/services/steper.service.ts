@@ -34,7 +34,6 @@ export class SteperService {
   }> = [];
 
   constructor() {
-		debugger;
     this.stepsItems = [
       {
         lable: 'Role Info',
@@ -86,8 +85,6 @@ export class SteperService {
       item => item.routerLink === currentLink
     );
 
-    this.resetToLastStep();
-
     if (currentLinkIndex + 1 > this.currentStep$.value) {
       this.navigateToLastStep();
     } else if (currentLinkIndex === this.currentStep$.value - 1) {
@@ -100,7 +97,6 @@ export class SteperService {
   }
 
   private resetToLastStep() {
-		debugger;
     this.stepsData = getStorageItem<Array<IStepsData['stepsData']>>(
       StorageKeys.STEPS_DATA
     );

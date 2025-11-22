@@ -1,5 +1,5 @@
 import { inject, Injectable, NgZone } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthProviderEnum } from '@core/enums';
 import { RolesEnum } from '@core/enums/roles.enum';
 import { StorageKeys } from '@core/enums/storage-keys.enum';
@@ -18,7 +18,8 @@ import {
 import { environment } from '@environments/environment';
 import { SupabaseService } from './supabase.service';
 import { BehaviorSubject, from, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, finalize, map, take, tap } from 'rxjs/operators';
+import { PATHS } from '@core/paths';
 
 @Injectable({
 	providedIn: 'root',
@@ -29,21 +30,22 @@ export class AuthenticationService {
 	public isAuthenticated: BehaviorSubject<boolean> =
 		new BehaviorSubject(false);
 	private _router: Router = inject(Router);
+	private _activatedRoute: ActivatedRoute = inject(ActivatedRoute);
 	private _ngZone: NgZone = inject(NgZone);
 	private _supabase: SupabaseService = inject(SupabaseService);
 
-	public setOAuthToken(token: string) {
-		if (
-			!token || token === 'null' || token === 'undefined'
-		) {
-			return;
-		}
-		setStorage<string>(StorageKeys.OAUTH_TOKEN, token);
-	}
+	// public setOAuthToken(token: string) {
+	// 	if (
+	// 		!token || token === 'null' || token === 'undefined'
+	// 	) {
+	// 		return;§
+	// 	}
+	// 	setStorage<string>(StorageKeys.OAUTH_TOKEN, token);
+	// }
 
-	public getOAuthToken(): string {
-		return getStorageItem<string>(StorageKeys.OAUTH_TOKEN);
-	}
+	// public getOAuthToken(): string {
+	// 	return getStorageItem<string>(StorageKeys.OAUTH_TOKEN);
+	// }
 
 	//* Login user
 	public login(user: ILoginBody) {
@@ -92,61 +94,33 @@ export class AuthenticationService {
 	}
 
 	//* Register user
-	public register(user: IRegisterBody) {
-		return from(
-			this._supabase.client.auth.signUp({
-				email: user.email,
-				password: user.password,
-				options: {
-					data: {
-						full_name: user.fullName || user.email?.split('@')[0],
-						phone_number: user.phoneNumber || '',
-					},
-				},
-			})
-		).pipe(
-			map(response => {
-				if (response.data.user) {
-					// User registered, but email verification may be required
-					return true;
-				}
-				return false;
-			}),
-			catchError(error => {
-				console.error('Register error:', error);
-				return of(false);
-			})
-		);
+	public register(user?: IRegisterBody) {
+		return this._supabase.client.auth.signUp({
+			email: "officialmentorchief@gmail.com",
+			password: "newaction123##",
+			options: {
+				emailRedirectTo: `${window.origin}/${PATHS.DISCOVER}`
+			},
+		})
+			.then((res) => { res.data && this._router.navigate([PATHS.AUTH__CHECK_EMAIL]) })
 	}
 
 	//* Forget password
 	public forgetPassword(forgetData: IForgetPasswordBody) {
-		return from(
-			this._supabase.client.auth.resetPasswordForEmail(forgetData.email, {
-				redirectTo: `${environment.supabase.redirectUrl}?type=recovery`,
-			})
-		).pipe(
-			map(() => true),
-			catchError(error => {
-				console.error('Forget password error:', error);
-				return of(false);
-			})
-		);
+		return this._supabase.client.auth.resetPasswordForEmail(forgetData.email, {
+			redirectTo: `${window.origin}/${PATHS.AUTH__RESET_PASS}`,
+		})
+			.then((res) => { res.data && this._router.navigate([PATHS.AUTH__CHECK_EMAIL]) })
 	}
 
-	//* reset password
+	// //* reset password
 	public resetPassword(resetData: IResetPasswordBody) {
-		return from(
-			this._supabase.client.auth.updateUser({
-				password: resetData.newPassword,
+		return this._supabase.client.auth.updateUser({
+			password: resetData.newPassword
+		}, { emailRedirectTo: `${window.origin}/${PATHS.AUTH__SIGN_IN}` })
+			.then(() => {
+				this._router.navigate([PATHS.AUTH__CHECK_EMAIL])
 			})
-		).pipe(
-			map(() => true),
-			catchError(error => {
-				console.error('Reset password error:', error);
-				return of(false);
-			})
-		);
 	}
 
 	//* Activate account (Supabase handles this via email link)
@@ -176,7 +150,6 @@ export class AuthenticationService {
 				},
 			})
 		).pipe(
-			map(() => true),
 			catchError(error => {
 				console.error('Resend verification error:', error);
 				return of(false);

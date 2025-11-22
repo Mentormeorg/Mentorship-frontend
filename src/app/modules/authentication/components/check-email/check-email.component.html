@@ -1,33 +1,36 @@
 <div class="content">
-  <div class="header text-center">
-    <div class="icon">
-      <img src="assets/icons/check-email-icon.png" alt="" />
-    </div>
-    <h1>Check Email</h1>
-    <p class="description">
-      Lorem ipsum dolor sit amet consectetur. Nec aenean pellentesque
+	<div class="header text-center">
+		<div class="icon">
+			<img src="assets/icons/check-email-icon.png"
+				alt>
+		</div>
+		<h1>Check Email</h1>
+		<p class="description">
+			Lorem ipsum dolor sit amet consectetur. Nec aenean pellentesque
       est porta gravida aliquam sed.
-    </p>
-  </div>
+		</p>
+	</div>
 
-  <div class="email-form">
-    <form autocomplete="off" role="presentation">
-      <p-button
-        [disabled]="true"
-        styleClass=" p-button-primary check-email p-button-text w-full flex justify-content-center"
-      >
-        Resend email in 0:35
-      </p-button>
+	<div class="email-form">
+		<form autocomplete="off"
+			role="presentation">
+			<p-button *ngIf="(timeRemaining$ | async) || 1 as timer"
+				[disabled]="resendDisabled"
+				(onClick)="resendEmail()"
+				styleClass=" p-button-primary check-email p-button-text w-full flex justify-content-center">
+				Resend email
+				<ng-container *ngIf="resendDisabled">
+					in {{ timer | date:'mm:ss' }}
+				</ng-container>
+			</p-button>
 
-      <div class="text-center back-login">
-        <a
-          [routerLink]="'/auth/sign-in'"
-          class="flex justify-content-center align-items-center text-decoration-none"
-        >
-          Back to login
-          <i class="pi pi-arrow-right"> </i>
-        </a>
-      </div>
-    </form>
-  </div>
+			<div class="text-center back-login">
+				<a [routerLink]="'/' + PATHS.AUTH__SIGN_IN"
+					class="flex justify-content-center align-items-center text-decoration-none">
+					Back to login
+					<i class="pi pi-arrow-right"></i>
+				</a>
+			</div>
+		</form>
+	</div>
 </div>

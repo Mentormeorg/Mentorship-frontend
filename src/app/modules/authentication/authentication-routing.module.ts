@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AccountLayoutComponent } from './account-layout/account-layout.component';
 import { AuthenticationLayoutComponent } from './authentication-layout/authentication-layout.component';
-import { CallbackComponent } from './callback/callback.component';
 import {
   ForgetPasswordComponent,
   ResetPasswordComponent,
@@ -55,10 +54,7 @@ const routes: Routes = [
             '../registration-steps/registration-steps.module'
           ).then(m => m.RegistrationStepsModule),
       },
-      // {
-      //   path: 'callback',
-      //   component: CallbackComponent,
-      // },
+
       {
         path: '**',
         redirectTo: 'sign-up',

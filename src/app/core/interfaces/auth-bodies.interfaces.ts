@@ -36,5 +36,4 @@ export interface IForgetPasswordBody {
 
 export interface IResetPasswordBody {
   newPassword: string;
-  token?: string;
 }
