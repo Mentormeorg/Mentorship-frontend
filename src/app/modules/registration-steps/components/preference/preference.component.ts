@@ -7,9 +7,9 @@ import {
 } from '@angular/forms';
 import {
   IStep5,
-  IStepsData,
 } from '@modules/registration-steps/models/interfaces/steps.interface';
 import { SteperService } from '@modules/registration-steps/services/steper.service';
+import { getValidationErrorMessage } from '@shared/utils/validation.utils';
 
 @Component({
   selector: 'app-preference',
@@ -36,11 +36,25 @@ export class PreferenceComponent {
     >(1, [Validators.required, Validators.min(1)]),
   });
 
-  finish($event?: IStepsData['stepsData']) {
+  finish() {
+    if (this.perferenceForm.invalid) {
+      this.perferenceForm.markAllAsTouched();
+      return;
+    }
     this.steprSerivce.finish(this.perferenceForm.value);
   }
 
   prevStep() {
     this.steprSerivce.previousStep();
+  }
+
+  getErrorMessage(controlName: string): string | null {
+    const control = this.perferenceForm.get(controlName);
+    const fieldNames: { [key: string]: string } = {
+      timeToSpend: 'Time to spend',
+      pricePerHour: 'Price per hour',
+      numberOfMentees: 'Number of mentees'
+    };
+    return getValidationErrorMessage(control, fieldNames[controlName]);
   }
 }

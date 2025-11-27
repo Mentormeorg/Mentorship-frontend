@@ -9,6 +9,7 @@ import {
   SignUpComponent,
 } from './components';
 import { CheckEmailComponent } from './components/check-email/check-email.component';
+import { authGuard, guestGuard, registrationAccessGuard } from '@core/guards';
 
 const routes: Routes = [
   {
@@ -27,10 +28,12 @@ const routes: Routes = [
           {
             path: 'sign-in',
             component: SignInComponent,
+            canActivate: [guestGuard],
           },
           {
             path: 'sign-up',
             component: SignUpComponent,
+            canActivate: [guestGuard],
           },
         ],
       },
@@ -38,17 +41,21 @@ const routes: Routes = [
       {
         path: 'reset-password',
         component: ResetPasswordComponent,
+        canActivate: [guestGuard],
       },
       {
         path: 'forget-password',
         component: ForgetPasswordComponent,
+        canActivate: [guestGuard],
       },
       {
         path: 'check-email',
         component: CheckEmailComponent,
+        canActivate: [guestGuard],
       },
       {
         path: 'registeration-steps',
+        canActivate: [authGuard, registrationAccessGuard],
         loadChildren: () =>
           import(
             '../registration-steps/registration-steps.module'

@@ -1,13 +1,18 @@
 <div [formGroup]="experincesForm">
-  <div class="p-inputgroup mb-6">
-    <span class="p-inputgroup-addon">WWW</span>
-    <input
-      type="text"
-      pInputText
-      class="portofolio-input"
-      placeholder="Add to your portofolio"
-      formControlName="portofolio"
-    />
+  <div class="mb-6">
+    <div class="p-inputgroup">
+      <span class="p-inputgroup-addon">WWW</span>
+      <input
+        type="text"
+        pInputText
+        class="portofolio-input"
+        placeholder="Add to your portofolio"
+        formControlName="portofolio"
+      />
+    </div>
+    <small class="p-error d-block mt-2" *ngIf="getErrorMessage('portofolio')">
+      {{ getErrorMessage('portofolio') }}
+    </small>
   </div>
   <div formArrayName="experinces">
     <div
@@ -21,41 +26,53 @@
           (click)="deleteExperince(i)"
         ></i>
       </span>
-      <span class="p-float-label mb-6">
-        <input
-          class="w-full"
-          pInputText
-          id="jobTitle"
-          name="jobTitle"
-          formControlName="jobtitle"
-        />
-        <label htmlFor="jobTitle">Job Title</label>
-      </span>
-
-      <span class="p-float-label mb-6">
-        <input
-          class="w-full"
-          pInputText
-          formControlName="workedat"
-          id="workAt"
-          name="workAt"
-        />
-        <label htmlFor="workAt">Worked at</label>
-      </span>
-
-      <span class="p-float-label mb-6">
-        <p-inputNumber
-          inputId="integeronly"
-          formControlName="experienceyears"
-          id="experienceyears"
-          name="experienceyears"
-          class="w-full"
-          styleClass="w-full"
-          [max]="50"
-        />
-
-        <label htmlFor="experienceyears">Experince years</label>
-      </span>
+      <div class="mb-6">
+        <span class="p-float-label">
+          <input
+            class="w-full"
+            pInputText
+            id="jobTitle"
+            name="jobTitle"
+            formControlName="jobtitle"
+          />
+          <label htmlFor="jobTitle">Job Title</label>
+        </span>
+        <small class="p-error d-block mt-2" *ngIf="getExperienceErrorMessage(i, 'jobtitle')">
+          {{ getExperienceErrorMessage(i, 'jobtitle') }}
+        </small>
+      </div>
+      <div class="mb-6">
+        <span class="p-float-label">
+          <input
+            class="w-full"
+            pInputText
+            formControlName="workedat"
+            id="workAt"
+            name="workAt"
+          />
+          <label htmlFor="workAt">Worked at</label>
+        </span>
+        <small class="p-error d-block mt-2" *ngIf="getExperienceErrorMessage(i, 'workedat')">
+          {{ getExperienceErrorMessage(i, 'workedat') }}
+        </small>
+      </div>
+      <div class="mb-6">
+        <span class="p-float-label">
+          <p-inputNumber
+            inputId="integeronly"
+            formControlName="experienceyears"
+            id="experienceyears"
+            name="experienceyears"
+            class="w-full"
+            styleClass="w-full"
+            [max]="50"
+          />
+          <label htmlFor="experienceyears">Experince years</label>
+        </span>
+        <small class="p-error d-block mt-2" *ngIf="getExperienceErrorMessage(i, 'experienceyears')">
+          {{ getExperienceErrorMessage(i, 'experienceyears') }}
+        </small>
+      </div>
     </div>
   </div>
 </div>

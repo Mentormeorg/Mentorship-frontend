@@ -57,6 +57,9 @@
 
 .p-error {
   color: #eb516c;
+	font-size: var(--s-FS);
+	display: block;
+	margin: 0.7rem;
 }
 
 .p-text-secondary {

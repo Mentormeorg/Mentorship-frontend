@@ -13,7 +13,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './modules/landing-page/home/home.component';
 import { AppComponent } from './app.component';
-import { SupabaseService } from '@core/services/supabase.service';
+import { MessageService } from 'primeng/api';
+import { NgPrimeModule } from '@shared/ng-prime.module';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -29,6 +30,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 		HomeComponent,
 		HttpClientModule,
 		ModulesModule,
+		NgPrimeModule,
 
 		TranslateModule.forRoot({
 			defaultLanguage: 'en',
@@ -40,6 +42,8 @@ export function HttpLoaderFactory(http: HttpClient) {
 		}),
 	],
 	bootstrap: [AppComponent],
-	providers: [SupabaseService]
+	providers: [
+		MessageService
+	]
 })
 export class AppModule { }

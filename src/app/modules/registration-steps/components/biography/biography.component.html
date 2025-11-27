@@ -1,45 +1,65 @@
 <form [formGroup]="biographyForm">
-  <span class="p-float-label mb-6">
-    <p-chips
-      class="w-full"
-      id="skills"
-      name="skills"
-      formControlName="skills"
-      separator=","
-      placeholder="Hint: Angular, React, Vue"
-      [addOnTab]="true"
-      [allowDuplicate]="false"
-      [showClear]="true"
-    ></p-chips>
-
-    <label htmlFor="skills">Skills</label>
-  </span>
-  <span class="p-float-label mb-6">
-    <p-chips
-      class="w-full"
-      id="tools"
-      name="tools"
-      placeholder="Select What Tools You Use "
-      separator=","
-      formControlName="tools"
-      [showClear]="true"
-      [addOnTab]="true"
-      [allowDuplicate]="false"
-    ></p-chips>
-
-    <label htmlFor="tools">Tools</label>
-  </span>
-  <span class="p-float-label mb-6">
-    <textarea
-      rows="5"
-      cols="30"
-      pInputTextarea
-      formControlName="careerStory"
-      placeholder="Write your career path story here..."
-    ></textarea>
-
-    <label htmlFor="careerStory">Career Story</label>
-  </span>
+  <div class="mb-6">
+    <span class="p-float-label">
+      <p-autoComplete
+        #skillsAutocomplete
+        class="w-full"
+        id="skills"
+        name="skills"
+        formControlName="skills"
+        [suggestions]="filteredSkills"
+        (completeMethod)="filterSkills($event)"
+        [multiple]="true"
+        placeholder="Type to search or add custom skill (press Enter/Tab)"
+        [showClear]="true"
+        [dropdown]="false"
+        [forceSelection]="false"
+        (onKeyDown)="onSkillsKeyDown($event)"
+      ></p-autoComplete>
+      <label htmlFor="skills">Skills</label>
+    </span>
+    <small class="p-error d-block mt-2" *ngIf="getErrorMessage('skills')">
+      {{ getErrorMessage('skills') }}
+    </small>
+  </div>
+  <div class="mb-6">
+    <span class="p-float-label">
+      <p-autoComplete
+        #toolsAutocomplete
+        class="w-full"
+        id="tools"
+        name="tools"
+        formControlName="tools"
+        [suggestions]="filteredTools"
+        (completeMethod)="filterTools($event)"
+        [multiple]="true"
+        placeholder="Type to search or add custom tool (press Enter/Tab)"
+        [showClear]="true"
+        [dropdown]="false"
+        [forceSelection]="false"
+        (onKeyDown)="onToolsKeyDown($event)"
+      ></p-autoComplete>
+      <label htmlFor="tools">Tools</label>
+    </span>
+    <small class="p-error d-block mt-2" *ngIf="getErrorMessage('tools')">
+      {{ getErrorMessage('tools') }}
+    </small>
+  </div>
+  <div class="mb-6">
+    <span class="p-float-label">
+      <textarea
+        rows="5"
+        cols="30"
+        pInputTextarea
+        formControlName="careerStory"
+        placeholder="Write your career path story here..."
+      ></textarea>
+      <label htmlFor="careerStory">Career Story</label>
+    </span>
+    <small class="p-error d-block mt-2" *ngIf="getErrorMessage('careerStory')">
+      {{ getErrorMessage('careerStory') }}
+    </small>
+  </div>
 </form>
 <div class="controller d-flex gap-4">
   <p-button

@@ -13,8 +13,16 @@ export function setStorage<T>(
 export function getStorageItem<T>(
   key: string,
   isLocalStorage?: boolean
-): T {
-  return JSON.parse(getStorage().getItem(key) || '{}');
+): T | null {
+  const item = getStorage().getItem(key);
+  if (item === null) {
+    return null;
+  }
+  try {
+    return JSON.parse(item) as T;
+  } catch {
+    return null;
+  }
 }
 
 export function removeStorageItem(

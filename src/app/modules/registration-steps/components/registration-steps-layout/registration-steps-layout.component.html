@@ -2,38 +2,26 @@
   <div class="card h-full">
     <div class="step-container">
       <div class="step-content">
-        <div class="intro">
-          <h1>
-            {{
-              steprSerivce.stepsItems[
-                ((steprSerivce.currentStep$ | async) || 0) - 1
-              ].intro.header
-            }}
-          </h1>
-          <p>
-            {{
-              steprSerivce.stepsItems[
-                ((steprSerivce.currentStep$ | async) || 1) - 1
-              ].intro.description
-            }}
-          </p>
-        </div>
-        <p class="steps-info">
-          Step {{ steprSerivce.currentStep$ | async }} of
-          {{
-            $any(steprSerivce.stepsData[0])?.role === userRoles.MENTEE
-              ? steprSerivce.totalSteps - 1
-              : steprSerivce.totalSteps
-          }}
-        </p>
-        <p-steps
-          [model]="
-            $any(steprSerivce.stepsData[0])?.role === userRoles.MENTEE
-              ? steprSerivce.stepsItems.slice(0, -1)
-              : steprSerivce.stepsItems
-          "
-          [readonly]="true"
-        ></p-steps>
+        <ng-container *ngIf="steprSerivce.currentStep$ | async as currentStep">
+          <ng-container
+            *ngIf="
+              currentStep &&
+              $any(steprSerivce.stepsItems)[currentStep - 1] as currentStepItem
+            "
+          >
+            <div class="intro">
+              <h1>{{ currentStepItem!.intro.header }}</h1>
+              <p>{{ currentStepItem!.intro.description || '' }}</p>
+            </div>
+            <p class="steps-info">
+              Step {{ currentStep }} of {{ steprSerivce.totalSteps }}
+            </p>
+            <p-steps
+              [model]="steprSerivce.stepsItems"
+              [readonly]="true"
+            ></p-steps>
+          </ng-container>
+        </ng-container>
         <router-outlet class="hide"></router-outlet>
       </div>
     </div>

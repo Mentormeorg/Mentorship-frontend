@@ -8,8 +8,10 @@
   </div>
   <div class="signup-social_buttons">
     <p-button
+      type="button"
       styleClass="p-button-secondary p-button-text"
-      (click)="authService.socialAuth(providers.GOOGLE)"
+      [disabled]="isLoading || isSocialLoading"
+      (onClick)="continueWithSocial(providers.GOOGLE)"
     >
       <span
         class="flex gap-3 align-items-center justify-content-center flex-1"
@@ -19,8 +21,10 @@
       </span>
     </p-button>
     <p-button
+      type="button"
       styleClass="p-button-secondary p-button-text"
-      (click)="authService.socialAuth(providers.GITHUB)"
+      [disabled]="isLoading || isSocialLoading"
+      (onClick)="continueWithSocial(providers.GITHUB)"
     >
       <span
         class="flex gap-3 align-items-center justify-content-center flex-1"
@@ -41,27 +45,82 @@
   </p-divider>
 
   <div class="signup-form">
-    <form>
-      <span class="p-float-label">
-        <input
-          class="w-full"
-          pInputText
-          id="signIn-email"
-          autocomplete="off"
-          type="email"
-        />
-        <label htmlFor="email">Email</label>
-      </span>
+    <form
+      [formGroup]="signupForm"
+      (ngSubmit)="registerWithEmail()"
+      autocomplete="off"
+      role="presentation"
+    >
+      <div class="input-container mb-5">
+        <span class="p-float-label">
+          <input
+            class="w-full"
+            pInputText
+            id="signUp-email"
+            name="email"
+            type="email"
+            formControlName="email"
+            autocomplete="email"
+          />
+          <label htmlFor="signUp-email">Email</label>
+        </span>
+        <small class="p-error" *ngIf="getErrorMessage('email')">
+          {{ getErrorMessage('email') }}
+        </small>
+      </div>
+
+      <div class="input-container mb-5">
+        <span class="p-float-label">
+          <input
+            class="w-full"
+            pInputText
+            id="signUp-password"
+            name="password"
+            type="password"
+            formControlName="password"
+            autocomplete="new-password"
+          />
+          <label htmlFor="signUp-password">Password</label>
+        </span>
+        <small class="p-error" *ngIf="getErrorMessage('password')">
+          {{ getErrorMessage('password') }}
+        </small>
+      </div>
+
+      <div class="input-container mb-5">
+        <span class="p-float-label">
+          <input
+            class="w-full"
+            pInputText
+            id="signUp-confirmPassword"
+            name="confirmPassword"
+            type="password"
+            formControlName="confirmPassword"
+            autocomplete="new-password"
+          />
+          <label htmlFor="signUp-confirmPassword">Confirm password</label>
+        </span>
+        <small class="p-error" *ngIf="getErrorMessage('confirmPassword')">
+          {{ getErrorMessage('confirmPassword') }}
+        </small>
+      </div>
 
       <p-button
+        type="submit"
+        [disabled]="signupForm.invalid || isLoading"
         styleClass="p-button-primary submit-email p-button-text w-full flex justify-content-center"
       >
-        Continue with email
+        <ng-container *ngIf="!isLoading; else loadingLabel">
+          Continue with email
+        </ng-container>
+        <ng-template #loadingLabel>Submitting...</ng-template>
       </p-button>
 
       <p class="hint">
         Already have an account ?
-        <a class="mr-2 uppercase" [routerLink]="'/'">sign in</a>
+        <a class="mr-2 uppercase" [routerLink]="'/' + PATHS.AUTH__SIGN_IN">
+          sign in
+        </a>
       </p>
     </form>
   </div>

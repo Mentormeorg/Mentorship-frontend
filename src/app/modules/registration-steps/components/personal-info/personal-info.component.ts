@@ -8,6 +8,8 @@ import {
 import { LocationEnum } from '@core/enums/location.enum';
 import { IStep2 } from '@modules/registration-steps/models/interfaces/steps.interface';
 import { SteperService } from '@modules/registration-steps/services/steper.service';
+import { getValidationErrorMessage } from '@shared/utils/validation.utils';
+import { phoneNumberValidator } from '@shared/validators';
 
 @Component({
   selector: 'app-personal-info',
@@ -25,7 +27,7 @@ export class PersonalInfoComponent implements OnInit {
     ),
     phoneNumber: new FormControl<IStep2['phoneNumber'] | null>(
       null,
-      Validators.required
+      [Validators.required, phoneNumberValidator()]
     ),
     gender: new FormControl<IStep2['gender'] | null>(
       null,
@@ -34,11 +36,7 @@ export class PersonalInfoComponent implements OnInit {
     city: new FormControl<IStep2['location'] | null>(
       null,
       Validators.required
-    ),
-    password: new FormControl<IStep2['password'] | null>(
-      null,
-      Validators.required
-    ),
+    )
   });
 
   cities: IStep2['location'][] = Object.values(LocationEnum).map(
@@ -59,11 +57,25 @@ export class PersonalInfoComponent implements OnInit {
   }
 
   nextStep() {
-    if (this.personalInfoForm.valid)
-      this.steprSerivce.nextStep(this.personalInfoForm.value);
+    if (this.personalInfoForm.invalid) {
+      this.personalInfoForm.markAllAsTouched();
+      return;
+    }
+    this.steprSerivce.nextStep(this.personalInfoForm.value);
   }
 
   prevStep() {
     this.steprSerivce.previousStep();
+  }
+
+  getErrorMessage(controlName: string): string | null {
+    const control = this.personalInfoForm.get(controlName);
+    const fieldNames: { [key: string]: string } = {
+      fullName: 'Full name',
+      phoneNumber: 'Phone number',
+      gender: 'Gender',
+      city: 'City',
+    };
+    return getValidationErrorMessage(control, fieldNames[controlName]);
   }
 }

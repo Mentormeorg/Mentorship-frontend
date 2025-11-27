@@ -12,6 +12,7 @@ import {
   IStepsData,
 } from '@modules/registration-steps/models/interfaces/steps.interface';
 import { SteperService } from '@modules/registration-steps/services/steper.service';
+import { getValidationErrorMessage } from '@shared/utils/validation.utils';
 
 @Component({
   selector: 'app-career-info',
@@ -27,8 +28,7 @@ export class CareerInfoComponent {
   constructor() {
     this.experincesForm = this.fb.group({
       portofolio: new FormControl<string | null>(
-        null,
-        Validators.required
+        null
       ),
       experinces: this.fb.array([]),
     });
@@ -73,6 +73,10 @@ export class CareerInfoComponent {
   }
 
   nextStep($event?: IStepsData['stepsData']) {
+    if (this.experincesForm.invalid) {
+      this.experincesForm.markAllAsTouched();
+      return;
+    }
     this.steprSerivce.nextStep(this.experincesForm.value);
   }
 
@@ -82,5 +86,24 @@ export class CareerInfoComponent {
 
   deleteExperince(i: number) {
     this.experinces.removeAt(i);
+  }
+
+  getErrorMessage(controlName: string): string | null {
+    const control = this.experincesForm.get(controlName);
+    const fieldNames: { [key: string]: string } = {
+      portofolio: 'Portfolio'
+    };
+    return getValidationErrorMessage(control, fieldNames[controlName]);
+  }
+
+  getExperienceErrorMessage(index: number, controlName: string): string | null {
+    const experienceGroup = this.experinces.at(index) as FormGroup;
+    const control = experienceGroup?.get(controlName);
+    const fieldNames: { [key: string]: string } = {
+      jobtitle: 'Job title',
+      workedat: 'Worked at',
+      experienceyears: 'Experience years'
+    };
+    return getValidationErrorMessage(control, fieldNames[controlName]);
   }
 }

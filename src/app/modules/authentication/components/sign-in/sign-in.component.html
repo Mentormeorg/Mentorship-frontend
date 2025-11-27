@@ -1,80 +1,106 @@
 <h1 class="text-center bg-red-100">
-	<!-- {{ (this.authService.isAuthenticated | async) ? 'true' : 'false' }} -->
+  {{ (this.authService.isAuthenticated | async) ? 'true' : 'false' }}
 </h1>
 
-<button (click)="authService.register()">register</button>
+<!-- Register button removed - use sign-up page instead -->
 <div class="signin-container signin">
-	<div class="signin-intro intro text-center">
-		<h1 class="intro-header">
-			Welcome to Mentorchief
-		</h1>
-		<p class="intro-desc">
-			Unlock Your Potential with Personalized Mentorship
-		</p>
-	</div>
-	<div class="signin-social_buttons">
-		<p-button (click)="authService.socialAuth(providers.GOOGLE)"
-			styleClass="p-button-secondary p-button-text">
-			<span class="flex gap-3 align-items-center justify-content-center flex-1">
-				<img src="assets/images/helpers/Google.png"
-					alt>
-				<p class="button-label text-center">Login with Google</p>
-			</span>
-		</p-button>
-		<p-button (click)="authService.socialAuth(providers.GITHUB)"
-			styleClass="p-button-secondary p-button-text">
-			<span class="flex gap-3 align-items-center justify-content-center flex-1">
-				<img width="30"
-					src="assets/images/helpers/github.png"
-					alt>
-				<p class="text-center button-label">Login with Github</p>
-			</span>
-		</p-button>
-	</div>
+  <div class="signin-intro intro text-center">
+    <h1 class="intro-header">Welcome to Mentorchief</h1>
+    <p class="intro-desc">
+      Unlock Your Potential with Personalized Mentorship
+    </p>
+  </div>
+  <div class="signin-social_buttons">
+    <p-button
+      (click)="authUser(providers.GOOGLE)"
+      styleClass="p-button-secondary p-button-text"
+    >
+      <span
+        class="flex gap-3 align-items-center justify-content-center flex-1"
+      >
+        <img src="assets/images/helpers/Google.png" alt />
+        <p class="button-label text-center">Login with Google</p>
+      </span>
+    </p-button>
+    <p-button
+      (click)="authUser(providers.GITHUB)"
+      styleClass="p-button-secondary p-button-text"
+    >
+      <span
+        class="flex gap-3 align-items-center justify-content-center flex-1"
+      >
+        <img width="30" src="assets/images/helpers/github.png" alt />
+        <p class="text-center button-label">Login with Github</p>
+      </span>
+    </p-button>
+  </div>
 
-	<p-divider align="center"
-		class="divider block">
-		<div class="inline-flex align-items-center">
-			<span>or</span>
-		</div>
-	</p-divider>
+  <p-divider align="center" class="divider block">
+    <div class="inline-flex align-items-center">
+      <span>or</span>
+    </div>
+  </p-divider>
 
-	<div class="signin-form">
-		<form [formGroup]="loginForm"
-			autocomplete="off"
-			role="presentation">
-			<span class="p-float-label mb-6">
-				<input class="w-full"
-					pInputText
-					id="email"
-					name="email"
-					formControlName="email">
-				<label htmlFor="email">Email</label>
-			</span>
-			<span class="p-float-label">
-				<input class="w-full"
-					pInputText
-					formControlName="password"
-					name="Passwrod"
-					id="password"
-					type="password">
-				<label htmlFor="password">Password</label>
-			</span>
-			<div class="flex justify-content-end forget-password">
-				<a [routerLink]="'/'+PATHS.AUTH__FORGET_PASS">Forgot password?</a>
-			</div>
-			<p-button (onClick)="authService.login(loginForm.value)"
-				styleClass="p-button-primary submit-email p-button-text w-full flex justify-content-center">
-				Login
-			</p-button>
+  <div class="signin-form">
+    <form
+      [formGroup]="loginForm"
+      autocomplete="off"
+      role="presentation"
+    >
+      <div class="input-container mb-6">
+        <span class="p-float-label">
+          <input
+            class="w-full"
+            pInputText
+            id="email"
+            name="email"
+            formControlName="email"
+          />
+          <label htmlFor="email">Email</label>
+        </span>
+        <small class="p-error" *ngIf="getErrorMessage('email')">
+          {{ getErrorMessage('email') }}
+        </small>
+      </div>
 
-			<p class="hint">
-				Don't have an account?
-				<a [routerLink]="'/auth/sign-up'"
-					class="mr-2 uppercase">
-					sign up
-				</a>
-			</p>
-		</form>
-	</div>
+      <div class="input-container mb-6">
+        <span class="p-float-label">
+          <input
+            class="w-full"
+            pInputText
+            formControlName="password"
+            name="Passwrod"
+            id="password"
+            type="password"
+          />
+          <label htmlFor="password">Password</label>
+        </span>
+        <small class="p-error" *ngIf="getErrorMessage('password')">
+          {{ getErrorMessage('password') }}
+        </small>
+      </div>
+      <div class="flex justify-content-end forget-password">
+        <a [routerLink]="'/' + PATHS.AUTH__FORGET_PASS"
+          >Forgot password?</a
+        >
+      </div>
+      <p-button
+        (onClick)="authUser()"
+        [disabled]="!loginForm.valid"
+        styleClass="p-button-primary submit-email p-button-text w-full flex justify-content-center"
+      >
+        Login
+      </p-button>
+
+      <p class="hint">
+        Don't have an account?
+        <a
+          [routerLink]="'/' + PATHS.AUTH__SIGN_UP"
+          class="mr-2 uppercase"
+        >
+          sign up
+        </a>
+      </p>
+    </form>
+  </div>
 </div>

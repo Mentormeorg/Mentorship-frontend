@@ -1,0 +1,111 @@
+:host ::ng-deep {
+  // Style autocomplete to match chips component
+  .p-autocomplete {
+    width: 100%;
+
+    .p-autocomplete-multiple-container {
+      padding: 0.5rem 1.4rem;
+      border: 0.1rem solid var(--gray_3000) !important;
+      border-radius: 0.8rem;
+      background: var(--white);
+      min-height: 5.6rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem;
+      transition: border-color 0.2s;
+
+      &:not(.p-disabled):hover {
+        border-color: var(--gray_3000) !important;
+      }
+
+      &:not(.p-disabled).p-focus {
+        outline: 0 none;
+        outline-offset: 0;
+        border-color: var(--gray_3000) !important;
+        box-shadow: none;
+      }
+
+      .p-autocomplete-input-token {
+        padding: 0;
+        margin: 0;
+        flex: 1;
+        min-width: 10rem;
+
+        input {
+          font-family: 'Inter', sans-serif, -apple-system, BlinkMacSystemFont,
+            'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+          font-size: var(--l_FS);
+          color: var(--gray_9000);
+          padding: 0;
+          margin: 0;
+          border: none;
+          background: transparent;
+          outline: none;
+          width: 100%;
+        }
+
+        input::placeholder {
+          color: var(--gray_5000);
+        }
+      }
+
+      .p-autocomplete-token {
+        padding: 0.375rem 0.75rem;
+        background: var(--primary_color);
+        color: var(--white);
+        border-radius: var(--button-radius);
+        font-size: var(--base_FS);
+        margin: 0;
+
+        .p-autocomplete-token-icon {
+          margin-left: 0.5rem;
+          color: var(--white);
+        }
+      }
+    }
+
+    // Hide dropdown button
+    .p-autocomplete-dropdown {
+      display: none !important;
+    }
+
+    // Error state - only show red border when invalid and dirty
+    &.ng-dirty.ng-invalid {
+      .p-autocomplete-multiple-container {
+        border-color: #eb516c !important;
+      }
+    }
+  }
+
+  // Ensure float label works with autocomplete
+  .p-float-label {
+    .p-autocomplete {
+      width: 100%;
+    }
+
+    // Float label when autocomplete has values or is focused
+    .p-autocomplete-multiple-container.p-inputwrapper-filled ~ label,
+    .p-autocomplete-multiple-container.p-inputwrapper-focus ~ label {
+      font-size: var(--base_FS);
+      color: var(--gray_7000);
+      font-weight: 300;
+      top: -0.6rem;
+      left: 1.2rem;
+      line-height: 2rem;
+      transform: translateY(-100%);
+    }
+
+    // Float label when there are tokens (selected items)
+    .p-autocomplete-multiple-container:has(.p-autocomplete-token) ~ label {
+      font-size: var(--base_FS);
+      color: var(--gray_7000);
+      font-weight: 300;
+      top: -0.6rem;
+      left: 1.2rem;
+      line-height: 2rem;
+      transform: translateY(-100%);
+    }
+  }
+}
+

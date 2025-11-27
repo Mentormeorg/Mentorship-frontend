@@ -1,32 +1,5 @@
 <form [formGroup]="perferenceForm">
-  <span class="d-block mb-6">
-    <p class="d-block mb-3 lable">
-      how much time want to spend mentoring someone?
-    </p>
-    <div class="p-inputgroup">
-      <input
-        pInputText
-        placeholder="placeholder"
-        formControlName="timeToSpend"
-      />
-      <span class="p-inputgroup-addon"> Hr </span>
-    </div>
-  </span>
-  <span class="d-block mb-6">
-    <p class="d-block mb-3 lable">
-      how much your price for mentoring someone per hour?
-    </p>
-
-    <div class="p-inputgroup">
-      <input
-        pInputText
-        placeholder="placeholder"
-        formControlName="pricePerHour"
-      />
-      <span class="p-inputgroup-addon"> $ </span>
-    </div>
-  </span>
-  <span class="d-block mb-6">
+  <div class="mb-6">
     <p class="d-block mb-3 lable">
       how many mentees capacity you can have?
     </p>
@@ -47,7 +20,42 @@
       incrementButtonIcon="pi pi-plus"
       decrementButtonIcon="pi pi-minus"
     ></p-inputNumber>
-  </span>
+    <small class="p-error d-block mt-2" *ngIf="getErrorMessage('numberOfMentees')">
+      {{ getErrorMessage('numberOfMentees') }}
+    </small>
+  </div>
+  <div class="mb-6">
+    <p class="d-block mb-3 lable">
+      how much time want to spend mentoring someone?
+    </p>
+    <div class="p-inputgroup">
+      <input
+        pInputText
+        placeholder="placeholder"
+        formControlName="timeToSpend"
+      />
+      <span class="p-inputgroup-addon"> Hr </span>
+    </div>
+    <small class="p-error d-block mt-2" *ngIf="getErrorMessage('timeToSpend')">
+      {{ getErrorMessage('timeToSpend') }}
+    </small>
+  </div>
+  <div class="mb-6">
+    <p class="d-block mb-3 lable">
+      how much your price for mentoring someone per hour?
+    </p>
+    <div class="p-inputgroup">
+      <input
+        pInputText
+        placeholder="placeholder"
+        formControlName="pricePerHour"
+      />
+      <span class="p-inputgroup-addon"> $ </span>
+    </div>
+    <small class="p-error d-block mt-2" *ngIf="getErrorMessage('pricePerHour')">
+      {{ getErrorMessage('pricePerHour') }}
+    </small>
+  </div>
 </form>
 <div class="controller d-flex gap-4">
   <p-button
@@ -59,7 +67,7 @@
   <p-button
     styleClass="p-button-primary p-button-text"
     [disabled]="!perferenceForm.valid"
-    (click)="finish(perferenceForm.value)"
+    (click)="finish()"
   >
     Finish
   </p-button>

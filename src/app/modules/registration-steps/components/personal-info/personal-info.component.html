@@ -1,22 +1,44 @@
 <form [formGroup]="personalInfoForm">
-  <span class="p-float-label mb-6">
-    <input
-      class="w-full"
-      formControlName="fullName"
-      id="fullName"
-      name="fullName"
-      pInputText
-    />
-    <label htmlFor="fullName">Full name</label>
-  </span>
-  <span class="p-float-label mb-4">
-    <p-inputMask
-      formControlName="phoneNumber"
-      mask="999-99999999"
-      placeholder="(999)-99999999"
-    ></p-inputMask>
-    <label htmlFor="phone">Phone number</label>
-  </span>
+  <div class="mb-6">
+    <span class="p-float-label">
+      <input
+        class="w-full"
+        formControlName="fullName"
+        id="fullName"
+        name="fullName"
+        pInputText
+      />
+      <label htmlFor="fullName">Full name</label>
+    </span>
+    <small class="p-error d-block mt-2" *ngIf="getErrorMessage('fullName')">
+      {{ getErrorMessage('fullName') }}
+    </small>
+  </div>
+  <div class="mb-6">
+    <p-dropdown
+      [options]="cities"
+      formControlName="city"
+      optionLabel="name"
+      placeholder="Where are you from"
+      styleClass="w-full"
+    ></p-dropdown>
+    <small class="p-error d-block mt-2" *ngIf="getErrorMessage('city')">
+      {{ getErrorMessage('city') }}
+    </small>
+  </div>
+  <div class="mb-6">
+    <span class="p-float-label">
+      <p-inputMask
+        formControlName="phoneNumber"
+        mask="999-99999999"
+        placeholder="(999)-99999999"
+      ></p-inputMask>
+      <label htmlFor="phone">Phone number</label>
+    </span>
+    <small class="p-error d-block mt-2" *ngIf="getErrorMessage('phoneNumber')">
+      {{ getErrorMessage('phoneNumber') }}
+    </small>
+  </div>
   <div class="mb-6">
     <p class="gender">Gender</p>
     <span class="d-flex form-check">
@@ -41,26 +63,10 @@
         />
       </label>
     </span>
+    <small class="p-error d-block mt-2" *ngIf="getErrorMessage('gender')">
+      {{ getErrorMessage('gender') }}
+    </small>
   </div>
-
-  <span class="mb-6 d-block">
-    <p-dropdown
-      [options]="cities"
-      formControlName="city"
-      optionLabel="name"
-      placeholder="Where are you from"
-      styleClass="w-full"
-    ></p-dropdown>
-  </span>
-  <span class="p-float-label mb-6">
-    <p-password
-      class="w-full"
-      formControlName="password"
-      id="password"
-      name="password"
-    ></p-password>
-    <label htmlFor="password">Create your password</label>
-  </span>
 </form>
 <div class="controller d-flex gap-4">
   <p-button

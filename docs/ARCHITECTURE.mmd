@@ -1,0 +1,33 @@
+flowchart TB
+    subgraph Client["Angular App (ModulesModule)"]
+        direction TB
+        Landing["Landing Page Module (/home)"]
+        Auth["Authentication Module (/auth)"]
+        RegSteps["Registration Steps Module (/auth/registeration-steps)"]
+        Dashboard["Dashboard Module (/dashboard)"]
+    end
+
+    subgraph Core["Core Layer"]
+        AuthService["AuthenticationService\n• Supabase Auth wrapper\n• Manages IUser + tokens"]
+        Guards["Route Guards\nauthGuard / guestGuard / roleGuard /\nregistrationCompletionGuard"]
+        Storage["Storage Utils\n(localStorage helpers)"]
+    end
+
+    subgraph Backend["Supabase"]
+        SupabaseAuth["Supabase Auth API"]
+        SupabaseDB["User Metadata\nregistrationCompleted flag"]
+    end
+
+    Auth <-- lazy load --> Client
+    RegSteps <-- lazy load --> Client
+    Dashboard <-- lazy load --> Client
+
+    AuthService <--> Storage
+    Guards --> AuthService
+
+    AuthService <--> SupabaseAuth
+    SupabaseAuth --> SupabaseDB
+
+    RegSteps -->|"SteperService"| AuthService
+    Dashboard --> Guards
+
