@@ -2,4 +2,19 @@ h1 {
   color: var(--gray_9000);
   font-weight: var(--semi-bold-font-weight);
   font-size: 3.6rem;
+  margin-bottom: 2.4rem;
+}
+
+.layout-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.4rem;
+}
+
+.filters-section {
+  margin-bottom: 3.2rem;
+}
+
+.mentors-container {
+  margin-top: 2.4rem;
 }

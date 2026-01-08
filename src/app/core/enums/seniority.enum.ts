@@ -1,0 +1,11 @@
+export enum SeniorityEnum {
+  JUNIOR = 'JUNIOR',
+  MID_LEVEL = 'MID_LEVEL',
+  SENIOR = 'SENIOR',
+  LEAD = 'LEAD',
+  PRINCIPAL = 'PRINCIPAL',
+	ARCHITECT = 'ARCHITECT',
+	CTO = 'CTO',
+	CONSULTANT = 'CONSULTANT'
+}
+

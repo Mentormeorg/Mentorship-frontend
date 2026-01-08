@@ -1,0 +1,39 @@
+<div class="message-composer">
+  <form [formGroup]="messageForm" (ngSubmit)="onSubmit()">
+    <div class="composer-content">
+      <div class="file-preview" *ngIf="selectedFile">
+        <span>📎 {{ selectedFile.name }}</span>
+        <button type="button" class="btn-remove" (click)="removeFile()">×</button>
+      </div>
+
+      <textarea
+        formControlName="content"
+        placeholder="Type your message..."
+        rows="1"
+        (keydown.enter)="onEnterKey($event)"
+      ></textarea>
+
+      <div class="composer-actions">
+        <label for="file-input" class="file-input-label">
+          📎
+          <input
+            id="file-input"
+            type="file"
+            (change)="onFileSelected($event)"
+            style="display: none"
+          />
+        </label>
+
+        <button
+          type="submit"
+          class="btn-send"
+          [disabled]="messageForm.invalid || isSending || isUploading"
+        >
+          <span *ngIf="!isSending && !isUploading">Send</span>
+          <span *ngIf="isSending || isUploading">Sending...</span>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+

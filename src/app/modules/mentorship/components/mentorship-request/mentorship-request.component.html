@@ -1,0 +1,60 @@
+<div class="mentorship-request-container">
+  <div class="card" *ngIf="!isLoading">
+    <h2>Request Mentorship</h2>
+    <p class="subtitle">Send a mentorship request to start your journey</p>
+
+    <div class="mentor-info" *ngIf="mentor">
+      <h3>{{ mentor.name }}</h3>
+      <p>{{ mentor.jobTitle }} at {{ mentor.company }}</p>
+    </div>
+
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="paymentAmount">Payment Amount (EGP) *</label>
+        <input
+          id="paymentAmount"
+          type="number"
+          [(ngModel)]="paymentAmount"
+          name="paymentAmount"
+          min="0"
+          step="0.01"
+          required
+        />
+        <small>This amount will be held in escrow until the mentorship period ends</small>
+      </div>
+
+      <div class="info-box">
+        <h4>Important Information:</h4>
+        <ul>
+          <li>Payment will be held in escrow until the mentorship period ends</li>
+          <li>You can cancel within the first 3 days for a full refund</li>
+          <li>After 3 days, refunds require admin approval</li>
+          <li>The mentor will receive payment after submitting the end-of-period report</li>
+        </ul>
+      </div>
+
+      <div class="form-actions">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="onCancel()"
+        >
+          Cancel
+        </button>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="isSubmitting || paymentAmount <= 0"
+        >
+          <span *ngIf="!isSubmitting">Send Request</span>
+          <span *ngIf="isSubmitting">Sending...</span>
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div *ngIf="isLoading" class="loading">
+    <p>Loading...</p>
+  </div>
+</div>
+

@@ -39,19 +39,16 @@ export class PersonalInfoComponent implements OnInit {
     )
   });
 
-  cities: IStep2['location'][] = Object.values(LocationEnum).map(
-    city => ({
-      name: city,
-      code: city,
-    })
-  );
+  cities: LocationEnum[] = Object.values(LocationEnum);
 
   ngOnInit(): void {
     this.steprSerivce.currentStep$.subscribe(step => {
       if (step === 2 && this.steprSerivce.stepsData[1]) {
-        this.personalInfoForm.patchValue(
-          this.steprSerivce.stepsData[1]
-        );
+        const stepData = this.steprSerivce.stepsData[1] as IStep2;
+        this.personalInfoForm.patchValue({
+          ...stepData,
+          city: stepData.location,
+        });
       }
     });
   }
@@ -61,7 +58,17 @@ export class PersonalInfoComponent implements OnInit {
       this.personalInfoForm.markAllAsTouched();
       return;
     }
-    this.steprSerivce.nextStep(this.personalInfoForm.value);
+    const formValue = this.personalInfoForm.value;
+    // Remove hyphens and other formatting from phone number before storing
+    const sanitizedPhoneNumber = formValue.phoneNumber?.replace(/[-\s()]/g, '') || '';
+    const stepData: IStep2 = {
+      fullName: formValue.fullName,
+      gender: formValue.gender,
+      location: formValue.city,
+      phoneNumber: sanitizedPhoneNumber,
+      password: formValue.password,
+    };
+    this.steprSerivce.nextStep(stepData);
   }
 
   prevStep() {

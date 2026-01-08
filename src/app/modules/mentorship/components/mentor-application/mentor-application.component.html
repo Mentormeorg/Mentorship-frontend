@@ -1,0 +1,113 @@
+<div class="mentor-application-container">
+  <div class="card">
+    <h2>Apply to Become a Mentor</h2>
+    <p class="subtitle">Fill out the form below to apply as a mentor on MentorChief</p>
+
+    <form [formGroup]="applicationForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="motivation">Why do you want to become a mentor? *</label>
+        <textarea
+          id="motivation"
+          formControlName="motivation"
+          rows="5"
+          placeholder="Tell us about your motivation to mentor others (minimum 100 characters)"
+        ></textarea>
+        <div
+          *ngIf="
+            applicationForm.get('motivation')?.invalid &&
+            applicationForm.get('motivation')?.touched
+          "
+          class="error-message"
+        >
+          Motivation is required (minimum 100 characters)
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="experience">Your Experience *</label>
+        <textarea
+          id="experience"
+          formControlName="experience"
+          rows="5"
+          placeholder="Describe your professional experience and background (minimum 100 characters)"
+        ></textarea>
+        <div
+          *ngIf="
+            applicationForm.get('experience')?.invalid &&
+            applicationForm.get('experience')?.touched
+          "
+          class="error-message"
+        >
+          Experience is required (minimum 100 characters)
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="expertise">Areas of Expertise *</label>
+        <input
+          id="expertise"
+          type="text"
+          formControlName="expertise"
+          placeholder="e.g., Frontend Development, Backend Architecture, DevOps"
+        />
+        <div
+          *ngIf="
+            applicationForm.get('expertise')?.invalid &&
+            applicationForm.get('expertise')?.touched
+          "
+          class="error-message"
+        >
+          Expertise is required
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="availability">Availability *</label>
+        <input
+          id="availability"
+          type="text"
+          formControlName="availability"
+          placeholder="e.g., 5-10 hours per week, Weekends only"
+        />
+        <div
+          *ngIf="
+            applicationForm.get('availability')?.invalid &&
+            applicationForm.get('availability')?.touched
+          "
+          class="error-message"
+        >
+          Availability is required
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="additionalInfo">Additional Information</label>
+        <textarea
+          id="additionalInfo"
+          formControlName="additionalInfo"
+          rows="3"
+          placeholder="Any additional information you'd like to share"
+        ></textarea>
+      </div>
+
+      <div class="form-actions">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="router.navigate(['/dashboard'])"
+        >
+          Cancel
+        </button>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="applicationForm.invalid || isSubmitting"
+        >
+          <span *ngIf="!isSubmitting">Submit Application</span>
+          <span *ngIf="isSubmitting">Submitting...</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+

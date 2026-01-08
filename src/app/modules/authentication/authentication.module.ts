@@ -17,6 +17,7 @@ import {
 	SignUpComponent,
 } from './components';
 import { CheckEmailComponent } from './components/check-email/check-email.component';
+import { OAuthCallbackComponent } from './components/oauth-callback/oauth-callback.component';
 
 @NgModule({
 	declarations: [
@@ -28,6 +29,7 @@ import { CheckEmailComponent } from './components/check-email/check-email.compon
 		ForgetPasswordComponent,
 		AccountLayoutComponent,
 		CheckEmailComponent,
+		OAuthCallbackComponent,
 	],
 	imports: [
 		CommonModule,

@@ -1,4 +1,27 @@
+<div *ngIf="loading" class="loading-container">
+  <p-progressSpinner></p-progressSpinner>
+  <p>Loading mentors...</p>
+</div>
+
+<div *ngIf="!loading && mentorData.length === 0" class="empty-state">
+  <i class="pi pi-users" style="font-size: 4rem; color: var(--gray_5000);"></i>
+  <h3>No mentors found</h3>
+  <p>Try adjusting your filters to see more results.</p>
+</div>
+
+<div *ngIf="!loading && mentorData.length > 0" class="mentors-grid">
 <app-mentor-card
   *ngFor="let card of mentorData"
   [mentor]="card"
 ></app-mentor-card>
+</div>
+
+<p-paginator
+  *ngIf="!loading && totalPages > 1"
+  [rows]="pageSize"
+  [totalRecords]="totalCount"
+  [first]="(currentPage - 1) * pageSize"
+  (onPageChange)="onPageChange($event)"
+  [rowsPerPageOptions]="[12, 24, 48]"
+  styleClass="mt-4"
+></p-paginator>

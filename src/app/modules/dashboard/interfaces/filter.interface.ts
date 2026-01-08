@@ -9,9 +9,8 @@ export interface IFilter {
   rate: IDropDownFilter<Rate_OPTIONS>;
   experience: IDropDownFilter<EXPERIENCE_OPTIONS>;
   price: IRangeFilter;
-  country: IDropDownFilter<{ code: string; name: LocationEnum }>;
+  country: IDropDownFilter<LocationEnum>;
   sortBy: IDropDownFilter<SORT_TYPE>;
-  speciality: IDropDownFilter<string>;
 }
 
 interface IDropDownFilter<T> {

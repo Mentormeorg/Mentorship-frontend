@@ -1,0 +1,173 @@
+<div class="report-form-container">
+  <div class="card">
+    <h2>Create Report</h2>
+    <p class="subtitle">Fill out the report for this mentorship period</p>
+
+    <form [formGroup]="reportForm" (ngSubmit)="onSubmit()">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="period_start_date">Period Start Date *</label>
+          <input
+            id="period_start_date"
+            type="date"
+            formControlName="period_start_date"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="period_end_date">Period End Date *</label>
+          <input
+            id="period_end_date"
+            type="date"
+            formControlName="period_end_date"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Strength Points *</label>
+        <div formArrayName="strength_points">
+          <div
+            *ngFor="let point of strengthPoints.controls; let i = index"
+            class="array-item"
+          >
+            <input [formControlName]="i" placeholder="Enter strength point" />
+            <button
+              type="button"
+              class="btn-remove"
+              (click)="removeStrengthPoint(i)"
+              *ngIf="strengthPoints.length > 1"
+            >
+              Remove
+            </button>
+          </div>
+        </div>
+        <button type="button" class="btn-add" (click)="addStrengthPoint()">
+          + Add Strength Point
+        </button>
+      </div>
+
+      <div class="form-group">
+        <label>Weak Points *</label>
+        <div formArrayName="weak_points">
+          <div
+            *ngFor="let point of weakPoints.controls; let i = index"
+            class="array-item"
+          >
+            <input [formControlName]="i" placeholder="Enter weak point" />
+            <button
+              type="button"
+              class="btn-remove"
+              (click)="removeWeakPoint(i)"
+              *ngIf="weakPoints.length > 1"
+            >
+              Remove
+            </button>
+          </div>
+        </div>
+        <button type="button" class="btn-add" (click)="addWeakPoint()">
+          + Add Weak Point
+        </button>
+      </div>
+
+      <div class="form-group">
+        <label>Skills Used *</label>
+        <div formArrayName="skills_used">
+          <div
+            *ngFor="let skill of skillsUsed.controls; let i = index"
+            class="array-item"
+          >
+            <input [formControlName]="i" placeholder="Enter skill" />
+            <button
+              type="button"
+              class="btn-remove"
+              (click)="removeSkill(i)"
+              *ngIf="skillsUsed.length > 1"
+            >
+              Remove
+            </button>
+          </div>
+        </div>
+        <button type="button" class="btn-add" (click)="addSkill()">
+          + Add Skill
+        </button>
+      </div>
+
+      <div class="form-group">
+        <label>Action Items *</label>
+        <div formArrayName="action_items">
+          <div
+            *ngFor="let item of actionItems.controls; let i = index"
+            class="array-item"
+            [formGroup]="getActionItemGroup(i)"
+          >
+            <input formControlName="item" placeholder="Enter action item" />
+            <select formControlName="priority">
+              <option value="high">High</option>
+              <option value="medium">Medium</option>
+              <option value="low">Low</option>
+            </select>
+            <button
+              type="button"
+              class="btn-remove"
+              (click)="removeActionItem(i)"
+              *ngIf="actionItems.length > 1"
+            >
+              Remove
+            </button>
+          </div>
+        </div>
+        <button type="button" class="btn-add" (click)="addActionItem()">
+          + Add Action Item
+        </button>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="commitment_rate">Commitment Rate (0-100) *</label>
+          <input
+            id="commitment_rate"
+            type="number"
+            formControlName="commitment_rate"
+            min="0"
+            max="100"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="consistency_rate">Consistency Rate (0-100) *</label>
+          <input
+            id="consistency_rate"
+            type="number"
+            formControlName="consistency_rate"
+            min="0"
+            max="100"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="router.navigate(['/dashboard/mentorships'])"
+        >
+          Cancel
+        </button>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="reportForm.invalid || isSubmitting"
+        >
+          <span *ngIf="!isSubmitting">Submit Report</span>
+          <span *ngIf="isSubmitting">Submitting...</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+

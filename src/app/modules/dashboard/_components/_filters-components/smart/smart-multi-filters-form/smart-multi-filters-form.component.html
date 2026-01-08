@@ -4,4 +4,5 @@
   [filterConfig]="filterConfig"
   [filterObj]="filterObj"
   [sortBy]="sortBy"
+  (filtersChange)="filtersChange.emit($event)"
 ></app-multi-filters-form>

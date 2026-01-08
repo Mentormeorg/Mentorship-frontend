@@ -19,7 +19,8 @@
 		"lint-fix": "ng lint --fix",
 		"prepare": "husky install",
 		"format": "prettier --write \"src/**/*.{ts,html,css,scss}\"",
-		"format:check": "prettier --check \"src/**/*.{ts,html,css,scss}\""
+		"format:check": "prettier --check \"src/**/*.{ts,html,css,scss}\"",
+		"seed:users": "node supabase/seed/seed_users.js"
 	},
 	"private": true,
 	"dependencies": {
@@ -77,6 +78,7 @@
 		"karma-jasmine": "~5.1.0",
 		"karma-jasmine-html-reporter": "~2.0.0",
 		"rollup-plugin-visualizer": "github:supabase/gotrue-js",
+		"ts-node": "^10.9.2",
 		"typescript": "~4.9.4"
 	}
 }

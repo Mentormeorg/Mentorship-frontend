@@ -19,6 +19,34 @@ const routes: Routes = [
         path: 'discover',
         component: DiscoverPageComponent,
       },
+      {
+        path: 'mentorships',
+        loadChildren: () =>
+          import('../mentorship/mentorship.module').then(
+            m => m.MentorshipModule
+          ),
+      },
+      {
+        path: 'chat',
+        loadChildren: () =>
+          import('../chat/chat.module').then(
+            m => m.ChatModule
+          ),
+      },
+      {
+        path: 'reports',
+        loadChildren: () =>
+          import('../reports/reports.module').then(
+            m => m.ReportsModule
+          ),
+      },
+      {
+        path: 'payments',
+        loadChildren: () =>
+          import('../payments/payments.module').then(
+            m => m.PaymentsModule
+          ),
+      },
     ],
   },
 ];

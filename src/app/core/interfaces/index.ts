@@ -2,3 +2,8 @@ export * from './auth-bodies.interfaces';
 export * from './countries.interface';
 export * from './http-res.interface';
 export * from './user.interface';
+export * from './mentorship.interface';
+export * from './report.interface';
+export * from './conversation.interface';
+export * from './payment.interface';
+export * from './mentor-application.interface';

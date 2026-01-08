@@ -1,0 +1,92 @@
+<div class="report-view-container">
+  <button class="btn btn-secondary back-btn" (click)="router.navigate(['/dashboard/reports'])">
+    ← Back to Reports
+  </button>
+
+  <div *ngIf="isLoading" class="loading">
+    <p>Loading report...</p>
+  </div>
+
+  <div *ngIf="!isLoading && report" class="report-card">
+    <div class="header">
+      <h2>Report Details</h2>
+      <span class="status-badge">{{ report.admin_review_status }}</span>
+    </div>
+
+    <div class="report-content">
+      <div class="section">
+        <h3>Period</h3>
+        <p>{{ report.period_start_date | date }} - {{ report.period_end_date | date }}</p>
+      </div>
+
+      <div class="section">
+        <h3>Strength Points</h3>
+        <ul>
+          <li *ngFor="let point of report.strength_points">{{ point }}</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h3>Weak Points</h3>
+        <ul>
+          <li *ngFor="let point of report.weak_points">{{ point }}</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h3>Skills Used</h3>
+        <div class="skills">
+          <span *ngFor="let skill of report.skills_used" class="skill-tag">{{ skill }}</span>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3>Action Items</h3>
+        <ul>
+          <li *ngFor="let item of report.action_items">
+            {{ item.item }} <span class="priority priority-{{ item.priority }}">({{ item.priority }})</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h3>Rates</h3>
+        <div class="rates">
+          <div class="rate-item">
+            <label>Commitment Rate:</label>
+            <span>{{ report.commitment_rate }}%</span>
+          </div>
+          <div class="rate-item">
+            <label>Consistency Rate:</label>
+            <span>{{ report.consistency_rate }}%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="section" *ngIf="report.mentee_comments">
+        <h3>Your Comments</h3>
+        <p class="comment-text">{{ report.mentee_comments }}</p>
+      </div>
+
+      <div class="section" *ngIf="canAddComment()">
+        <h3>Add Comment</h3>
+        <form [formGroup]="commentForm" (ngSubmit)="onSubmitComment()">
+          <textarea
+            formControlName="comment"
+            rows="4"
+            placeholder="Add your comments on this report (this cannot be edited later)"
+          ></textarea>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="commentForm.invalid || isSubmittingComment"
+          >
+            <span *ngIf="!isSubmittingComment">Submit Comment</span>
+            <span *ngIf="isSubmittingComment">Submitting...</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+

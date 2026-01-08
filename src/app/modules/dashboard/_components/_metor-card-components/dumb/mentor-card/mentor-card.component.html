@@ -2,7 +2,17 @@
   <div class="left d-flex">
     <div class="profile-photo">
       <div class="photo-container">
-        <img [src]="mentor?.profilePicture" />
+        <img
+          *ngIf="mentor?.profilePicture && !imageError; else placeholderPhoto"
+          [src]="mentor?.profilePicture"
+          [alt]="mentor?.name + ' profile picture'"
+          (error)="onImageError($event)"
+        />
+        <ng-template #placeholderPhoto>
+          <div class="placeholder-photo">
+            <i class="pi pi-user" style="font-size: 8rem; color: var(--gray_4000);"></i>
+          </div>
+        </ng-template>
       </div>
     </div>
 

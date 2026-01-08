@@ -1,0 +1,104 @@
+<div class="mentorship-details-container">
+  <button class="btn btn-secondary back-btn" (click)="router.navigate(['/dashboard/mentorships'])">
+    ← Back to List
+  </button>
+
+  <div *ngIf="isLoading" class="loading">
+    <p>Loading mentorship details...</p>
+  </div>
+
+  <div *ngIf="!isLoading && mentorship" class="details-card">
+    <div class="header">
+      <h2>Mentorship Details</h2>
+      <span class="status-badge" [ngClass]="'status-' + mentorship.status">
+        {{ mentorship.status }}
+      </span>
+    </div>
+
+    <div class="details-grid">
+      <div class="detail-item">
+        <label>Mentorship ID</label>
+        <p>{{ mentorship.id }}</p>
+      </div>
+
+      <div class="detail-item">
+        <label>Status</label>
+        <p>{{ mentorship.status }}</p>
+      </div>
+
+      <div class="detail-item">
+        <label>Payment Amount</label>
+        <p>{{ mentorship.payment_amount }} {{ mentorship.payment_currency }}</p>
+      </div>
+
+      <div class="detail-item">
+        <label>Payment Status</label>
+        <p>{{ mentorship.payment_status }}</p>
+      </div>
+
+      <div class="detail-item" *ngIf="mentorship.started_at">
+        <label>Started At</label>
+        <p>{{ mentorship.started_at | date: 'short' }}</p>
+      </div>
+
+      <div class="detail-item" *ngIf="mentorship.ended_at">
+        <label>Ended At</label>
+        <p>{{ mentorship.ended_at | date: 'short' }}</p>
+      </div>
+
+      <div class="detail-item" *ngIf="mentorship.termination_reason">
+        <label>Termination Reason</label>
+        <p>{{ mentorship.termination_reason }}</p>
+      </div>
+    </div>
+
+    <div class="actions" *ngIf="canAccept() || canReject()">
+      <button
+        *ngIf="canAccept()"
+        class="btn btn-primary"
+        (click)="acceptRequest()"
+        [disabled]="isProcessing"
+      >
+        Accept Request
+      </button>
+
+      <button
+        *ngIf="canReject()"
+        class="btn btn-danger"
+        (click)="showRejectionForm = !showRejectionForm"
+        [disabled]="isProcessing"
+      >
+        Reject Request
+      </button>
+    </div>
+
+    <div *ngIf="showRejectionForm" class="rejection-form">
+      <label for="rejectionReason">Rejection Reason *</label>
+      <textarea
+        id="rejectionReason"
+        [(ngModel)]="rejectionReason"
+        rows="3"
+        placeholder="Please provide a reason for rejection"
+      ></textarea>
+      <div class="form-actions">
+        <button class="btn btn-secondary" (click)="showRejectionForm = false">
+          Cancel
+        </button>
+        <button
+          class="btn btn-danger"
+          (click)="rejectRequest()"
+          [disabled]="!rejectionReason.trim() || isProcessing"
+        >
+          Confirm Rejection
+        </button>
+      </div>
+    </div>
+
+    <div class="actions" *ngIf="mentorship.status === MentorshipStatusEnum.ACTIVE">
+      <button class="btn btn-primary" (click)="goToChat()">
+        Open Chat
+      </button>
+    </div>
+  </div>
+</div>
+

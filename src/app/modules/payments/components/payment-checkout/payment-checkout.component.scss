@@ -1,0 +1,12 @@
+.payment-checkout-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  .loading {
+    text-align: center;
+    color: #666;
+  }
+}
+

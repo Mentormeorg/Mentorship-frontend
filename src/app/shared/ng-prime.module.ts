@@ -39,6 +39,7 @@ import { PanelModule } from 'primeng/panel';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { PasswordModule } from 'primeng/password';
 import { ProgressBarModule } from 'primeng/progressbar';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { RatingModule } from 'primeng/rating';
 import { RippleModule } from 'primeng/ripple';
@@ -102,6 +103,7 @@ import { TreeTableModule } from 'primeng/treetable';
     PanelMenuModule,
     PasswordModule,
     ProgressBarModule,
+    ProgressSpinnerModule,
     RadioButtonModule,
     RatingModule,
     RippleModule,

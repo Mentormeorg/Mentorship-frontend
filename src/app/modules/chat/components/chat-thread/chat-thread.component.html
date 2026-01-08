@@ -1,0 +1,47 @@
+<div class="chat-thread-container">
+  <div class="chat-header">
+    <button class="btn btn-secondary back-btn" (click)="router.navigate(['/dashboard/chat'])">
+      ← Back
+    </button>
+    <h3>Chat</h3>
+  </div>
+
+  <div *ngIf="isLoading" class="loading">
+    <p>Loading messages...</p>
+  </div>
+
+  <div *ngIf="!isLoading" class="chat-content">
+    <div class="messages-container" #messagesContainer>
+      <div *ngIf="messages.length === 0" class="empty-messages">
+        <p>No messages yet. Start the conversation!</p>
+      </div>
+
+      <div
+        *ngFor="let message of messages"
+        class="message"
+        [ngClass]="{ 'my-message': isMyMessage(message), 'other-message': !isMyMessage(message) }"
+      >
+        <div class="message-content">
+          <div *ngIf="message.message_type === 'file'" class="file-message">
+            <a [href]="message.file_url" target="_blank" *ngIf="message.file_url">
+              📎 {{ message.file_name }}
+            </a>
+          </div>
+          <div *ngIf="message.message_type === 'text'" class="text-message">
+            {{ message.content }}
+          </div>
+          <div class="message-time">
+            {{ message.created_at | date: 'short' }}
+            <span *ngIf="isMyMessage(message) && message.is_read" class="read-indicator">✓✓</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <app-message-composer
+      [conversationId]="conversationId!"
+      (messageSent)="onMessageSent()"
+    ></app-message-composer>
+  </div>
+</div>
+

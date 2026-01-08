@@ -10,7 +10,7 @@ import {
   IResetPasswordBody,
 } from '@core/interfaces/auth-bodies.interfaces';
 import { IUser } from '@core/interfaces/user.interface';
-import { IStepsData } from '@modules/registration-steps/models/interfaces/steps.interface';
+import { IStepsData, IStep2 } from '@modules/registration-steps/models/interfaces/steps.interface';
 import {
   clearStorage,
   getStorageItem,
@@ -18,8 +18,8 @@ import {
 } from '@core/utils/storage.utils';
 import { environment } from '@environments/environment';
 import { SupabaseService } from './supabase.service';
-import { BehaviorSubject, from, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { BehaviorSubject, from, of, Observable } from 'rxjs';
+import { catchError, map, switchMap } from 'rxjs/operators';
 import { PATHS } from '@core/paths';
 import { ErrorHandlingService } from './error-handling.service';
 import { AUTH_MESSAGES } from '@core/constants/auth-messages.constants';
@@ -59,15 +59,21 @@ export class AuthenticationService implements OnDestroy {
             response.data.user,
             response.data.session
           );
+          // Set user data first to ensure state is updated
           this.setUserData(mappedUser);
           this.setToken(response.data.session.access_token);
+
           if (mappedUser) {
             this._errorHandlingService.showSuccess(
               AUTH_MESSAGES.SUCCESS.LOGIN,
               AUTH_MESSAGES.TITLES.LOGIN_SUCCESS
             );
-            const nextRoute = this.getPostAuthenticationPath(mappedUser);
-            this._router.navigate([nextRoute]);
+
+            // Use setTimeout to ensure state is fully updated before navigation
+            setTimeout(() => {
+              const nextRoute = this.getPostAuthenticationPath(mappedUser);
+              this._router.navigate([nextRoute]);
+            }, 0);
           }
           return mappedUser;
         }
@@ -133,7 +139,9 @@ export class AuthenticationService implements OnDestroy {
             AUTH_MESSAGES.SUCCESS.REGISTRATION,
             AUTH_MESSAGES.TITLES.REGISTRATION_SUCCESS
           );
-          this._router.navigate([PATHS.AUTH__CHECK_EMAIL]);
+          this._router.navigate([PATHS.AUTH__CHECK_EMAIL], {
+            queryParams: { email: user.email },
+          });
         }
         return response.data;
       }),
@@ -163,7 +171,9 @@ export class AuthenticationService implements OnDestroy {
             AUTH_MESSAGES.SUCCESS.PASSWORD_RESET_EMAIL,
             AUTH_MESSAGES.TITLES.EMAIL_SENT
           );
-          this._router.navigate([PATHS.AUTH__CHECK_EMAIL]);
+          this._router.navigate([PATHS.AUTH__CHECK_EMAIL], {
+            queryParams: { email: forgetData.email },
+          });
         }
         return response.data;
       }),
@@ -195,7 +205,10 @@ export class AuthenticationService implements OnDestroy {
             AUTH_MESSAGES.SUCCESS.PASSWORD_RESET,
             AUTH_MESSAGES.TITLES.PASSWORD_RESET_SUCCESS
           );
-          this._router.navigate([PATHS.AUTH__CHECK_EMAIL]);
+          const userEmail = this.userData.value?.email || response.data.user?.email || '';
+          this._router.navigate([PATHS.AUTH__CHECK_EMAIL], {
+            queryParams: userEmail ? { email: userEmail } : {},
+          });
         }
         return response.data;
       }),
@@ -260,7 +273,11 @@ export class AuthenticationService implements OnDestroy {
       this._supabase.client.auth.signInWithOAuth({
         provider: provider,
         options: {
-          redirectTo: `${window.location.origin}/${PATHS.DISCOVER}`,
+          redirectTo: `${window.location.origin}/auth/callback`,
+          queryParams: {
+            access_type: 'offline',
+            prompt: 'consent',
+          },
         },
       })
     ).pipe(
@@ -303,9 +320,14 @@ export class AuthenticationService implements OnDestroy {
     if (!targetUser) {
       return PATHS.AUTH__SIGN_IN;
     }
-    return targetUser.hasCompletedRegistration
-      ? PATHS.DISCOVER
-      : PATHS.AUTH__REG_STEPS__ROLE_INFO;
+
+    // Check if user has completed registration
+    // Redirect to registration steps if not completed, otherwise to discover page
+    if (!targetUser.hasCompletedRegistration) {
+      return PATHS.AUTH__REG_STEPS__ROLE_INFO;
+    }
+
+    return PATHS.DISCOVER;
   }
   //* Map Supabase user to IUser [private]
   private mapSupabaseUserToIUser(
@@ -313,6 +335,7 @@ export class AuthenticationService implements OnDestroy {
       id: string;
       email?: string;
       user_metadata?: Record<string, unknown>;
+      app_metadata?: Record<string, unknown>;
       email_confirmed_at?: string | null;
       phone?: string;
       created_at?: string;
@@ -320,15 +343,25 @@ export class AuthenticationService implements OnDestroy {
     session: { access_token: string; refresh_token?: string | null },
     isOAuth = false
   ): IUser {
+    // For OAuth users, extract name from user_metadata (Google/GitHub provide full_name or name)
+    const oAuthName = isOAuth
+      ? (supabaseUser.user_metadata?.['full_name'] as string) ||
+        (supabaseUser.user_metadata?.['name'] as string) ||
+        (supabaseUser.user_metadata?.['user_name'] as string) ||
+        (supabaseUser.user_metadata?.['preferred_username'] as string)
+      : null;
+
     return {
       id: supabaseUser.id, // Use string UUID directly, no parsing
       email: supabaseUser.email || '',
       fullName:
+        oAuthName ||
         (supabaseUser.user_metadata?.['full_name'] as string) ||
+        (supabaseUser.user_metadata?.['name'] as string) ||
         supabaseUser.email?.split('@')[0] ||
         '',
       isOAuth,
-      isVerified: !!supabaseUser.email_confirmed_at,
+      isVerified: !!supabaseUser.email_confirmed_at || isOAuth, // OAuth users are verified by default
       role: ((supabaseUser.user_metadata?.['role'] as string) ||
         RolesEnum.MENTEE) as RolesEnum,
       phoneNumber: supabaseUser.phone || '',
@@ -340,6 +373,55 @@ export class AuthenticationService implements OnDestroy {
       ),
       registrationData: supabaseUser.user_metadata?.['registrationData'] as IStepsData['stepsData'][] | undefined,
     };
+  }
+  //* Sync OAuth user profile to profiles_table [private]
+  private syncOAuthUserProfile(user: {
+    id: string;
+    email?: string;
+    user_metadata?: Record<string, unknown>;
+    app_metadata?: Record<string, unknown>;
+    email_confirmed_at?: string | null;
+    phone?: string;
+    created_at?: string;
+  }): Observable<unknown> {
+    // Extract OAuth user data
+    const fullName = (user.user_metadata?.['full_name'] as string) ||
+      (user.user_metadata?.['name'] as string) ||
+      (user.user_metadata?.['user_name'] as string) ||
+      (user.user_metadata?.['preferred_username'] as string) ||
+      user.email?.split('@')[0] ||
+      '';
+
+    const avatarUrl = (user.user_metadata?.['avatar_url'] as string) ||
+      (user.user_metadata?.['picture'] as string) ||
+      (user.user_metadata?.['avatar_url'] as string) ||
+      '';
+
+    // Upsert profile to profiles_table
+    return from(
+      this._supabase.client
+        .from('profiles_table')
+        .upsert({
+          id: user.id,
+          email: user.email || '',
+          full_name: fullName,
+          avatar_url: avatarUrl,
+          phone_number: user.phone || null,
+          role: (user.user_metadata?.['role'] as string) || 'MENTEE',
+          registration_completed: Boolean(
+            user.user_metadata?.['registrationCompleted']
+          ),
+          created_at: user.created_at || new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+        }, {
+          onConflict: 'id'
+        })
+    ).pipe(
+      catchError(() => {
+        // Error logged silently - don't block authentication if profile sync fails
+        return of(null);
+      })
+    );
   }
   //* Mark user registration as complete (mentor onboarding)
   public markRegistrationComplete(registrationData?: IStepsData['stepsData'][]) {
@@ -353,11 +435,24 @@ export class AuthenticationService implements OnDestroy {
       return of(false);
     }
 
+    // Sanitize phone number in registrationData before saving (remove hyphens, spaces, parentheses)
+    const sanitizedRegistrationData: IStepsData['stepsData'][] | undefined = registrationData?.map((step, index) => {
+      if (index === 1 && step && typeof step === 'object' && 'phoneNumber' in step) {
+        // Step 2 contains phoneNumber - sanitize it
+        const step2 = step as IStep2;
+        return {
+          ...step2,
+          phoneNumber: step2.phoneNumber?.replace(/[-\s()]/g, '') || '',
+        } as IStep2;
+      }
+      return step;
+    }) as IStepsData['stepsData'][];
+
     return from(
       this._supabase.client.auth.updateUser({
         data: {
           registrationCompleted: true,
-          registrationData: registrationData || null,
+          registrationData: sanitizedRegistrationData || null,
         },
       })
     ).pipe(
@@ -376,13 +471,13 @@ export class AuthenticationService implements OnDestroy {
           this.setUserData({
             ...updatedUser,
             hasCompletedRegistration: true,
-            registrationData: registrationData || undefined,
+            registrationData: sanitizedRegistrationData || undefined,
           });
         } else {
           this.setUserData({
             ...currentUser,
             hasCompletedRegistration: true,
-            registrationData: registrationData || undefined,
+            registrationData: sanitizedRegistrationData || undefined,
           });
         }
         this._errorHandlingService.showSuccess(
@@ -392,6 +487,22 @@ export class AuthenticationService implements OnDestroy {
         return true;
       }),
       catchError(error => {
+        // Handle user_not_found error - user was deleted or token is invalid
+        if (error?.message?.includes('user_not_found') || error?.code === 'user_not_found') {
+          // Clear invalid session and logout
+          this.setUserData(null);
+          clearStorage();
+          this.isAuthenticated.next(false);
+          this._supabase.client.auth.signOut().catch(() => {
+            // Ignore signOut errors
+          });
+          this._errorHandlingService.handleError(
+            'Your session has expired. Please sign in again.',
+            'Session Expired'
+          );
+          this._router.navigate([PATHS.AUTH__SIGN_IN]);
+          return of(false);
+        }
         this._errorHandlingService.handleError(
           error,
           AUTH_MESSAGES.ERROR.REGISTRATION_COMPLETE_FAILED
@@ -421,12 +532,22 @@ export class AuthenticationService implements OnDestroy {
           this.validateResponse(response);
           const session = response.data.session;
           if (session) {
+            // Detect if this is an OAuth user
+            const isOAuth = !!(session.user.app_metadata?.provider &&
+              session.user.app_metadata.provider !== 'email');
+
             const mappedUser = this.mapSupabaseUserToIUser(
               session.user,
-              session
+              session,
+              isOAuth
             );
             this.setUserData(mappedUser);
             this.setToken(session.access_token);
+
+            // Sync OAuth user profile if needed
+            if (isOAuth) {
+              this.syncOAuthUserProfile(session.user).subscribe();
+            }
           } else if (!storedUser) {
             // No session and no stored user - clear state
             this.setUserData(null);
@@ -434,6 +555,17 @@ export class AuthenticationService implements OnDestroy {
           return session;
         }),
         catchError(error => {
+          // Handle user_not_found error - user was deleted or token is invalid
+          if (error?.message?.includes('user_not_found') || error?.code === 'user_not_found') {
+            // Clear invalid session and logout
+            this.setUserData(null);
+            clearStorage();
+            this.isAuthenticated.next(false);
+            this._supabase.client.auth.signOut().catch(() => {
+              // Ignore signOut errors
+            });
+            return of(null);
+          }
           // Silently handle lock errors - they're often non-critical
           if (error?.name !== 'NavigatorLockAcquireTimeoutError') {
             this._errorHandlingService.handleError(
@@ -467,36 +599,101 @@ export class AuthenticationService implements OnDestroy {
         break;
       case 'SIGNED_IN':
         if (session) {
-          const mappedUser = this.mapSupabaseUserToIUser(
-            session.user,
-            session
-          );
-          this.setUserData(mappedUser);
-          this.setToken(session.access_token);
+          try {
+            // Detect if this is an OAuth user by checking app_metadata or user_metadata
+            const isOAuth = !!(session.user.app_metadata?.provider &&
+              session.user.app_metadata.provider !== 'email');
 
-          // Navigate to appropriate page after OAuth sign-in
-          const nextRoute =
-            this.getPostAuthenticationPath(mappedUser);
-          this._router.navigate([nextRoute]);
+            const mappedUser = this.mapSupabaseUserToIUser(
+              session.user,
+              session,
+              isOAuth
+            );
+            this.setUserData(mappedUser);
+            this.setToken(session.access_token);
+
+            // Sync OAuth user profile to profiles_table if needed
+            if (isOAuth) {
+              this.syncOAuthUserProfile(session.user).subscribe();
+            }
+
+            // Navigate to appropriate page after OAuth sign-in
+            // Use setTimeout to ensure state is fully updated before navigation
+            setTimeout(() => {
+              const nextRoute =
+                this.getPostAuthenticationPath(mappedUser);
+              this._router.navigate([nextRoute]);
+            }, 0);
+          } catch (error) {
+            // If user mapping fails (e.g., user_not_found), logout
+            if (error && typeof error === 'object' && ('message' in error || 'code' in error)) {
+              const errorObj = error as { message?: string; code?: string };
+              if (errorObj.message?.includes('user_not_found') || errorObj.code === 'user_not_found') {
+                this.setUserData(null);
+                clearStorage();
+                this.isAuthenticated.next(false);
+                this._supabase.client.auth.signOut().catch(() => {
+                  // Ignore signOut errors
+                });
+                this._errorHandlingService.handleError(
+                  'Your account was not found. Please sign up again.',
+                  'Account Not Found'
+                );
+                this._router.navigate([PATHS.AUTH__SIGN_IN]);
+              }
+            }
+          }
         }
         break;
       case 'TOKEN_REFRESHED':
         if (session) {
-          const mappedUser = this.mapSupabaseUserToIUser(
-            session.user,
-            session
-          );
-          this.setUserData(mappedUser);
-          this.setToken(session.access_token);
+          try {
+            const mappedUser = this.mapSupabaseUserToIUser(
+              session.user,
+              session
+            );
+            this.setUserData(mappedUser);
+            this.setToken(session.access_token);
+          } catch (error) {
+            // If user mapping fails (e.g., user_not_found), logout
+            if (error && typeof error === 'object' && ('message' in error || 'code' in error)) {
+              const errorObj = error as { message?: string; code?: string };
+              if (errorObj.message?.includes('user_not_found') || errorObj.code === 'user_not_found') {
+                this.setUserData(null);
+                clearStorage();
+                this.isAuthenticated.next(false);
+                this._supabase.client.auth.signOut().catch(() => {
+                  // Ignore signOut errors
+                });
+                this._router.navigate([PATHS.AUTH__SIGN_IN]);
+              }
+            }
+          }
         }
         break;
       case 'USER_UPDATED':
         if (session) {
-          const mappedUser = this.mapSupabaseUserToIUser(
-            session.user,
-            session
-          );
-          this.setUserData(mappedUser);
+          try {
+            const mappedUser = this.mapSupabaseUserToIUser(
+              session.user,
+              session
+            );
+            this.setUserData(mappedUser);
+          } catch (error) {
+            // If user mapping fails (e.g., user_not_found), logout
+            if (error && typeof error === 'object' && ('message' in error || 'code' in error)) {
+              const errorObj = error as { message?: string; code?: string };
+              if (errorObj.message?.includes('user_not_found') || errorObj.code === 'user_not_found') {
+                this.setUserData(null);
+                clearStorage();
+                this.isAuthenticated.next(false);
+                this._supabase.client.auth.signOut().catch(() => {
+                  // Ignore signOut errors
+                });
+                this._router.navigate([PATHS.AUTH__SIGN_IN]);
+              }
+            }
+          }
         }
         break;
     }

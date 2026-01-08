@@ -1,0 +1,58 @@
+<div class="mentorship-list-container">
+  <div class="header">
+    <h2>My Mentorships</h2>
+    <div class="filter-group">
+      <label for="statusFilter">Filter by Status:</label>
+      <select
+        id="statusFilter"
+        [(ngModel)]="selectedStatus"
+        (change)="onStatusChange()"
+      >
+        <option *ngFor="let option of statusOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <div *ngIf="isLoading" class="loading">
+    <p>Loading mentorships...</p>
+  </div>
+
+  <div *ngIf="!isLoading && filteredMentorships.length === 0" class="empty-state">
+    <p>No mentorships found.</p>
+    <button class="btn btn-primary" (click)="router.navigate(['/dashboard/discover'])">
+      Browse Mentors
+    </button>
+  </div>
+
+  <div *ngIf="!isLoading && filteredMentorships.length > 0" class="mentorships-grid">
+    <div
+      *ngFor="let mentorship of filteredMentorships"
+      class="mentorship-card"
+      (click)="viewDetails(mentorship.id)"
+    >
+      <div class="card-header">
+        <span class="status-badge" [ngClass]="getStatusClass(mentorship.status)">
+          {{ getStatusLabel(mentorship.status) }}
+        </span>
+        <span class="amount">{{ mentorship.payment_amount }} {{ mentorship.payment_currency }}</span>
+      </div>
+      <div class="card-body">
+        <p class="mentorship-id">ID: {{ mentorship.id.substring(0, 8) }}...</p>
+        <p class="dates">
+          <span *ngIf="mentorship.started_at">
+            Started: {{ mentorship.started_at | date: 'short' }}
+          </span>
+          <span *ngIf="!mentorship.started_at">
+            Created: {{ mentorship.created_at | date: 'short' }}
+          </span>
+        </p>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-sm btn-primary">View Details</button>
+      </div>
+    </div>
+  </div>
+</div>
+

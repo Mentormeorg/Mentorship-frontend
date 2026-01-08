@@ -1,0 +1,60 @@
+<div class="admin-container">
+  <h2>Mentor Applications Review</h2>
+
+  <div *ngIf="isLoading" class="loading">
+    <p>Loading applications...</p>
+  </div>
+
+  <div *ngIf="!isLoading && applications.length === 0" class="empty-state">
+    <p>No pending applications.</p>
+  </div>
+
+  <div *ngIf="!isLoading && applications.length > 0" class="applications-list">
+    <div *ngFor="let application of applications" class="application-card">
+      <div class="card-header">
+        <h3>Application #{{ application.id.substring(0, 8) }}</h3>
+        <span class="status-badge">{{ application.status }}</span>
+      </div>
+      <div class="card-body">
+        <pre>{{ application.application_data | json }}</pre>
+      </div>
+      <div class="card-actions">
+        <button
+          class="btn btn-success"
+          (click)="approveApplication(application.id)"
+        >
+          Approve
+        </button>
+        <button
+          class="btn btn-danger"
+          (click)="openRejectionForm(application)"
+        >
+          Reject
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="showRejectionForm" class="rejection-modal">
+    <div class="modal-content">
+      <h3>Reject Application</h3>
+      <textarea
+        [(ngModel)]="rejectionReason"
+        rows="4"
+        placeholder="Enter rejection reason"
+      ></textarea>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" (click)="showRejectionForm = false">
+          Cancel
+        </button>
+        <button
+          class="btn btn-danger"
+          (click)="rejectApplication(selectedApplication!.id)"
+        >
+          Confirm Rejection
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+

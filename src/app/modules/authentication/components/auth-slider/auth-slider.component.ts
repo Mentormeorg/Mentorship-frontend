@@ -13,17 +13,17 @@ export class AuthSliderComponent {
     {
       imagePath: 'assets/images/slide1.png',
       qoute:
-        '“Lorem ipsum dolor sit amet consectetur. Nec aenean pellentesque est porta gravida aliquam sed.”',
+        '"MentorChief transformed my career journey. Having direct access to experienced mentors helped me navigate challenges and accelerate my growth as a developer."',
     },
     {
       imagePath: 'assets/images/slide1.png',
       qoute:
-        '“Lorem ipsum dolor sit amet consectetur. Nec aenean pellentesque est porta gravida aliquam sed.”',
+        '"The real-time mentorship experience is incredible. I can get instant guidance on complex problems and receive personalized career advice whenever I need it."',
     },
     {
       imagePath: 'assets/images/slide1.png',
       qoute:
-        '“Lorem ipsum dolor sit amet consectetur. Nec aenean pellentesque est porta gravida aliquam sed.”',
+        '"As a mentor, I love how MentorChief connects me with passionate learners. It\'s rewarding to share knowledge and see mentees grow in their careers."',
     },
   ];
 

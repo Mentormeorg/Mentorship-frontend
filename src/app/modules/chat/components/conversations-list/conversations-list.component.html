@@ -1,0 +1,31 @@
+<div class="conversations-list-container">
+  <div class="header">
+    <h2>Conversations</h2>
+  </div>
+
+  <div *ngIf="isLoading" class="loading">
+    <p>Loading conversations...</p>
+  </div>
+
+  <div *ngIf="!isLoading && conversations.length === 0" class="empty-state">
+    <p>No conversations yet. Start a mentorship to begin chatting!</p>
+  </div>
+
+  <div *ngIf="!isLoading && conversations.length > 0" class="conversations">
+    <div
+      *ngFor="let conversation of conversations"
+      class="conversation-item"
+      (click)="openConversation(conversation.id)"
+    >
+      <div class="conversation-info">
+        <h3>Mentorship: {{ conversation.mentorship_id.substring(0, 8) }}...</h3>
+        <p *ngIf="conversation.last_message_at">
+          Last message: {{ conversation.last_message_at | date: 'short' }}
+        </p>
+        <p *ngIf="!conversation.last_message_at">No messages yet</p>
+      </div>
+      <div class="conversation-arrow">→</div>
+    </div>
+  </div>
+</div>
+

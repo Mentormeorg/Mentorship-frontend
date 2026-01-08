@@ -1,17 +1,19 @@
 <div [formGroup]="experincesForm">
   <div class="mb-6">
-    <div class="p-inputgroup">
-      <span class="p-inputgroup-addon">WWW</span>
-      <input
-        type="text"
-        pInputText
-        class="portofolio-input"
-        placeholder="Add to your portofolio"
-        formControlName="portofolio"
+    <span class="p-float-label">
+      <p-inputNumber
+        inputId="totalYearsOfExperience"
+        formControlName="totalYearsOfExperience"
+        id="totalYearsOfExperience"
+        name="totalYearsOfExperience"
+        class="w-full"
+        styleClass="w-full"
+        [max]="50"
       />
-    </div>
-    <small class="p-error d-block mt-2" *ngIf="getErrorMessage('portofolio')">
-      {{ getErrorMessage('portofolio') }}
+      <label htmlFor="totalYearsOfExperience">Total Years of Experience</label>
+    </span>
+    <small class="p-error d-block mt-2" *ngIf="getErrorMessage('totalYearsOfExperience')">
+      {{ getErrorMessage('totalYearsOfExperience') }}
     </small>
   </div>
   <div formArrayName="experinces">
@@ -33,12 +35,12 @@
             pInputText
             id="jobTitle"
             name="jobTitle"
-            formControlName="jobtitle"
+            formControlName="jobTitle"
           />
           <label htmlFor="jobTitle">Job Title</label>
         </span>
-        <small class="p-error d-block mt-2" *ngIf="getExperienceErrorMessage(i, 'jobtitle')">
-          {{ getExperienceErrorMessage(i, 'jobtitle') }}
+        <small class="p-error d-block mt-2" *ngIf="getExperienceErrorMessage(i, 'jobTitle')">
+          {{ getExperienceErrorMessage(i, 'jobTitle') }}
         </small>
       </div>
       <div class="mb-6">
@@ -46,31 +48,44 @@
           <input
             class="w-full"
             pInputText
-            formControlName="workedat"
+            formControlName="workedAt"
             id="workAt"
             name="workAt"
           />
           <label htmlFor="workAt">Worked at</label>
         </span>
-        <small class="p-error d-block mt-2" *ngIf="getExperienceErrorMessage(i, 'workedat')">
-          {{ getExperienceErrorMessage(i, 'workedat') }}
+        <small class="p-error d-block mt-2" *ngIf="getExperienceErrorMessage(i, 'workedAt')">
+          {{ getExperienceErrorMessage(i, 'workedAt') }}
         </small>
       </div>
       <div class="mb-6">
         <span class="p-float-label">
           <p-inputNumber
             inputId="integeronly"
-            formControlName="experienceyears"
-            id="experienceyears"
-            name="experienceyears"
+            formControlName="experienceYears"
+            id="experienceYears"
+            name="experienceYears"
             class="w-full"
             styleClass="w-full"
             [max]="50"
           />
-          <label htmlFor="experienceyears">Experince years</label>
+          <label htmlFor="experienceYears">Experince years</label>
         </span>
-        <small class="p-error d-block mt-2" *ngIf="getExperienceErrorMessage(i, 'experienceyears')">
-          {{ getExperienceErrorMessage(i, 'experienceyears') }}
+        <small class="p-error d-block mt-2" *ngIf="getExperienceErrorMessage(i, 'experienceYears')">
+          {{ getExperienceErrorMessage(i, 'experienceYears') }}
+        </small>
+      </div>
+      <div class="mb-6">
+        <p-dropdown
+          [options]="seniorityLevels"
+          formControlName="seniorityLevel"
+          placeholder="Select seniority level"
+          styleClass="w-full"
+          optionLabel="label"
+          optionValue="value"
+        ></p-dropdown>
+        <small class="p-error d-block mt-2" *ngIf="getExperienceErrorMessage(i, 'seniorityLevel')">
+          {{ getExperienceErrorMessage(i, 'seniorityLevel') }}
         </small>
       </div>
     </div>

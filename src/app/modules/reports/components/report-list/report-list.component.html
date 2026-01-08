@@ -1,0 +1,35 @@
+<div class="report-list-container">
+  <div class="header">
+    <h2>Reports</h2>
+  </div>
+
+  <div *ngIf="isLoading" class="loading">
+    <p>Loading reports...</p>
+  </div>
+
+  <div *ngIf="!isLoading && reports.length === 0" class="empty-state">
+    <p>No reports found.</p>
+  </div>
+
+  <div *ngIf="!isLoading && reports.length > 0" class="reports-grid">
+    <div
+      *ngFor="let report of reports"
+      class="report-card"
+      (click)="viewReport(report.id)"
+    >
+      <div class="card-header">
+        <span class="status-badge">{{ report.admin_review_status }}</span>
+        <span class="date">{{ report.created_at | date: 'short' }}</span>
+      </div>
+      <div class="card-body">
+        <p class="period">
+          {{ report.period_start_date | date }} - {{ report.period_end_date | date }}
+        </p>
+        <p class="rates">
+          Commitment: {{ report.commitment_rate }}% | Consistency: {{ report.consistency_rate }}%
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+

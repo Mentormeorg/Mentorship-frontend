@@ -9,6 +9,7 @@ import {
   SignUpComponent,
 } from './components';
 import { CheckEmailComponent } from './components/check-email/check-email.component';
+import { OAuthCallbackComponent } from './components/oauth-callback/oauth-callback.component';
 import { authGuard, guestGuard, registrationAccessGuard } from '@core/guards';
 
 const routes: Routes = [
@@ -52,6 +53,10 @@ const routes: Routes = [
         path: 'check-email',
         component: CheckEmailComponent,
         canActivate: [guestGuard],
+      },
+      {
+        path: 'callback',
+        component: OAuthCallbackComponent,
       },
       {
         path: 'registeration-steps',

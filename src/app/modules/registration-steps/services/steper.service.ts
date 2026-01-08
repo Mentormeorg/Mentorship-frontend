@@ -37,7 +37,7 @@ export class SteperService {
       intro: {
         header: 'Sign up',
         description:
-          'Lorem ipsum dolor sit amet consectetur. Nec aenean pellentesque est porta gravida aliquam sed.',
+          'Choose your role to get started. Are you looking for mentorship or ready to share your expertise?',
       },
     },
     {
@@ -53,7 +53,7 @@ export class SteperService {
       intro: {
         header: 'Career information ',
         description:
-          'Lorem ipsum dolor sit amet consectetur. Nec aenean pellentesque est porta gravida aliquam sed.',
+          'Tell us about your professional background. Share your experience, expertise, and what makes you unique.',
       },
     },
     {
@@ -62,7 +62,7 @@ export class SteperService {
       intro: {
         header: 'My biography',
         description:
-          'Lorem ipsum dolor sit amet consectetur. Nec aenean pellentesque est porta gravida aliquam sed.',
+          'Share your story and journey. Help others understand your background, achievements, and what drives you.',
       },
     },
   ];
@@ -72,7 +72,7 @@ export class SteperService {
     intro: {
       header: 'Mentoring preference ',
       description:
-        'Lorem ipsum dolor sit amet consectetur. Nec aenean pellentesque est porta gravida aliquam sed.',
+        'Set your mentoring preferences. Define your availability, capacity, and pricing to help mentees find you.',
     },
   };
 

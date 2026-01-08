@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { flagPipeModule } from 'flag-pipe';
 
 import { FooterComponent } from './components/main-layout/footer/footer.component';
@@ -17,6 +18,7 @@ import { NgPrimeModule } from './ng-prime.module';
   ],
   imports: [
     CommonModule,
+    RouterModule,
     NgPrimeModule,
     flagPipeModule.forRoot({
       config: {

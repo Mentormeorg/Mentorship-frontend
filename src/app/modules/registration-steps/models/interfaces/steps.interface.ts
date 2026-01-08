@@ -1,4 +1,4 @@
-import { GenderEnum, RolesEnum } from '@core/enums';
+import { GenderEnum, RolesEnum, SeniorityEnum } from '@core/enums';
 import { LocationEnum } from '@core/enums/location.enum';
 
 export interface IStepsData {
@@ -12,23 +12,22 @@ export interface IStep1 {
 export interface IStep2 {
   fullName: string;
   gender: GenderEnum;
-  location: {
-    name: LocationEnum;
-    code: LocationEnum;
-  };
+  location: LocationEnum;
   phoneNumber: string;
   password?: string;
 }
 
 export interface IStep3 {
   portfolio: string | null;
+  totalYearsOfExperience: number | null;
   experinces: IExperince[];
 }
 
 export interface IExperince {
-  jobtitle: string | null | undefined;
-  workedat: string | null;
-  experienceyears: number | null;
+  jobTitle: string | null | undefined;
+  workedAt: string | null;
+  experienceYears: number | null;
+  seniorityLevel: SeniorityEnum | null;
 }
 
 export interface IStep4 {

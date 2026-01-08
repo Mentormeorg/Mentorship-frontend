@@ -1,29 +1,90 @@
-<nav>
+<nav class="navbar" role="navigation" aria-label="Main navigation">
   <div class="layout-container">
-    <div
-      class="nav-content d-flex justify-content-between align-items-center"
-    >
-      <div class="nav-left">
-        <div class="nav-logo">
-          <a>
-            <img src="assets/images/logo.png" alt="logo" />
-          </a>
-        </div>
+    <div class="navbar__content">
+      <!-- Logo Section -->
+      <div class="navbar__logo">
+        <a
+          [routerLink]="['/' + PATHS.HOME]"
+          (click)="navigateToHome()"
+          aria-label="Go to home page"
+        >
+          <img
+            src="assets/images/logo.png"
+            alt="Mentorchief Logo"
+            class="navbar__logo-image"
+          />
+        </a>
       </div>
-      <div class="nav-right">
-        <div class="nav-links d-flex">
-          <a routerLink="#">Become a mentor</a>
-          <a [routerLink]="'../' + paths.DISCOVER">Find a mentor</a>
-          <div class="auth-links d-flex">
-            <a [routerLink]="'../' + paths.AUTH__SIGN_IN">Login</a>
-            <p-button
-              [routerLink]="'../' + paths.AUTH__SIGN_UP"
-              styleClass="p-button-primary signup-button-text w-full flex justify-content-center"
+
+      <!-- Navigation Links -->
+      <div class="navbar__links">
+        <ng-container *ngFor="let link of navLinks">
+          <ng-container *ngIf="vm$ | async as vm">
+            <a
+              *ngIf="link.visible ? link.visible(vm.user) : true"
+              [routerLink]="link.route"
+              class="navbar__link"
+              [attr.aria-label]="link.label"
             >
-              Sign up
+              {{ link.label }}
+            </a>
+          </ng-container>
+        </ng-container>
+      </div>
+
+      <!-- Authentication Section -->
+      <div class="navbar__auth">
+        <ng-container *ngIf="vm$ | async as vm">
+          <!-- Guest User Actions -->
+          <ng-container *ngIf="!vm.isAuthenticated">
+            <a
+              [routerLink]="'../' + PATHS.AUTH__SIGN_IN"
+              class="navbar__auth-link"
+              (click)="navigateToSignIn()"
+              aria-label="Sign in to your account"
+            >
+              Login
+            </a>
+            <p-button
+              [routerLink]="'../' + PATHS.AUTH__SIGN_UP"
+              styleClass="p-button-primary navbar__signup-button"
+              (click)="navigateToSignUp()"
+              [label]="'Sign up'"
+              aria-label="Create a new account"
+            >
             </p-button>
-          </div>
-        </div>
+          </ng-container>
+
+          <!-- Authenticated User Menu -->
+          <ng-container *ngIf="vm.isAuthenticated">
+            <div class="navbar__user-menu">
+              <p-menu
+                #userMenu
+                [model]="getUserMenuItems(vm.user)"
+                [popup]="true"
+                [appendTo]="'body'"
+              >
+              </p-menu>
+              <button
+                type="button"
+                class="navbar__user-button"
+                (click)="userMenu.toggle($event)"
+                [attr.aria-label]="'User menu for ' + getDisplayName(vm.user)"
+                [attr.aria-expanded]="userMenu.visible"
+              >
+                <div class="navbar__user-avatar">
+                  <span class="navbar__user-initials">
+                    {{ getUserInitials(vm.user) }}
+                  </span>
+                </div>
+                <span class="navbar__user-name">
+                  {{ getDisplayName(vm.user) }}
+                </span>
+                <i class="pi pi-chevron-down navbar__user-chevron"></i>
+              </button>
+            </div>
+          </ng-container>
+        </ng-container>
       </div>
     </div>
   </div>

@@ -8,7 +8,7 @@ import { map, take } from 'rxjs/operators';
  * Guard to protect routes that require authentication
  * Redirects to sign-in if user is not authenticated
  */
-export const authGuard: CanActivateFn = (route, state) => {
+export const authGuard: CanActivateFn = () => {
 	const authService = inject(AuthenticationService);
 	const router = inject(Router);
 

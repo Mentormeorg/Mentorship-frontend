@@ -1,20 +1,114 @@
 :host {
-  ::ng-deep .p-dropdown {
+  .filters-form {
+    background: var(--white);
+    border-radius: var(--medium-border-radius);
+    padding: 2.4rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    margin-bottom: 2.4rem;
+  }
+
+  ::ng-deep {
+    .p-dropdown {
     width: 100%;
+      border-radius: var(--small-border-radius);
+      border: 1px solid var(--gray_3000);
+      transition: all 0.2s ease;
+
+      &:hover {
+        border-color: var(--primary_color);
+      }
+
+      &.p-focus {
+        border-color: var(--primary_color);
+        box-shadow: 0 0 0 0.2rem rgba(var(--primary_color_rgb), 0.2);
+      }
+    }
+
+    .p-dropdown-filter {
+      padding: 0.75rem 1rem;
   }
 
-  ::ng-deep .p-dropdown-filter {
-    padding: 0.5rem 1rem;
-  }
-
-  ::ng-deep .p-icon {
+    .p-icon {
     width: 1.25rem;
     height: 1.25rem;
+    }
+
+    .p-inputtext {
+      width: 100%;
+      border-radius: var(--small-border-radius);
+      border: 1px solid var(--gray_3000);
+      padding: 0.75rem 1rem;
+      transition: all 0.2s ease;
+
+      &:hover {
+        border-color: var(--primary_color);
+      }
+
+      &:focus {
+        border-color: var(--primary_color);
+        box-shadow: 0 0 0 0.2rem rgba(var(--primary_color_rgb), 0.2);
+      }
+    }
+
+    .p-button {
+      border-radius: var(--small-border-radius);
+      padding: 0.75rem 2rem;
+      font-weight: var(--medium-font-weight);
+      transition: all 0.2s ease;
+
+      &:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+      }
+    }
+
+    .p-slider {
+      margin-top: 1.6rem;
+
+      .p-slider-handle {
+        width: 1.6rem;
+        height: 1.6rem;
+        border: 2px solid var(--primary_color);
+        background: var(--white);
+        transition: all 0.2s ease;
+
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+
+      .p-slider-range {
+        background: var(--primary_color);
+      }
+    }
   }
 
   .slider-result {
+    margin-top: 1.6rem;
+    padding: 1.2rem 0;
+
     h3 {
       color: var(--primary_color);
+      font-size: 1.6rem;
+      font-weight: var(--semi-bold-font-weight);
+      margin: 0;
+    }
+  }
+
+  .row {
+    gap: 1.6rem;
+    margin-bottom: 1.6rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .col-12 {
+    margin-bottom: 1.6rem;
+
+    &:last-child {
+      margin-bottom: 0;
     }
   }
 }
