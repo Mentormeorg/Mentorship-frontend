@@ -1,6 +1,6 @@
 import { Component, inject, Input, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, takeUntil, debounceTime, distinctUntilChanged } from 'rxjs';
 import { ChatService } from '../../services/chat.service';
 import { FileUploadService } from '../../services/file-upload.service';
 import { ErrorHandlingService } from '@core/services/error-handling.service';
@@ -28,12 +28,20 @@ export class MessageComposerComponent implements OnInit, OnDestroy {
   selectedFile: File | null = null;
   isUploading = false;
   isSending = false;
+  private typingTimeout: ReturnType<typeof setTimeout> | null = null;
+  private lastTypingStatus = false;
 
   ngOnInit(): void {
     this.initForm();
+    this.setupTypingTracking();
   }
 
   ngOnDestroy(): void {
+    // Stop typing indicator when component is destroyed
+    this.stopTyping();
+    if (this.typingTimeout) {
+      clearTimeout(this.typingTimeout);
+    }
     this.destroy$.next();
     this.destroy$.complete();
   }
@@ -42,6 +50,51 @@ export class MessageComposerComponent implements OnInit, OnDestroy {
     this.messageForm = this.fb.group({
       content: ['', [Validators.required]],
     });
+  }
+
+  private setupTypingTracking(): void {
+    // Track typing status when user types in the textarea
+    this.messageForm.get('content')?.valueChanges
+      .pipe(
+        takeUntil(this.destroy$),
+        debounceTime(300)
+      )
+      .subscribe(() => {
+        const content = this.messageForm.get('content')?.value || '';
+        if (content.trim().length > 0) {
+          this.startTyping();
+        } else {
+          this.stopTyping();
+        }
+      });
+  }
+
+  private startTyping(): void {
+    if (!this.lastTypingStatus) {
+      this.chatService.sendTypingStatus(this.conversationId, true);
+      this.lastTypingStatus = true;
+    }
+
+    // Clear existing timeout
+    if (this.typingTimeout) {
+      clearTimeout(this.typingTimeout);
+    }
+
+    // Stop typing after 3 seconds of inactivity
+    this.typingTimeout = setTimeout(() => {
+      this.stopTyping();
+    }, 3000);
+  }
+
+  private stopTyping(): void {
+    if (this.lastTypingStatus) {
+      this.chatService.sendTypingStatus(this.conversationId, false);
+      this.lastTypingStatus = false;
+    }
+    if (this.typingTimeout) {
+      clearTimeout(this.typingTimeout);
+      this.typingTimeout = null;
+    }
   }
 
   onFileSelected(event: Event): void {
@@ -108,6 +161,7 @@ export class MessageComposerComponent implements OnInit, OnDestroy {
               this.selectedFile = null;
               this.isSending = false;
               this.isUploading = false;
+              this.stopTyping();
               this.messageSent.emit();
             },
             error: (error) => {
@@ -129,6 +183,7 @@ export class MessageComposerComponent implements OnInit, OnDestroy {
             next: () => {
               this.messageForm.reset();
               this.isSending = false;
+              this.stopTyping();
               this.messageSent.emit();
             },
             error: (error) => {

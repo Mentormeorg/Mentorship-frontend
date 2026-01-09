@@ -20,6 +20,7 @@ export class ChatService {
   private authService = inject(AuthenticationService);
 
   private activeChannels: Map<string, RealtimeChannel> = new Map();
+  private typingChannels: Map<string, RealtimeChannel> = new Map();
   private messageSubjects: Map<string, BehaviorSubject<IMessage[]>> = new Map();
 
   /**
@@ -259,6 +260,7 @@ export class ChatService {
       this.activeChannels.delete(channelName);
     }
     this.messageSubjects.delete(conversationId);
+    this.unsubscribeFromTypingStatus(conversationId);
   }
 
   /**
@@ -266,6 +268,82 @@ export class ChatService {
    */
   getMessagesSubject(conversationId: string): BehaviorSubject<IMessage[]> | null {
     return this.messageSubjects.get(conversationId) || null;
+  }
+
+  /**
+   * Send typing status to other users in the conversation
+   */
+  sendTypingStatus(conversationId: string, isTyping: boolean): void {
+    const user = this.authService.userData.value;
+    if (!user?.id) {
+      return;
+    }
+
+    const channelName = `typing:${conversationId}`;
+    let channel = this.typingChannels.get(channelName);
+
+    if (!channel) {
+      channel = this.supabase.client.channel(channelName);
+      this.typingChannels.set(channelName, channel);
+    }
+
+    channel.send({
+      type: 'broadcast',
+      event: 'typing',
+      payload: {
+        userId: user.id,
+        isTyping,
+        conversationId,
+      },
+    }).catch(() => {
+      // Silently fail - typing indicator is not critical
+    });
+  }
+
+  /**
+   * Subscribe to typing status changes for a conversation
+   */
+  subscribeToTypingStatus(
+    conversationId: string
+  ): Observable<{ userId: string; isTyping: boolean }> {
+    const channelName = `typing:${conversationId}`;
+
+    // Clean up existing channel if any
+    if (this.typingChannels.has(channelName)) {
+      this.typingChannels.get(channelName)?.unsubscribe();
+    }
+
+    return new Observable<{ userId: string; isTyping: boolean }>((observer) => {
+      const channel = this.supabase.client
+        .channel(channelName)
+        .on(
+          'broadcast',
+          { event: 'typing' },
+          (payload: { payload: { userId: string; isTyping: boolean } }) => {
+            observer.next(payload.payload);
+          }
+        )
+        .subscribe();
+
+      this.typingChannels.set(channelName, channel);
+
+      return () => {
+        channel.unsubscribe();
+        this.typingChannels.delete(channelName);
+      };
+    });
+  }
+
+  /**
+   * Unsubscribe from typing status
+   */
+  unsubscribeFromTypingStatus(conversationId: string): void {
+    const channelName = `typing:${conversationId}`;
+    const channel = this.typingChannels.get(channelName);
+    if (channel) {
+      channel.unsubscribe();
+      this.typingChannels.delete(channelName);
+    }
   }
 }
 

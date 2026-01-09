@@ -7,6 +7,7 @@ import { clearStorage } from './storage.utils';
 import { mapSupabaseUserToIUser } from './user-mapper.utils';
 import { syncOAuthUserProfile } from './oauth-profile-sync.utils';
 import { handleUserNotFoundError } from './auth-error-handler.utils';
+import { syncUserProfileFromDatabase } from './profile-sync.utils';
 import type { Session } from '@supabase/supabase-js';
 
 export interface HandleSignedInParams {
@@ -47,20 +48,40 @@ export function handleSignedInEvent(params: HandleSignedInParams): void {
       session,
       isOAuth
     );
-    setUserData(mappedUser);
-    setToken(session.access_token);
+    
+    // Fetch profile from database to get accurate registration_completed status
+    syncUserProfileFromDatabase(supabaseClient, mappedUser).subscribe({
+      next: (syncedUser) => {
+        setUserData(syncedUser);
+        setToken(session.access_token);
 
-    // Sync OAuth user profile to profiles_table if needed
-    if (isOAuth) {
-      syncOAuthUserProfile(supabaseClient, session.user).subscribe();
-    }
+        // Sync OAuth user profile to profiles_table if needed
+        if (isOAuth) {
+          syncOAuthUserProfile(supabaseClient, session.user).subscribe();
+        }
 
-    // Navigate to appropriate page after OAuth sign-in
-    // Use setTimeout to ensure state is fully updated before navigation
-    setTimeout(() => {
-      const nextRoute = getPostAuthenticationPath(mappedUser);
-      router.navigate([nextRoute]);
-    }, 0);
+        // Navigate to appropriate page after sign-in
+        // Use setTimeout to ensure state is fully updated before navigation
+        setTimeout(() => {
+          const nextRoute = getPostAuthenticationPath(syncedUser);
+          router.navigate([nextRoute]);
+        }, 0);
+      },
+      error: (error) => {
+        // If profile sync fails, use mapped user as fallback
+        setUserData(mappedUser);
+        setToken(session.access_token);
+
+        if (isOAuth) {
+          syncOAuthUserProfile(supabaseClient, session.user).subscribe();
+        }
+
+        setTimeout(() => {
+          const nextRoute = getPostAuthenticationPath(mappedUser);
+          router.navigate([nextRoute]);
+        }, 0);
+      }
+    });
   } catch (error) {
     // If user mapping fails (e.g., user_not_found), logout
     handleUserNotFoundError({

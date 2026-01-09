@@ -1,6 +1,6 @@
 import { Component, inject, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subject, takeUntil, combineLatest } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { ChatService } from '../../services/chat.service';
 import { ErrorHandlingService } from '@core/services/error-handling.service';
 import { AuthenticationService } from '@core/services/authentication.service';
@@ -29,6 +29,8 @@ export class ChatThreadComponent implements OnInit, OnDestroy, AfterViewChecked 
   conversation: IConversation | null = null;
   messages: IMessage[] = [];
   isLoading = true;
+  isOtherUserTyping = false;
+  typingUserId: string | null = null;
   private shouldScroll = false;
 
   get currentUserId(): string | null {
@@ -41,6 +43,7 @@ export class ChatThreadComponent implements OnInit, OnDestroy, AfterViewChecked 
       this.loadConversation();
       this.loadMessages();
       this.subscribeToRealtime();
+      this.subscribeToTypingStatus();
     } else {
       this.errorHandling.handleError('Invalid conversation ID');
       this.router.navigate(['/dashboard/chat']);
@@ -57,6 +60,7 @@ export class ChatThreadComponent implements OnInit, OnDestroy, AfterViewChecked 
   ngOnDestroy(): void {
     if (this.conversationId) {
       this.chatService.unsubscribeFromMessages(this.conversationId);
+      this.chatService.unsubscribeFromTypingStatus(this.conversationId);
     }
     this.destroy$.next();
     this.destroy$.complete();
@@ -113,6 +117,26 @@ export class ChatThreadComponent implements OnInit, OnDestroy, AfterViewChecked 
         },
         error: (error) => {
           this.errorHandling.handleError(error);
+        },
+      });
+  }
+
+  private subscribeToTypingStatus(): void {
+    if (!this.conversationId) return;
+
+    this.chatService
+      .subscribeToTypingStatus(this.conversationId)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (typingData) => {
+          // Only show typing indicator if it's not the current user
+          if (typingData.userId !== this.currentUserId) {
+            this.isOtherUserTyping = typingData.isTyping;
+            this.typingUserId = typingData.isTyping ? typingData.userId : null;
+          }
+        },
+        error: (error) => {
+          // Silently fail - typing indicator is not critical
         },
       });
   }

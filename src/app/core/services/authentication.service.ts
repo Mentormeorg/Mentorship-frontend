@@ -20,7 +20,7 @@ import {
 import { environment } from '@environments/environment';
 import { SupabaseService } from './supabase.service';
 import { BehaviorSubject, from, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, switchMap } from 'rxjs/operators';
 import { PATHS } from '@core/paths';
 import { ErrorHandlingService } from './error-handling.service';
 import { AUTH_MESSAGES } from '@core/constants/auth-messages.constants';
@@ -33,6 +33,7 @@ import {
   handleTokenRefreshedEvent,
   handleUserUpdatedEvent,
 } from '@core/utils/auth-state-handler.utils';
+import { syncUserProfileFromDatabase } from '@core/utils/profile-sync.utils';
 
 @Injectable({
   providedIn: 'root',
@@ -59,7 +60,7 @@ export class AuthenticationService implements OnDestroy {
         password: user.password,
       })
     ).pipe(
-      map(response => {
+      switchMap(response => {
         // Validate response and throw error if present
         this.validateResponse(response);
 
@@ -68,19 +69,25 @@ export class AuthenticationService implements OnDestroy {
             response.data.user,
             response.data.session
           );
-          // Set user data first to ensure state is updated
-          this.setUserData(mappedUser);
-          this.setToken(response.data.session.access_token);
+          
+          // Fetch profile from database to get accurate registration_completed status
+          return syncUserProfileFromDatabase(this._supabase.client, mappedUser).pipe(
+            map(syncedUser => {
+              // Set user data with accurate profile data
+              this.setUserData(syncedUser);
+              this.setToken(response.data.session.access_token);
 
-          if (mappedUser) {
-            this._errorHandlingService.showSuccess(AUTH_MESSAGES.SUCCESS.LOGIN, AUTH_MESSAGES.TITLES.LOGIN_SUCCESS);
-            setTimeout(() => {
-              this._router.navigate([this.getPostAuthenticationPath(mappedUser)]);
-            }, 0);
-          }
-          return mappedUser;
+              if (syncedUser) {
+                this._errorHandlingService.showSuccess(AUTH_MESSAGES.SUCCESS.LOGIN, AUTH_MESSAGES.TITLES.LOGIN_SUCCESS);
+                setTimeout(() => {
+                  this._router.navigate([this.getPostAuthenticationPath(syncedUser)]);
+                }, 0);
+              }
+              return syncedUser;
+            })
+          );
         }
-        return null;
+        return of(null);
       }),
       catchError(error => {
         this._errorHandlingService.handleError(error, AUTH_MESSAGES.ERROR.LOGIN_FAILED);
@@ -388,7 +395,7 @@ export class AuthenticationService implements OnDestroy {
     // Get current session with error handling
     from(this._supabase.client.auth.getSession())
       .pipe(
-        map(response => {
+        switchMap(response => {
           this.validateResponse(response);
           const session = response.data.session;
           if (session) {
@@ -401,18 +408,26 @@ export class AuthenticationService implements OnDestroy {
               session,
               isOAuth
             );
-            this.setUserData(mappedUser);
-            this.setToken(session.access_token);
+            
+            // Fetch profile from database to get accurate registration_completed status
+            return syncUserProfileFromDatabase(this._supabase.client, mappedUser).pipe(
+              map(syncedUser => {
+                this.setUserData(syncedUser);
+                this.setToken(session.access_token);
 
-            // Sync OAuth user profile if needed
-            if (isOAuth) {
-              syncOAuthUserProfile(this._supabase.client, session.user).subscribe();
-            }
+                // Sync OAuth user profile if needed
+                if (isOAuth) {
+                  syncOAuthUserProfile(this._supabase.client, session.user).subscribe();
+                }
+                return session;
+              })
+            );
           } else if (!storedUser) {
             // No session and no stored user - clear state
             this.setUserData(null);
+            return of(session);
           }
-          return session;
+          return of(session);
         }),
         catchError(error => {
           // Handle user_not_found error - user was deleted or token is invalid
